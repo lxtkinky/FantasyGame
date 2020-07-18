@@ -9,14 +9,31 @@
 import UIKit
 
 class LXTBaseController: UIViewController {
-
+    let backButton = UIButton.init(type: .custom)
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+        self.backButton.setImage(UIImage(named: "close"), for: .normal)
+        self.backButton.addTarget(self, action: #selector(lxt_backClick), for: .touchUpInside)
+        self.view.addSubview(self.backButton)
+        self.backButton.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(20)
+            make.height.equalTo(44)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.bringSubviewToFront(self.backButton)
     }
     
 
+    @objc func lxt_backClick() {
+        self.dismiss(animated: false) {}
+    }
     /*
     // MARK: - Navigation
 

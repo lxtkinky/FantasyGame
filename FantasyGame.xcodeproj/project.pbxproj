@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E27FC1ABED54EB0A15580985 /* Pods_FantasyGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8D87F2C7AF119E8331C9365 /* Pods_FantasyGame.framework */; };
+		F4010A4724C1535F0008A054 /* LXTRoleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4010A4624C1535F0008A054 /* LXTRoleManager.swift */; };
+		F4010A4B24C154120008A054 /* LXTRoleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4010A4A24C154120008A054 /* LXTRoleController.swift */; };
+		F4010A4E24C17CE70008A054 /* LXTDateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4010A4D24C17CE60008A054 /* LXTDateHelper.swift */; };
 		F404131124BD60E700E918F8 /* LXTRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131024BD60E700E918F8 /* LXTRoleModel.swift */; };
 		F404131324BD615100E918F8 /* LXTHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131224BD615100E918F8 /* LXTHeroModel.swift */; };
 		F404131524BD616100E918F8 /* LXTMonsterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131424BD616100E918F8 /* LXTMonsterModel.swift */; };
@@ -15,6 +18,9 @@
 		F404131A24BD62FA00E918F8 /* LXTHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131924BD62FA00E918F8 /* LXTHeroView.swift */; };
 		F404131C24BD630700E918F8 /* LXTMonsterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131B24BD630700E918F8 /* LXTMonsterView.swift */; };
 		F404132024BD8C3900E918F8 /* LXTUserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */; };
+		F40F52A324C28F1C00FC95D9 /* LXTExpStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */; };
+		F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */; };
+		F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */; };
 		F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398B24BD43AB00D906D4 /* AppDelegate.swift */; };
 		F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398D24BD43AB00D906D4 /* SceneDelegate.swift */; };
 		F476399024BD43AB00D906D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398F24BD43AB00D906D4 /* ViewController.swift */; };
@@ -28,6 +34,9 @@
 		F47639C524BD4B9300D906D4 /* LXTBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */; };
 		F47639C824BD4C1300D906D4 /* LXTHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639C724BD4C1300D906D4 /* LXTHomeController.swift */; };
 		F47639CC24BD4DB700D906D4 /* LXTStripProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639CB24BD4DB700D906D4 /* LXTStripProgressView.swift */; };
+		F4D9FAB224BE97B400EF594B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4D9FAB124BE97B400EF594B /* README.md */; };
+		F4D9FAB424BEA0BA00EF594B /* LXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */; };
+		F4D9FAB624BEA3D800EF594B /* LXTMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,9 @@
 		4AFF461CC014FC502A3864D3 /* Pods-FantasyGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyGame.release.xcconfig"; path = "Target Support Files/Pods-FantasyGame/Pods-FantasyGame.release.xcconfig"; sourceTree = "<group>"; };
 		D7E8344E7F71C4F39B6F8F28 /* Pods-FantasyGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FantasyGame.debug.xcconfig"; path = "Target Support Files/Pods-FantasyGame/Pods-FantasyGame.debug.xcconfig"; sourceTree = "<group>"; };
 		E8D87F2C7AF119E8331C9365 /* Pods_FantasyGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FantasyGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4010A4624C1535F0008A054 /* LXTRoleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTRoleManager.swift; sourceTree = "<group>"; };
+		F4010A4A24C154120008A054 /* LXTRoleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTRoleController.swift; sourceTree = "<group>"; };
+		F4010A4D24C17CE60008A054 /* LXTDateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTDateHelper.swift; sourceTree = "<group>"; };
 		F404131024BD60E700E918F8 /* LXTRoleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTRoleModel.swift; sourceTree = "<group>"; };
 		F404131224BD615100E918F8 /* LXTHeroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroModel.swift; sourceTree = "<group>"; };
 		F404131424BD616100E918F8 /* LXTMonsterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTMonsterModel.swift; sourceTree = "<group>"; };
@@ -58,6 +70,9 @@
 		F404131924BD62FA00E918F8 /* LXTHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroView.swift; sourceTree = "<group>"; };
 		F404131B24BD630700E918F8 /* LXTMonsterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTMonsterView.swift; sourceTree = "<group>"; };
 		F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserDefaultManager.swift; sourceTree = "<group>"; };
+		F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTExpStripView.swift; sourceTree = "<group>"; };
+		F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTPackageController.swift; sourceTree = "<group>"; };
+		F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTrialAreaController.swift; sourceTree = "<group>"; };
 		F476398824BD43AB00D906D4 /* FantasyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F476398B24BD43AB00D906D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F476398D24BD43AB00D906D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +92,9 @@
 		F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTBaseModel.swift; sourceTree = "<group>"; };
 		F47639C724BD4C1300D906D4 /* LXTHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHomeController.swift; sourceTree = "<group>"; };
 		F47639CB24BD4DB700D906D4 /* LXTStripProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStripProgressView.swift; sourceTree = "<group>"; };
+		F4D9FAB124BE97B400EF594B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTabBarController.swift; sourceTree = "<group>"; };
+		F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTMapController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,12 +140,37 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F4010A4824C153930008A054 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				F4010A4924C1539D0008A054 /* Controller */,
+			);
+			path = Role;
+			sourceTree = "<group>";
+		};
+		F4010A4924C1539D0008A054 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F4010A4A24C154120008A054 /* LXTRoleController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F4010A4C24C17CB30008A054 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F4010A4D24C17CE60008A054 /* LXTDateHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		F404130F24BD60D100E918F8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				F404131024BD60E700E918F8 /* LXTRoleModel.swift */,
 				F404131224BD615100E918F8 /* LXTHeroModel.swift */,
 				F404131424BD616100E918F8 /* LXTMonsterModel.swift */,
+				F4010A4624C1535F0008A054 /* LXTRoleManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,6 +181,7 @@
 				F404131724BD62E900E918F8 /* LXTRoleView.swift */,
 				F404131924BD62FA00E918F8 /* LXTHeroView.swift */,
 				F404131B24BD630700E918F8 /* LXTMonsterView.swift */,
+				F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -148,6 +192,37 @@
 				F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		F40F52A424C2D87E00FC95D9 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				F40F52A724C2E2C500FC95D9 /* Controller */,
+			);
+			path = Package;
+			sourceTree = "<group>";
+		};
+		F40F52A724C2E2C500FC95D9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F44428B624C2F64400AAB68E /* TrialArea */ = {
+			isa = PBXGroup;
+			children = (
+				F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */,
+			);
+			path = TrialArea;
+			sourceTree = "<group>";
+		};
+		F44428B724C2F65900AAB68E /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		F476397F24BD43AB00D906D4 = {
@@ -182,6 +257,7 @@
 				F476399424BD43AF00D906D4 /* Assets.xcassets */,
 				F476399624BD43AF00D906D4 /* LaunchScreen.storyboard */,
 				F476399924BD43AF00D906D4 /* Info.plist */,
+				F4D9FAB124BE97B400EF594B /* README.md */,
 				F47639BB24BD4A0C00D906D4 /* Class */,
 			);
 			path = FantasyGame;
@@ -208,6 +284,10 @@
 		F47639BB24BD4A0C00D906D4 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				F44428B724C2F65900AAB68E /* User */,
+				F44428B624C2F64400AAB68E /* TrialArea */,
+				F40F52A424C2D87E00FC95D9 /* Package */,
+				F4010A4824C153930008A054 /* Role */,
 				F47639CD24BD4ED200D906D4 /* Home */,
 				F47639BC24BD4A1500D906D4 /* Common */,
 			);
@@ -217,6 +297,7 @@
 		F47639BC24BD4A1500D906D4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F4010A4C24C17CB30008A054 /* Helper */,
 				F404131E24BD8C1C00E918F8 /* Manager */,
 				F47639C924BD4D2C00D906D4 /* View */,
 				F47639C124BD4B4700D906D4 /* Base */,
@@ -237,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				F47639C724BD4C1300D906D4 /* LXTHomeController.swift */,
+				F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -245,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				F47639C224BD4B7D00D906D4 /* LXTBaseController.swift */,
+				F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */,
 				F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */,
 			);
 			path = Base;
@@ -376,6 +459,7 @@
 			files = (
 				F476399824BD43AF00D906D4 /* LaunchScreen.storyboard in Resources */,
 				F476399524BD43AF00D906D4 /* Assets.xcassets in Resources */,
+				F4D9FAB224BE97B400EF594B /* README.md in Resources */,
 				F476399324BD43AB00D906D4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,18 +527,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40F52A324C28F1C00FC95D9 /* LXTExpStripView.swift in Sources */,
 				F404131C24BD630700E918F8 /* LXTMonsterView.swift in Sources */,
 				F404131524BD616100E918F8 /* LXTMonsterModel.swift in Sources */,
+				F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */,
+				F4010A4724C1535F0008A054 /* LXTRoleManager.swift in Sources */,
 				F47639BF24BD4A7700D906D4 /* ConstantDefine.swift in Sources */,
 				F476399024BD43AB00D906D4 /* ViewController.swift in Sources */,
 				F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */,
 				F404131124BD60E700E918F8 /* LXTRoleModel.swift in Sources */,
 				F404131824BD62E900E918F8 /* LXTRoleView.swift in Sources */,
+				F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */,
+				F4010A4B24C154120008A054 /* LXTRoleController.swift in Sources */,
 				F404131324BD615100E918F8 /* LXTHeroModel.swift in Sources */,
 				F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */,
 				F47639C324BD4B7D00D906D4 /* LXTBaseController.swift in Sources */,
 				F404132024BD8C3900E918F8 /* LXTUserDefaultManager.swift in Sources */,
+				F4D9FAB624BEA3D800EF594B /* LXTMapController.swift in Sources */,
 				F47639C824BD4C1300D906D4 /* LXTHomeController.swift in Sources */,
+				F4D9FAB424BEA0BA00EF594B /* LXTTabBarController.swift in Sources */,
+				F4010A4E24C17CE70008A054 /* LXTDateHelper.swift in Sources */,
 				F404131A24BD62FA00E918F8 /* LXTHeroView.swift in Sources */,
 				F47639C524BD4B9300D906D4 /* LXTBaseModel.swift in Sources */,
 				F47639CC24BD4DB700D906D4 /* LXTStripProgressView.swift in Sources */,
@@ -634,7 +726,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 73497T5ED8;
 				INFOPLIST_FILE = FantasyGame/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -654,7 +746,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 73497T5ED8;
 				INFOPLIST_FILE = FantasyGame/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

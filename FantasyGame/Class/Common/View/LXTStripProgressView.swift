@@ -55,6 +55,5 @@ class LXTStripProgressView: UIView {
         shapeLayer.strokeColor = foregroundColor.cgColor
         shapeLayer.lineWidth = rect.size.height
         self.layer.addSublayer(shapeLayer)
-        
     }
 }

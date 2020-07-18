@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.hero = LXTHeroModel()
+        self.hero = self.lxt_loadHero()
         let heroView = LXTHeroView()
         self.heroView = heroView
         self.heroView?.role = self.hero

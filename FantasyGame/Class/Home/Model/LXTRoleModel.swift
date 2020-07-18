@@ -39,4 +39,6 @@ class LXTRoleModel: LXTBaseModel{
     var currentMP = 0
     var attack = 0
     var level = 1
+    var maxExp = 0
+    var currentExp = 0
 }

@@ -53,7 +53,7 @@ class LXTRoleView: UIView {
             let currentHP = role.currentHP > 0 ? role.currentHP : 0
             self.bloodLabel.text = "\(role.hp)/\(currentHP)"
             self.bloodStrip.percentage = CGFloat(currentHP) / CGFloat(role.hp)
-            print("blood per = \(self.bloodStrip.percentage)")
+//            print("blood per = \(self.bloodStrip.percentage)")
             self.bloodStrip.setNeedsDisplay()
         }
 

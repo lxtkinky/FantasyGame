@@ -11,6 +11,23 @@ import UIKit
 class LXTHeroModel: LXTRoleModel,NSSecureCoding {
     static var supportsSecureCoding: Bool = true
     
+    override var level: Int{
+        didSet{
+            self.maxExp = level * 10000
+        }
+    }
+    
+    var mapLevel = 1
+    
+    
+    override var maxExp: Int{
+        get{
+             return level * 10000
+        }
+        set{
+            super.maxExp = newValue
+        }
+    }
     
     override init() {
         super.init()
@@ -20,6 +37,8 @@ class LXTHeroModel: LXTRoleModel,NSSecureCoding {
         self.currentMP = self.mp
         self.attack = 10
         self.level = 1
+        self.maxExp = 1000
+        self.currentExp = 0
     }
     
      func encode(with coder: NSCoder) {
@@ -29,6 +48,9 @@ class LXTHeroModel: LXTRoleModel,NSSecureCoding {
 //        coder.encode(currentMP, forKey: "currentMP")
         coder.encode(attack, forKey: "attack")
         coder.encode(level, forKey: "level")
+        coder.encode(maxExp, forKey: "maxExp")
+        coder.encode(currentExp, forKey: "currentExp")
+        coder.encode(mapLevel, forKey: "mapLevel")
     }
 
     
@@ -43,5 +65,8 @@ class LXTHeroModel: LXTRoleModel,NSSecureCoding {
 //        currentMP = Int(coder.decodeInt32(forKey: "currentMP"))
         attack = Int(coder.decodeInt32(forKey: "attack"))
         level = Int(coder.decodeInt32(forKey: "level"))
+        maxExp = Int(coder.decodeInt32(forKey: "maxExp"))
+        currentExp = Int(coder.decodeInt32(forKey: "currentExp"))
+        mapLevel = Int(coder.decodeInt32(forKey: "mapLevel"))
     }
 }
