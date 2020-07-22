@@ -20,6 +20,7 @@
 		F404132024BD8C3900E918F8 /* LXTUserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */; };
 		F40F52A324C28F1C00FC95D9 /* LXTExpStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */; };
 		F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */; };
+		F42C381F24C58B0600E1E6BC /* LXTTableSQliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */; };
 		F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */; };
 		F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398B24BD43AB00D906D4 /* AppDelegate.swift */; };
 		F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398D24BD43AB00D906D4 /* SceneDelegate.swift */; };
@@ -72,6 +73,7 @@
 		F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserDefaultManager.swift; sourceTree = "<group>"; };
 		F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTExpStripView.swift; sourceTree = "<group>"; };
 		F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTPackageController.swift; sourceTree = "<group>"; };
+		F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTableSQliteHelper.swift; sourceTree = "<group>"; };
 		F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTrialAreaController.swift; sourceTree = "<group>"; };
 		F476398824BD43AB00D906D4 /* FantasyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F476398B24BD43AB00D906D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -210,10 +212,18 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		F42C381D24C58AD100E1E6BC /* SQliteHelper */ = {
+			isa = PBXGroup;
+			children = (
+				F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */,
+			);
+			path = SQliteHelper;
+			sourceTree = "<group>";
+		};
 		F44428B624C2F64400AAB68E /* TrialArea */ = {
 			isa = PBXGroup;
 			children = (
-				F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */,
+				F44428BA24C2F92700AAB68E /* Controller */,
 			);
 			path = TrialArea;
 			sourceTree = "<group>";
@@ -221,8 +231,24 @@
 		F44428B724C2F65900AAB68E /* User */ = {
 			isa = PBXGroup;
 			children = (
+				F44428BB24C2F94400AAB68E /* Controller */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		F44428BA24C2F92700AAB68E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F44428BB24C2F94400AAB68E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		F476397F24BD43AB00D906D4 = {
@@ -297,6 +323,7 @@
 		F47639BC24BD4A1500D906D4 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F42C381D24C58AD100E1E6BC /* SQliteHelper */,
 				F4010A4C24C17CB30008A054 /* Helper */,
 				F404131E24BD8C1C00E918F8 /* Manager */,
 				F47639C924BD4D2C00D906D4 /* View */,
@@ -534,6 +561,7 @@
 				F4010A4724C1535F0008A054 /* LXTRoleManager.swift in Sources */,
 				F47639BF24BD4A7700D906D4 /* ConstantDefine.swift in Sources */,
 				F476399024BD43AB00D906D4 /* ViewController.swift in Sources */,
+				F42C381F24C58B0600E1E6BC /* LXTTableSQliteHelper.swift in Sources */,
 				F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */,
 				F404131124BD60E700E918F8 /* LXTRoleModel.swift in Sources */,
 				F404131824BD62E900E918F8 /* LXTRoleView.swift in Sources */,

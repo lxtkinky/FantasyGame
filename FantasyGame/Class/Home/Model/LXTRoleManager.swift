@@ -74,7 +74,7 @@ class LXTRoleManager: NSObject {
                 var attackCount = 0
                 for _  in 1...pkCount {
                     if Int(arc4random()) % probability == 1{
-                        if arc4random() % 2 == 1 {
+                        if arc4random() % 5 == 1 {
                             hero.attack += 1
                             attackCount += 1
                         }else{

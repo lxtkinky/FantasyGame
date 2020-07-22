@@ -13,10 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     var allowRotate = false
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window?.backgroundColor = .white
 //        self.window?.rootViewController = ViewController.init()
+        
+        LXTTableSQliteHelper.lxt_createTable(tableName: "user")
+        
         let tabBarVC = LXTTabBarController()
         let homeVC = LXTHomeController()
         homeVC.tabBarItem = UITabBarItem.init(title: "战斗", image: UIImage(named: "tabbar_home"), tag: 1001)
@@ -24,10 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let myVC = LXTRoleController()
         myVC.tabBarItem = UITabBarItem.init(title: "角色", image: UIImage(named: "tabbar_my"), tag: 1002)
         
-        let packageVC = LXTPackageController()
-        packageVC.tabBarItem = UITabBarItem.init(title: "包裹", image: UIImage(named: "tabbar_my"), tag: 1002)
         
-        tabBarVC.viewControllers = [homeVC, myVC, packageVC]
+        let trialAreaVC = LXTTrialAreaController()
+        trialAreaVC.tabBarItem = UITabBarItem.init(title: "试炼", image: UIImage(named: "tabbar_my"), tag: 1003)
+        
+        let packageVC = LXTPackageController()
+        packageVC.tabBarItem = UITabBarItem.init(title: "包裹", image: UIImage(named: "tabbar_my"), tag: 1004)
+        
+        tabBarVC.viewControllers = [homeVC, myVC, trialAreaVC, packageVC]
         self.window?.rootViewController = tabBarVC
         self.window?.makeKeyAndVisible()
         return true

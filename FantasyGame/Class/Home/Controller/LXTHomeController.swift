@@ -175,11 +175,13 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     @objc func lxt_restHero()  {
-        self.hero?.attack = 10
-        self.hero?.hp = 100
-        self.hero?.currentHP = 100
-        self.hero?.mapLevel = 1
-        self.hero?.maxExp = 1000
+//        self.hero?.attack = 10
+//        self.hero?.hp = 100
+//        self.hero?.currentHP = 100
+//        self.hero?.mapLevel = 1
+//        self.hero?.level = 1
+//        self.hero?.maxExp = 1000
+        self.hero = LXTHeroModel()
         self.lxt_saveHero(hero: self.hero!)
     }
     
@@ -209,12 +211,12 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             //计算战斗结果
             if self.monster!.currentHP <= 0 {
                 if Int(arc4random()) % probability == 1 {
-                    if arc4random() % 2 == 0 {
-                        self.hero?.hp += 1
-                        self.dataSource.append("战斗胜利，获得生命+1")
-                    }else{
+                    if arc4random() % 5 == 1 {
                         self.hero?.attack += 1
                         self.dataSource.append("战斗胜利，获得攻击+1")
+                    }else{
+                        self.hero?.hp += 1
+                        self.dataSource.append("战斗胜利，获得生命+1")
                     }
                 }else{
                     self.dataSource.append("战斗胜利，什么都没有")
