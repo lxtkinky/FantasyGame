@@ -32,6 +32,7 @@ let probability = 100
 
 //NotificationName
 let NotificationNameUpdateHero = NSNotification.Name(rawValue: "notificationNameSaveHero")
+let KNotificationAppActive = NSNotification.Name(rawValue: "KNotificationAppActive")
 
 
 //Font
@@ -68,3 +69,5 @@ var kBottomSafeHeight: CGFloat {
    //return UIApplication.shared.statusBarFrame.height == 44 ? 34 : 0
    return isFullScreen ? 34 : 0
 }
+
+

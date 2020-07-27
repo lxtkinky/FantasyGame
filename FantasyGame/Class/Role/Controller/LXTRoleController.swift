@@ -14,6 +14,7 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
     let attackLabel = UILabel()
     let tableView = UITableView()
     let cellKey = "cellKey"
+    let skillCellKey = "skillCellKey"
     var dataSource : Array<String> = []
     
     
@@ -44,12 +45,12 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //            make.left.equalTo(self.hpLabel)
 //            make.top.equalTo(self.hpLabel.snp.bottom).offset(10)
 //        }
-        
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: self.cellKey)
+        self.tableView.register(LXTHeroSkillTableCell.classForCoder(), forCellReuseIdentifier: self.skillCellKey)
         self.tableView.bounces = false
         self.tableView.separatorStyle = .none
-        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: self.cellKey)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.view.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: statusBarHeight + 20, left: 0, bottom: 0, right: 0))
@@ -69,11 +70,28 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.tableView.reloadData()
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        
+        return section == 0 ? self.dataSource.count : 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 40
+        }else{
+            return (kScreenWidth - 35) / 6
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            let cell : LXTHeroSkillTableCell = tableView.dequeueReusableCell(withIdentifier: self.skillCellKey) as! LXTHeroSkillTableCell
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellKey)
         cell?.textLabel?.text = self.dataSource[indexPath.row]
         cell?.selectionStyle = .none

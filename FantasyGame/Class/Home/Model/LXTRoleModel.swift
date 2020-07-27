@@ -41,4 +41,5 @@ class LXTRoleModel: LXTBaseModel{
     var level = 1
     var maxExp = 0
     var currentExp = 0
+    var skills = Array<Any>()
 }

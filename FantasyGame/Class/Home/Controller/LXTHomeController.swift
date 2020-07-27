@@ -44,6 +44,8 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
 //        self.backButton.isHidden = true
         
+        self.lxt_registerNotification()
+        
         if showOfflineRevenue {
             self.offlineResult = LXTRoleManager.lxt_offlineRevenue()
 //            self.offlineRevenue = false
@@ -136,7 +138,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         let restBtn = UIButton.init(type: .custom)
-        restBtn.setTitle("重置", for: .normal)
+        restBtn.setTitle("藏书阁", for: .normal)
         restBtn.layer.cornerRadius = 25
         restBtn.clipsToBounds = true
         restBtn.backgroundColor = kRandomColor()
@@ -174,6 +176,14 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
     }
     
+    func lxt_registerNotification() -> Void {
+        NotificationCenter.default.addObserver(self, selector: #selector(lxt_appActive), name: KNotificationAppActive, object: nil)
+    }
+    
+    @objc func lxt_appActive() -> Void {
+        self.showOfflineRevenue = true
+    }
+    
     @objc func lxt_restHero()  {
 //        self.hero?.attack = 10
 //        self.hero?.hp = 100
@@ -181,8 +191,11 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //        self.hero?.mapLevel = 1
 //        self.hero?.level = 1
 //        self.hero?.maxExp = 1000
-        self.hero = LXTHeroModel()
-        self.lxt_saveHero(hero: self.hero!)
+//        self.hero = LXTHeroModel()
+//        self.lxt_saveHero(hero: self.hero!)                         
+        
+        let skillVC = LXTSikllLibController()
+        self.present(skillVC, animated: false) {}
     }
     
     @objc func lxt_mapClick() {

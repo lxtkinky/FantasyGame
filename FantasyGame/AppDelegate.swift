@@ -17,7 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = .white
 //        self.window?.rootViewController = ViewController.init()
         
-        LXTTableSQliteHelper.lxt_createTable(tableName: "user")
+//        LXTTableSQliteHelper.lxt_createTable(tableName: "user")
+        LXTTableSQliteHelper.lxt_initTable()
         
         let tabBarVC = LXTTabBarController()
         let homeVC = LXTHomeController()
@@ -52,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-//        LXTRoleManager.lxt_offlineRevenue()
+        NotificationCenter.default.post(name: KNotificationAppActive, object: nil)
     }
 
     // MARK: UISceneSession Lifecycle

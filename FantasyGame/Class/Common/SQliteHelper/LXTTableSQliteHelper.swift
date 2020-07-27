@@ -9,9 +9,31 @@
 import UIKit
 import SQLite
 
+var db = try? Connection(documentPath! + "/db.sqlite3")
+
 class LXTTableSQliteHelper: NSObject {
     class func lxt_initTable() {
-        
+        if let _ = db {
+            db!.busyTimeout = 5      //超时时间
+
+            //繁忙处理
+            db!.busyHandler({ tries in
+                if tries >= 3 {
+                    return false
+                }
+                return true
+            })
+            
+            let userTableExists = LXTTableSQliteHelper().tableExists(tableName: "users")
+            if !userTableExists {
+                self.lxt_createTable(tableName: "users")
+            }
+            
+            let skillTableExists = LXTTableSQliteHelper().tableExists(tableName: "skill")
+            if !skillTableExists {
+                LXTTableSQliteHelper().lxt_createSkillTable()
+            }
+        }
     }
     
     func lxt_createDBFile() -> Void {
@@ -19,6 +41,78 @@ class LXTTableSQliteHelper: NSObject {
 //        if !FileManager.default.fileExists(atPath: sqlitePath){
 //            FileManager.default.createDirectory(atPath: documentPath! + "sqlite", withIntermediateDirectories: <#T##Bool#>, attributes: <#T##[FileAttributeKey : Any]?#>)
 //        }
+    }
+//    技能名称，伤害类型，伤害基数，等级，等级叠加公式，学习条件，等级经验基数，等级经验公式，冷却CD
+    func lxt_createSkillTable() -> Void {
+        let skillTable = Table("skill")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        let type = Expression<Int64>("type")
+        let damageBase = Expression<Int64>("damageBase")
+        let maxLevel = Expression<Int64>("maxLevel")
+        let damageFormula = Expression<Int64>("formula")
+        let prerequisite = Expression<Int64>("prerequisite")
+        let minExp = Expression<Int64>("minExp")
+        let expFormula = Expression<Int64>("expFormula")
+        let cd = Expression<Int64>("cd")
+        let desc = Expression<String>("desc")
+        
+        let _ = try? db!.run(skillTable.create(block: { (table) in
+            table.column(id, primaryKey: true)
+            table.column(name, unique: true)
+            table.column(type)
+            table.column(damageBase)
+            table.column(maxLevel)
+            table.column(damageFormula)
+            table.column(prerequisite)
+            table.column(minExp)
+            table.column(expFormula)
+            table.column(cd)
+            table.column(desc)
+        }))
+        
+        let skillDesc = "使用物理攻击造成伤害"
+        let insert = skillTable.insert(name <- "基础剑法", type <- 1, damageBase <- 110, maxLevel <- 9, damageFormula <- 5, prerequisite <- 10, minExp <- 1000, expFormula <- 2, cd <- 3, desc <- skillDesc)
+        _ = try? db!.run(insert)
+        
+        for skill in try! db!.prepare(skillTable) {
+            print("技能名称：\(skill[name])，对地方造成\(skill[damageBase])%的物理伤害")
+        }
+    }
+    
+    func lxt_getBaseSkills() -> Array<LXTSkillModel> {
+        let skillTable = Table("skill")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        let type = Expression<Int64>("type")
+        let damageBase = Expression<Int64>("damageBase")
+        let maxLevel = Expression<Int64>("maxLevel")
+        let damageFormula = Expression<Int64>("formula")
+        let prerequisite = Expression<Int64>("prerequisite")
+        let minExp = Expression<Int64>("minExp")
+        let expFormula = Expression<Int64>("expFormula")
+        let cd = Expression<Int64>("cd")
+        let desc = Expression<String>("desc")
+        
+        var skillArr = Array<LXTSkillModel>()
+        for skill in try! db!.prepare(skillTable) {
+            print("技能名称：\(skill[name])，对地方造成\(skill[damageBase])%的物理伤害")
+            let model = LXTSkillModel()
+            model.id = Int(skill[id])
+            model.name = String(skill[name])
+            model.type = Int(skill[type])
+            model.damageBase = Int(skill[damageBase])
+            model.maxLevel = Int(skill[maxLevel])
+            model.damageFormula = Int(skill[damageFormula])
+            model.prerequisite = Int(skill[prerequisite])
+            model.minExp = Int(skill[minExp])
+            model.expFormula = Int(skill[expFormula])
+            model.cd = Int(skill[cd])
+            model.desc = String(skill[desc])
+            skillArr.append(model)
+        }
+        
+        return skillArr
     }
     
 //    //创建一个内存数据库
@@ -93,5 +187,15 @@ class LXTTableSQliteHelper: NSObject {
 //            }
 //        }
         
+    }
+    
+    func tableExists(tableName : String) -> Bool{
+        let result = try? db?.scalar("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = '\(tableName)'")
+        /*
+         let result = try? db?.scalar("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = ? ","tableName")
+         */
+        let count = Int.fromDatatypeValue(result as! Int64) //(刚学swift，我不晓得这里是不是这样用的，但测试没问题)
+        print("Table \(tableName)  \(count == 1 ? "存在" : "不存在")")
+        return count == 1 ? true : false
     }
 }
