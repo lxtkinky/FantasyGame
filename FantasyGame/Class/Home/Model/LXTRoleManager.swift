@@ -10,37 +10,48 @@ import UIKit
 
 class LXTRoleManager: NSObject {
     class func lxt_saveHero(hero : LXTHeroModel) -> Void {
-            let fileExists = FileManager().fileExists(atPath: documentPath! + "/data/role/hero.data")
-            if !fileExists {
-                do {
-                    try FileManager().createDirectory(atPath: documentPath! + "/data/role/", withIntermediateDirectories: true, attributes: nil)
-                    FileManager.default.createFile(atPath: documentPath! + "/data/role/hero.data", contents: nil, attributes: nil)
-                } catch  {
-                    print("创建文件失败")
-                }
-                
-            }
-            if let data = try? NSKeyedArchiver.archivedData(withRootObject: hero, requiringSecureCoding: true){
-    //            print("\(documentPath!)/data/role/hero.data")
-                if let _ = try? data.write(to: URL(fileURLWithPath: documentPath! + "/data/role/hero.data")){
-    //                print("保存数据成功")
-                }else{
-                    print("写入文件失败")
-                }
-            }else{
-                print("失败1")
-            }
+            LXTHeroTableHelper.lxt_saveHero(hero: hero)
+//            let fileExists = FileManager().fileExists(atPath: documentPath! + "/data/role/hero.data")
+//            if !fileExists {
+//                do {
+//                    try FileManager().createDirectory(atPath: documentPath! + "/data/role/", withIntermediateDirectories: true, attributes: nil)
+//                    FileManager.default.createFile(atPath: documentPath! + "/data/role/hero.data", contents: nil, attributes: nil)
+//                } catch  {
+//                    print("创建文件失败")
+//                }
+//
+//            }
+//            if let data = try? NSKeyedArchiver.archivedData(withRootObject: hero, requiringSecureCoding: true){
+//
+//                if let _ = try? data.write(to: URL(fileURLWithPath: documentPath! + "/data/role/hero.data")){
+//
+//                }else{
+//                    print("写入文件失败")
+//                }
+//            }else{
+//                print("失败1")
+//            }
+        
         }
         
         class func lxt_loadHero() -> LXTHeroModel {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/role/hero.data"))
-                let hero = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTHeroModel
-                return hero ?? LXTHeroModel.init()
-            } catch  {
-                print("解档文件失败")
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/role/hero.data"))
+//                let hero = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTHeroModel
+//                return hero ?? LXTHeroModel.init()
+//            } catch  {
+//                print("解档文件失败")
+//            }
+            let heroArray = LXTHeroTableHelper.lxt_queryAllHero()
+            if heroArray.count > 0 {
+                return heroArray[0]
+            }else{
+                let hero = LXTHeroModel()
+                hero.heroID = 1
+                hero.name = "主角"
+                LXTHeroTableHelper.lxt_saveHero(hero: hero)
+                return hero
             }
-            return LXTHeroModel()
         }
     
     
@@ -63,6 +74,7 @@ class LXTRoleManager: NSObject {
             print("lxt-- 上次存档时间 = \(dateStr), interval = \(interval)")
             if interval > 1 * 60 {
                 let pkCount = Int(interval / 5 )
+                user.goldNum += pkCount
                 let totalExp = pkCount * 10
                 let hero = self.lxt_loadHero()
                 hero.currentExp += totalExp
@@ -84,6 +96,7 @@ class LXTRoleManager: NSObject {
                     }
                 }
                 self.lxt_saveHero(hero: hero)
+                LXTUserManager().lxt_saveUser(user: user)
                 revenueStr = "离线战斗\(pkCount)次，生命+\(hpCount)，攻击+\(attackCount)"
             }
         }else{

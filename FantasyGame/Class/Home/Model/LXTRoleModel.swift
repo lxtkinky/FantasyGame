@@ -33,6 +33,9 @@ class LXTRoleModel: LXTBaseModel{
         
     }
     
+    var id = 0
+    var heroID = 0
+    var name = ""
     var hp = 0
     var mp = 0
     var currentHP = 0
@@ -41,5 +44,6 @@ class LXTRoleModel: LXTBaseModel{
     var level = 1
     var maxExp = 0
     var currentExp = 0
-    var skills = Array<Any>()
+    var desc = ""
+    var skills = Array<LXTHeroSkillModel>()
 }

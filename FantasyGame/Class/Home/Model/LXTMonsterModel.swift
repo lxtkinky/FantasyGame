@@ -11,10 +11,18 @@ import UIKit
 class LXTMonsterModel: LXTRoleModel {
     override var level: Int{
         didSet{
-            self.maxExp = level * 10
-            self.attack = level > 1 ? 30 * level : 10
-            self.hp = 100 * level
-            self.currentHP = 100 * level
+            if level > 0 {
+                self.maxExp = level * 10
+                self.attack = level > 1 ? 30 * level : 10
+                self.hp = 100 * level
+                self.currentHP = 100 * level
+            }else{
+                self.maxExp = 10
+                self.attack = 10
+                self.hp = 100
+                self.currentHP = 100 
+            }
+            
         }
     }
     override init() {

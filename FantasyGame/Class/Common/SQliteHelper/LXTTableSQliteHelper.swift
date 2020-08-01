@@ -33,7 +33,46 @@ class LXTTableSQliteHelper: NSObject {
             if !skillTableExists {
                 LXTTableSQliteHelper().lxt_createSkillTable()
             }
+            LXTSkillTableHelper.lxt_addSkillIDColumn()
+            LXTSkillTableHelper.lxt_initSkill()
+            
+//            LXTTableSQliteHelper().lxt_createGoodsTable()
+            LXTGoodsSQliteHelper().lxt_createGoodsTable()
+            
+            LXTHeroTableHelper.lxt_createTable()
+            
+            LXTHeroSkillDBHelper.lxt_createTable()
         }
+    }
+    
+//    var name = ""
+//    var count = 1
+//    var lock = false
+//    var useable = true
+//    var type = 1
+//    var desc = ""
+//    var relationID = 0
+    func lxt_createGoodsTable() -> Void {
+        let goodTable = Table("goods")
+        let id = Expression<Int64>("id")
+        let name = Expression<String>("name")
+        let count = Expression<Int64>("count")
+        let lock = Expression<Bool>("lock")
+        let useable = Expression<Bool>("useable")
+        let type = Expression<Int64>("type")
+        let desc = Expression<String>("desc")
+        let relationID = Expression<Int64>("relationID")
+        
+        let _ = try? db!.run(goodTable.create(temporary: false, ifNotExists: true, withoutRowid: true, block: { (builder) in
+            builder.column(id, primaryKey: true)
+            builder.column(name, unique: true)
+            builder.column(count)
+            builder.column(lock)
+            builder.column(useable)
+            builder.column(type)
+            builder.column(desc)
+            builder.column(relationID)
+        }))
     }
     
     func lxt_createDBFile() -> Void {
@@ -75,9 +114,9 @@ class LXTTableSQliteHelper: NSObject {
         let insert = skillTable.insert(name <- "基础剑法", type <- 1, damageBase <- 110, maxLevel <- 9, damageFormula <- 5, prerequisite <- 10, minExp <- 1000, expFormula <- 2, cd <- 3, desc <- skillDesc)
         _ = try? db!.run(insert)
         
-        for skill in try! db!.prepare(skillTable) {
-            print("技能名称：\(skill[name])，对地方造成\(skill[damageBase])%的物理伤害")
-        }
+//        for skill in try! db!.prepare(skillTable) {
+//            print("技能名称：\(skill[name])，对地方造成\(skill[damageBase])%的物理伤害")
+//        }
     }
     
     func lxt_getBaseSkills() -> Array<LXTSkillModel> {
@@ -93,10 +132,11 @@ class LXTTableSQliteHelper: NSObject {
         let expFormula = Expression<Int64>("expFormula")
         let cd = Expression<Int64>("cd")
         let desc = Expression<String>("desc")
+        let skillID = Expression<Int>("skillID")
         
         var skillArr = Array<LXTSkillModel>()
         for skill in try! db!.prepare(skillTable) {
-            print("技能名称：\(skill[name])，对地方造成\(skill[damageBase])%的物理伤害")
+            
             let model = LXTSkillModel()
             model.id = Int(skill[id])
             model.name = String(skill[name])
@@ -109,6 +149,8 @@ class LXTTableSQliteHelper: NSObject {
             model.expFormula = Int(skill[expFormula])
             model.cd = Int(skill[cd])
             model.desc = String(skill[desc])
+            model.skillID = skill[skillID]
+            print("技能名称：\(skill[name])，skillID = \(skill[skillID])，对地方造成\(skill[damageBase])%的物理伤害")
             skillArr.append(model)
         }
         
@@ -197,5 +239,37 @@ class LXTTableSQliteHelper: NSObject {
         let count = Int.fromDatatypeValue(result as! Int64) //(刚学swift，我不晓得这里是不是这样用的，但测试没问题)
         print("Table \(tableName)  \(count == 1 ? "存在" : "不存在")")
         return count == 1 ? true : false
+    }
+    
+    class func lxt_addColumn<V:Value>(table : Table, columnName : String, column : Expression<V?>, defaultValue : V) -> Void {
+        let isExists = self.lxt_columnExists(columnName: columnName, table: table)
+        if !isExists {
+            do {
+                let addColumn = table.addColumn(column, defaultValue: defaultValue)
+                try db!.run(addColumn)
+                print("新增列\(columnName)成功")
+            } catch {
+                print("新增列\(columnName)失败,error = \(error)")
+            }
+        }
+    }
+    
+    class func lxt_columnExists(columnName : String, table : Table) -> Bool {
+        var isExists = false
+        do {
+//            let goodTable = Table("goods")
+            let expression = table.expression
+            let columnNames = try db!.prepare(expression.template, expression.bindings).columnNames
+            for name in columnNames {
+                if name == columnName {
+                    isExists = true
+                    break
+                }
+            }
+        } catch {
+            
+        }
+        
+        return isExists
     }
 }

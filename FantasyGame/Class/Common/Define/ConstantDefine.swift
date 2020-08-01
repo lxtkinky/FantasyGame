@@ -17,6 +17,11 @@ func rgb(_ red : UInt32, _ green : UInt32, _ blue : UInt32) -> UIColor {
     return UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1)
 }
 
+//rgba(17, 61, 104, 1)
+func rgba(_ red : UInt32, _ green : UInt32, _ blue : UInt32, _ alpha : CGFloat) -> UIColor {
+    return UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
+}
+
 func kRandomColor() -> UIColor {
     return rgb(arc4random() % 255, arc4random() % 255, arc4random() % 255)
 }
@@ -25,14 +30,20 @@ let roleBorderColor = rgb(34, 189, 130)
 let roleBgColor = rgb(66, 66, 66)
 let bloodColor = rgb(255, 91, 101)
 let manaColor = rgb(0, 179, 248)
+let titleColor51 = rgb(51, 51, 51)
+let titleDisableColor = rgb(102, 102, 102)
+let buttonDisableColor = rgb(200, 200, 200)
+let buttonEnableColor = titleColor51
 
 let documentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last
 
-let probability = 100
+let probability = 100           //
 
 //NotificationName
 let NotificationNameUpdateHero = NSNotification.Name(rawValue: "notificationNameSaveHero")
 let KNotificationAppActive = NSNotification.Name(rawValue: "KNotificationAppActive")
+
+let KNotificationHeroSkillChange = NSNotification.Name(rawValue: "KNotificationHeroSkillChange")
 
 
 //Font
@@ -70,4 +81,7 @@ var kBottomSafeHeight: CGFloat {
    return isFullScreen ? 34 : 0
 }
 
+
+//用户
+var user = LXTUserManager().lxt_loadUser()
 

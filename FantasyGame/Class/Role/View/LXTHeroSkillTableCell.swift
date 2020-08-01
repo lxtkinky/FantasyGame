@@ -10,7 +10,12 @@ import UIKit
 
 class LXTHeroSkillTableCell: UITableViewCell {
     let width = (kScreenWidth - 35) / 6
-    var array = Array<UIView>()
+    var array = Array<LXTSkillItem>()
+    var skillArray : Array<LXTHeroSkillModel>?{
+        didSet{
+            self.lxt_updateUIWithData()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,9 +34,10 @@ class LXTHeroSkillTableCell: UITableViewCell {
     
     
     func lxt_initSubView() -> Void {
+        self.selectionStyle = .none
         for index in 0...5 {
-            let skillView = UIView()
-            skillView.backgroundColor = kRandomColor()
+            let skillView = LXTSkillItem()
+//            skillView.backgroundColor = kRandomColor()
             self.array.append(skillView)
             self.contentView.addSubview(skillView)
             skillView.snp.makeConstraints { (make) in
@@ -45,6 +51,21 @@ class LXTHeroSkillTableCell: UITableViewCell {
                 make.centerY.equalToSuperview()
                 make.size.equalTo(CGSize(width: width, height: width))
                 
+            }
+        }
+    }
+    
+    func lxt_updateUIWithData() {
+        for index in 0 ..< self.array.count {
+            let skillView = self.array[index]
+            if let model = self.skillArray?[index]{
+                if model.id > 0 {
+                    skillView.backgroundColor = rgb(255, 227, 150)
+                    skillView.model = model
+                }else{
+                    skillView.model = model
+                    skillView.backgroundColor = buttonDisableColor
+                }
             }
         }
     }

@@ -16,21 +16,32 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
     let cellKey = "cellKey"
     let skillCellKey = "skillCellKey"
     var dataSource : Array<String> = []
-    
+    var skillArray : Array<LXTHeroSkillModel> = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.lxt_initData()
         self.lxt_updateUIWithData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.lxt_initData()
 
         self.lxt_initSubView()
         
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(lxt_updateUIWithData), name: NotificationNameUpdateHero, object: nil)
+    }
+    
+    func lxt_initData() {
+        self.skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+        for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: 1, battle: true) {
+            self.skillArray[model.index - 1] = model
+            print("上阵技能：\(model.skill?.name ?? "未知技能")")
+        }
     }
     
     func lxt_initSubView() {
@@ -55,6 +66,28 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: statusBarHeight + 20, left: 0, bottom: 0, right: 0))
         }
+        
+        let studyButton = UIButton(type: .custom)
+        studyButton.setTitle("学习", for: .normal)
+        studyButton.setTitleColor(titleColor51, for: .normal)
+        studyButton.layer.cornerRadius = 3.0
+        studyButton.clipsToBounds = true
+        studyButton.layer.borderColor = rgba(17, 61, 104, 1).cgColor
+        studyButton.layer.borderWidth = 1.0
+        studyButton.addTarget(self, action: #selector(lxt_studyClick), for: .touchUpInside)
+        self.view.addSubview(studyButton)
+        studyButton.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-10)
+            make.top.equalTo(self.tableView).offset(30)
+            make.size.equalTo(CGSize(width: 50, height: 30))
+        }
+    }
+    
+    @objc func lxt_studyClick() -> Void {
+        let studySkillVC = LXTStudySkillController()
+        studySkillVC.modalPresentationStyle = .fullScreen
+        studySkillVC.hero = LXTHeroTableHelper.lxt_queryAllHero().first
+        self.present(studySkillVC, animated: true) {}
     }
     
     @objc func lxt_updateUIWithData() {
@@ -64,9 +97,8 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.dataSource.append("等级：\(self.hero.level)")
         self.dataSource.append("攻击：\(self.hero.attack)")
         self.dataSource.append("魔法：\(self.hero.mp)")
-//        self.dataSource.append("攻击：\(self.hero.attack)")
-//        self.dataSource.append("攻击：\(self.hero.attack)")
-//        self.dataSource.append("攻击：\(self.hero.attack)")
+        self.dataSource.append("金币：\(user.goldNum)")
+        self.dataSource.append("元宝：\(user.ybNum)")
         self.tableView.reloadData()
     }
     
@@ -90,11 +122,20 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
             let cell : LXTHeroSkillTableCell = tableView.dequeueReusableCell(withIdentifier: self.skillCellKey) as! LXTHeroSkillTableCell
+            cell.skillArray = self.skillArray
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: self.cellKey)
         cell?.textLabel?.text = self.dataSource[indexPath.row]
         cell?.selectionStyle = .none
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let chooseVC = LXTChooseSkillController()
+            chooseVC.modalPresentationStyle = .fullScreen
+            self.present(chooseVC, animated: true) {}
+        }
     }
 }

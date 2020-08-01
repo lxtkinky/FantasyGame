@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         LXTRoleManager.lxt_saveArchiveDate()
+        LXTUserManager().lxt_saveUser(user: user)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

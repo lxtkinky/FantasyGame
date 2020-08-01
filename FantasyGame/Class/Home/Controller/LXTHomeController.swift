@@ -23,6 +23,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var showOfflineRevenue = true     //离线收益是否结算
     var offlineResult : String?
     let offlineResLabel = UILabel()
+    var round = 1           //回合
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count
@@ -64,7 +65,12 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         
-        self.hero = self.lxt_loadHero()
+        self.hero = LXTRoleManager.lxt_loadHero()
+        var skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+        for item in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: self.hero!.heroID, battle: true) {
+            skillArray[item.index - 1] = item
+        }
+        self.hero?.skills = skillArray
         let heroView = LXTHeroView()
         self.heroView = heroView
         self.heroView?.role = self.hero
@@ -178,10 +184,20 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func lxt_registerNotification() -> Void {
         NotificationCenter.default.addObserver(self, selector: #selector(lxt_appActive), name: KNotificationAppActive, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(lxt_heroSkillChange), name: KNotificationHeroSkillChange, object: nil)
     }
     
     @objc func lxt_appActive() -> Void {
         self.showOfflineRevenue = true
+    }
+    
+    @objc func lxt_heroSkillChange(){
+        var skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+        for item in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: self.hero!.heroID, battle: true) {
+            skillArray[item.index - 1] = item
+        }
+        self.hero?.skills = skillArray
     }
     
     @objc func lxt_restHero()  {
@@ -195,6 +211,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //        self.lxt_saveHero(hero: self.hero!)                         
         
         let skillVC = LXTSikllLibController()
+        skillVC.modalPresentationStyle = .fullScreen
         self.present(skillVC, animated: false) {}
     }
     
@@ -202,6 +219,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let mapVC = LXTMapController()
         mapVC.changeMap = { mapLevel in
             self.hero?.mapLevel = mapLevel
+//            self.monster?.level = mapLevel
             LXTRoleManager.lxt_saveHero(hero: self.hero!)
         }
         self.present(mapVC, animated: false) {}
@@ -234,36 +252,58 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 }else{
                     self.dataSource.append("战斗胜利，什么都没有")
                 }
+                user.goldNum += 1
                 self.hero?.currentExp += self.monster!.maxExp
                 if self.hero!.currentExp > self.hero!.maxExp {
                     self.hero?.currentExp = self.hero!.currentExp - self.hero!.maxExp
                     self.hero?.level += 1
                 }
                 self.expStrip.hero = self.hero!
-                self.lxt_saveHero(hero: self.hero!)
+//                self.lxt_saveHero(hero: self.hero!)
+                LXTRoleManager.lxt_saveHero(hero: self.hero!)
+                LXTUserManager().lxt_saveUser(user: user)
                 NotificationCenter.default.post(name: NotificationNameUpdateHero, object: nil)
+                self.round = 1
             }else{
                 self.dataSource.append("战斗失败")
+                self.round = 1
             }
             
             //初始化战斗
             self.playStatus = 0
-            self.hero = LXTRoleManager.lxt_loadHero()
-            self.monster = LXTMonsterModel()
-            self.monster?.level = self.hero!.mapLevel
+//            self.hero = LXTRoleManager.lxt_loadHero()
+            self.hero?.currentHP = self.hero!.hp
+            self.hero?.currentMP = self.hero!.mp
             self.heroView?.role = self.hero
+            
+//            self.monster = LXTMonsterModel()
+//            self.monster?.level = self.hero!.mapLevel
+            self.monster?.level = self.hero!.mapLevel
+            self.monster?.currentHP = self.monster!.hp
             self.monsterView?.role = self.monster
         }else{
             if self.playStatus == 0 {
                 self.playStatus = 1
-                self.monster?.currentHP -= self.hero!.attack
+                let index = (self.round - 1) % 6;
+                let heroSkill = self.hero?.skills[index]
+                if heroSkill!.id > 0 {
+                    let attackNum = Int(Double(self.hero!.attack * heroSkill!.damage) / 100.0)
+                    self.monster?.currentHP -= attackNum
+                    self.dataSource.append("轮子对阿呆使出了\(heroSkill!.skill!.name)，造成\(attackNum)点伤害")
+                }else{
+                    self.monster?.currentHP -= self.hero!.attack
+                    self.dataSource.append("轮子对阿呆使用普通攻击，造成\(self.hero!.attack)点伤害")
+                }
+                
                 self.monsterView?.role = self.monster
-                self.dataSource.append("轮子对阿呆使出了千年杀，造成\(self.hero!.attack)点伤害")
+                
             }else{
                 self.playStatus = 0
                 self.hero?.currentHP -= self.monster!.attack
                 self.heroView?.role = self.hero
-                self.dataSource.append("阿呆对轮子使出了猴子偷桃，造成\(self.monster!.attack)点伤害")
+                self.dataSource.append("阿呆对轮子使用普通攻击，造成\(self.monster!.attack)点伤害")
+                //回合加一
+                self.round += 1
             }
         }
         
@@ -282,38 +322,38 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
     }
     
-    func lxt_saveHero(hero : LXTHeroModel) -> Void {
-        let fileExists = FileManager().fileExists(atPath: documentPath! + "/data/role/hero.data")
-        if !fileExists {
-            do {
-                try FileManager().createDirectory(atPath: documentPath! + "/data/role/", withIntermediateDirectories: true, attributes: nil)
-                FileManager.default.createFile(atPath: documentPath! + "/data/role/hero.data", contents: nil, attributes: nil)
-            } catch  {
-                print("创建文件失败")
-            }
-            
-        }
-        if let data = try? NSKeyedArchiver.archivedData(withRootObject: hero, requiringSecureCoding: true){
-//            print("\(documentPath!)/data/role/hero.data")
-            if let _ = try? data.write(to: URL(fileURLWithPath: documentPath! + "/data/role/hero.data")){
-//                print("保存数据成功")
-            }else{
-                print("写入文件失败")
-            }
-        }else{
-            print("失败1")
-        }
-    }
+//    func lxt_saveHero(hero : LXTHeroModel) -> Void {
+//        let fileExists = FileManager().fileExists(atPath: documentPath! + "/data/role/hero.data")
+//        if !fileExists {
+//            do {
+//                try FileManager().createDirectory(atPath: documentPath! + "/data/role/", withIntermediateDirectories: true, attributes: nil)
+//                FileManager.default.createFile(atPath: documentPath! + "/data/role/hero.data", contents: nil, attributes: nil)
+//            } catch  {
+//                print("创建文件失败")
+//            }
+//
+//        }
+//        if let data = try? NSKeyedArchiver.archivedData(withRootObject: hero, requiringSecureCoding: true){
+////            print("\(documentPath!)/data/role/hero.data")
+//            if let _ = try? data.write(to: URL(fileURLWithPath: documentPath! + "/data/role/hero.data")){
+////                print("保存数据成功")
+//            }else{
+//                print("写入文件失败")
+//            }
+//        }else{
+//            print("失败1")
+//        }
+//    }
     
-    func lxt_loadHero() -> LXTHeroModel {
-        do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/role/hero.data"))
-            let hero = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTHeroModel
-            return hero ?? LXTHeroModel.init()
-        } catch  {
-            print("解档文件失败")
-        }
-        return LXTHeroModel()
-    }
+//    func lxt_loadHero() -> LXTHeroModel {
+//        do {
+//            let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/role/hero.data"))
+//            let hero = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTHeroModel
+//            return hero ?? LXTHeroModel.init()
+//        } catch  {
+//            print("解档文件失败")
+//        }
+//        return LXTHeroModel()
+//    }
     
 }

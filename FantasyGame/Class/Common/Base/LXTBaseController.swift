@@ -18,8 +18,8 @@ class LXTBaseController: UIViewController {
         self.backButton.addTarget(self, action: #selector(lxt_backClick), for: .touchUpInside)
         self.view.addSubview(self.backButton)
         self.backButton.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(10)
-            make.top.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(statusBarHeight)
             make.height.equalTo(44)
         }
     }

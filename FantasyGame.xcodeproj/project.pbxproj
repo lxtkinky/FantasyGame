@@ -20,9 +20,23 @@
 		F404132024BD8C3900E918F8 /* LXTUserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */; };
 		F40F52A324C28F1C00FC95D9 /* LXTExpStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */; };
 		F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */; };
+		F427C2BD24D3F5F300B365C3 /* LXTChooseSkillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F427C2BC24D3F5F300B365C3 /* LXTChooseSkillController.swift */; };
+		F427C2BF24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F427C2BE24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift */; };
+		F427C2C124D41EF300B365C3 /* LXTSkillItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F427C2C024D41EF300B365C3 /* LXTSkillItem.swift */; };
+		F427C2C324D4200C00B365C3 /* LXTHeroSkillActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F427C2C224D4200C00B365C3 /* LXTHeroSkillActivityCell.swift */; };
 		F429868624CEAC070030C049 /* Table.txt in Resources */ = {isa = PBXBuildFile; fileRef = F429868524CEAC070030C049 /* Table.txt */; };
 		F42C381F24C58B0600E1E6BC /* LXTTableSQliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */; };
 		F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */; };
+		F44F859524CFBE6400C931DB /* LXTBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859424CFBE6400C931DB /* LXTBaseTableViewCell.swift */; };
+		F44F859824CFC47500C931DB /* LXTSkillLibCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859724CFC47500C931DB /* LXTSkillLibCell.swift */; };
+		F44F859B24CFCDBD00C931DB /* LXTUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859A24CFCDBD00C931DB /* LXTUserModel.swift */; };
+		F44F859D24CFCF0800C931DB /* LXTLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859C24CFCF0800C931DB /* LXTLoginController.swift */; };
+		F44F859F24CFD3E600C931DB /* LXTUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859E24CFD3E600C931DB /* LXTUserManager.swift */; };
+		F44F85A224CFF5FB00C931DB /* LXTGoodsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85A124CFF5FB00C931DB /* LXTGoodsModel.swift */; };
+		F44F85A424D0097C00C931DB /* LXTBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85A324D0097C00C931DB /* LXTBookModel.swift */; };
+		F44F85A624D0202C00C931DB /* LXTGoodsSQliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85A524D0202C00C931DB /* LXTGoodsSQliteHelper.swift */; };
+		F44F85A924D0269300C931DB /* LXTGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85A824D0269300C931DB /* LXTGoodsCell.swift */; };
+		F44F85AB24D02F3000C931DB /* LXTGoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85AA24D02F3000C931DB /* LXTGoodsView.swift */; };
 		F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398B24BD43AB00D906D4 /* AppDelegate.swift */; };
 		F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398D24BD43AB00D906D4 /* SceneDelegate.swift */; };
 		F476399024BD43AB00D906D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398F24BD43AB00D906D4 /* ViewController.swift */; };
@@ -36,6 +50,10 @@
 		F47639C524BD4B9300D906D4 /* LXTBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */; };
 		F47639C824BD4C1300D906D4 /* LXTHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639C724BD4C1300D906D4 /* LXTHomeController.swift */; };
 		F47639CC24BD4DB700D906D4 /* LXTStripProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639CB24BD4DB700D906D4 /* LXTStripProgressView.swift */; };
+		F4B5517A24D1648100C9E6D6 /* LXTHeroTableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B5517924D1648100C9E6D6 /* LXTHeroTableHelper.swift */; };
+		F4C39AE824D2A4CB00E1EF5E /* LXTHeroSkillDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C39AE724D2A4CB00E1EF5E /* LXTHeroSkillDBHelper.swift */; };
+		F4C39AEB24D2A58600E1EF5E /* LXTHeroSkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C39AEA24D2A58600E1EF5E /* LXTHeroSkillModel.swift */; };
+		F4C39AED24D2BCAA00E1EF5E /* LXTStudySkillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C39AEC24D2BCAA00E1EF5E /* LXTStudySkillController.swift */; };
 		F4D9FAB224BE97B400EF594B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4D9FAB124BE97B400EF594B /* README.md */; };
 		F4D9FAB424BEA0BA00EF594B /* LXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */; };
 		F4D9FAB624BEA3D800EF594B /* LXTMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */; };
@@ -79,9 +97,23 @@
 		F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserDefaultManager.swift; sourceTree = "<group>"; };
 		F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTExpStripView.swift; sourceTree = "<group>"; };
 		F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTPackageController.swift; sourceTree = "<group>"; };
+		F427C2BC24D3F5F300B365C3 /* LXTChooseSkillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTChooseSkillController.swift; sourceTree = "<group>"; };
+		F427C2BE24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillChooseCell.swift; sourceTree = "<group>"; };
+		F427C2C024D41EF300B365C3 /* LXTSkillItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSkillItem.swift; sourceTree = "<group>"; };
+		F427C2C224D4200C00B365C3 /* LXTHeroSkillActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillActivityCell.swift; sourceTree = "<group>"; };
 		F429868524CEAC070030C049 /* Table.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Table.txt; sourceTree = "<group>"; };
 		F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTableSQliteHelper.swift; sourceTree = "<group>"; };
 		F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTrialAreaController.swift; sourceTree = "<group>"; };
+		F44F859424CFBE6400C931DB /* LXTBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTBaseTableViewCell.swift; sourceTree = "<group>"; };
+		F44F859724CFC47500C931DB /* LXTSkillLibCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSkillLibCell.swift; sourceTree = "<group>"; };
+		F44F859A24CFCDBD00C931DB /* LXTUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserModel.swift; sourceTree = "<group>"; };
+		F44F859C24CFCF0800C931DB /* LXTLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTLoginController.swift; sourceTree = "<group>"; };
+		F44F859E24CFD3E600C931DB /* LXTUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserManager.swift; sourceTree = "<group>"; };
+		F44F85A124CFF5FB00C931DB /* LXTGoodsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsModel.swift; sourceTree = "<group>"; };
+		F44F85A324D0097C00C931DB /* LXTBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTBookModel.swift; sourceTree = "<group>"; };
+		F44F85A524D0202C00C931DB /* LXTGoodsSQliteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsSQliteHelper.swift; sourceTree = "<group>"; };
+		F44F85A824D0269300C931DB /* LXTGoodsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsCell.swift; sourceTree = "<group>"; };
+		F44F85AA24D02F3000C931DB /* LXTGoodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsView.swift; sourceTree = "<group>"; };
 		F476398824BD43AB00D906D4 /* FantasyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F476398B24BD43AB00D906D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F476398D24BD43AB00D906D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +133,10 @@
 		F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTBaseModel.swift; sourceTree = "<group>"; };
 		F47639C724BD4C1300D906D4 /* LXTHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHomeController.swift; sourceTree = "<group>"; };
 		F47639CB24BD4DB700D906D4 /* LXTStripProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStripProgressView.swift; sourceTree = "<group>"; };
+		F4B5517924D1648100C9E6D6 /* LXTHeroTableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroTableHelper.swift; sourceTree = "<group>"; };
+		F4C39AE724D2A4CB00E1EF5E /* LXTHeroSkillDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillDBHelper.swift; sourceTree = "<group>"; };
+		F4C39AEA24D2A58600E1EF5E /* LXTHeroSkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillModel.swift; sourceTree = "<group>"; };
+		F4C39AEC24D2BCAA00E1EF5E /* LXTStudySkillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStudySkillController.swift; sourceTree = "<group>"; };
 		F4D9FAB124BE97B400EF594B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTabBarController.swift; sourceTree = "<group>"; };
 		F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTMapController.swift; sourceTree = "<group>"; };
@@ -157,6 +193,7 @@
 		F4010A4824C153930008A054 /* Role */ = {
 			isa = PBXGroup;
 			children = (
+				F4C39AE924D2A53F00E1EF5E /* Model */,
 				F4F33D9E24CED9BD00B7AF94 /* View */,
 				F4010A4924C1539D0008A054 /* Controller */,
 			);
@@ -167,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				F4010A4A24C154120008A054 /* LXTRoleController.swift */,
+				F4C39AEC24D2BCAA00E1EF5E /* LXTStudySkillController.swift */,
+				F427C2BC24D3F5F300B365C3 /* LXTChooseSkillController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,6 +233,7 @@
 		F404131624BD62C000E918F8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F44F859624CFC43100C931DB /* SkillLib */,
 				F404131724BD62E900E918F8 /* LXTRoleView.swift */,
 				F404131924BD62FA00E918F8 /* LXTHeroView.swift */,
 				F404131B24BD630700E918F8 /* LXTMonsterView.swift */,
@@ -213,6 +253,8 @@
 		F40F52A424C2D87E00FC95D9 /* Package */ = {
 			isa = PBXGroup;
 			children = (
+				F44F85A724D0267500C931DB /* View */,
+				F44F85A024CFF5BD00C931DB /* Model */,
 				F40F52A724C2E2C500FC95D9 /* Controller */,
 			);
 			path = Package;
@@ -247,6 +289,9 @@
 			children = (
 				F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */,
 				F4F33D9224CECD5400B7AF94 /* LXTSkillTableHelper.swift */,
+				F44F85A524D0202C00C931DB /* LXTGoodsSQliteHelper.swift */,
+				F4B5517924D1648100C9E6D6 /* LXTHeroTableHelper.swift */,
+				F4C39AE724D2A4CB00E1EF5E /* LXTHeroSkillDBHelper.swift */,
 			);
 			path = SQliteHelper;
 			sourceTree = "<group>";
@@ -262,6 +307,7 @@
 		F44428B724C2F65900AAB68E /* User */ = {
 			isa = PBXGroup;
 			children = (
+				F44F859924CFCDA300C931DB /* Model */,
 				F44428BB24C2F94400AAB68E /* Controller */,
 			);
 			path = User;
@@ -278,8 +324,51 @@
 		F44428BB24C2F94400AAB68E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F44F859C24CFCF0800C931DB /* LXTLoginController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		F44F859324CFBE3D00C931DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F44F859424CFBE6400C931DB /* LXTBaseTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F44F859624CFC43100C931DB /* SkillLib */ = {
+			isa = PBXGroup;
+			children = (
+				F44F859724CFC47500C931DB /* LXTSkillLibCell.swift */,
+			);
+			path = SkillLib;
+			sourceTree = "<group>";
+		};
+		F44F859924CFCDA300C931DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F44F859A24CFCDBD00C931DB /* LXTUserModel.swift */,
+				F44F859E24CFD3E600C931DB /* LXTUserManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F44F85A024CFF5BD00C931DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F44F85A124CFF5FB00C931DB /* LXTGoodsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F44F85A724D0267500C931DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F44F85A824D0269300C931DB /* LXTGoodsCell.swift */,
+				F44F85AA24D02F3000C931DB /* LXTGoodsView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F476397F24BD43AB00D906D4 = {
@@ -386,6 +475,7 @@
 		F47639C124BD4B4700D906D4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				F44F859324CFBE3D00C931DB /* View */,
 				F47639C224BD4B7D00D906D4 /* LXTBaseController.swift */,
 				F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */,
 				F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */,
@@ -411,6 +501,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		F4C39AE924D2A53F00E1EF5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F4C39AEA24D2A58600E1EF5E /* LXTHeroSkillModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F4F33D9424CECE0200B7AF94 /* SkillLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				F4F33D9C24CECF4100B7AF94 /* LXTSkillModel.swift */,
+				F44F85A324D0097C00C931DB /* LXTBookModel.swift */,
 			);
 			path = SkillLib;
 			sourceTree = "<group>";
@@ -432,6 +531,9 @@
 			children = (
 				F4F33D9F24CED9E800B7AF94 /* LXTHeroSkillCell.swift */,
 				F4F33DA124CEDC6400B7AF94 /* LXTHeroSkillTableCell.swift */,
+				F427C2BE24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift */,
+				F427C2C224D4200C00B365C3 /* LXTHeroSkillActivityCell.swift */,
+				F427C2C024D41EF300B365C3 /* LXTSkillItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -618,29 +720,47 @@
 				F404131524BD616100E918F8 /* LXTMonsterModel.swift in Sources */,
 				F4F33D9324CECD5400B7AF94 /* LXTSkillTableHelper.swift in Sources */,
 				F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */,
+				F44F85A424D0097C00C931DB /* LXTBookModel.swift in Sources */,
 				F4010A4724C1535F0008A054 /* LXTRoleManager.swift in Sources */,
+				F44F859D24CFCF0800C931DB /* LXTLoginController.swift in Sources */,
 				F47639BF24BD4A7700D906D4 /* ConstantDefine.swift in Sources */,
+				F4B5517A24D1648100C9E6D6 /* LXTHeroTableHelper.swift in Sources */,
+				F4C39AE824D2A4CB00E1EF5E /* LXTHeroSkillDBHelper.swift in Sources */,
 				F476399024BD43AB00D906D4 /* ViewController.swift in Sources */,
 				F4F33D9A24CECE8A00B7AF94 /* LXTSikllLibController.swift in Sources */,
 				F42C381F24C58B0600E1E6BC /* LXTTableSQliteHelper.swift in Sources */,
 				F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */,
+				F44F85A624D0202C00C931DB /* LXTGoodsSQliteHelper.swift in Sources */,
 				F404131124BD60E700E918F8 /* LXTRoleModel.swift in Sources */,
 				F404131824BD62E900E918F8 /* LXTRoleView.swift in Sources */,
 				F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */,
 				F4F33DA024CED9E800B7AF94 /* LXTHeroSkillCell.swift in Sources */,
+				F44F859524CFBE6400C931DB /* LXTBaseTableViewCell.swift in Sources */,
+				F4C39AED24D2BCAA00E1EF5E /* LXTStudySkillController.swift in Sources */,
 				F4010A4B24C154120008A054 /* LXTRoleController.swift in Sources */,
 				F404131324BD615100E918F8 /* LXTHeroModel.swift in Sources */,
 				F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */,
+				F427C2C124D41EF300B365C3 /* LXTSkillItem.swift in Sources */,
+				F4C39AEB24D2A58600E1EF5E /* LXTHeroSkillModel.swift in Sources */,
+				F44F85AB24D02F3000C931DB /* LXTGoodsView.swift in Sources */,
 				F47639C324BD4B7D00D906D4 /* LXTBaseController.swift in Sources */,
 				F404132024BD8C3900E918F8 /* LXTUserDefaultManager.swift in Sources */,
+				F44F859B24CFCDBD00C931DB /* LXTUserModel.swift in Sources */,
 				F4F33DA224CEDC6400B7AF94 /* LXTHeroSkillTableCell.swift in Sources */,
 				F4F33D9D24CECF4100B7AF94 /* LXTSkillModel.swift in Sources */,
+				F44F85A924D0269300C931DB /* LXTGoodsCell.swift in Sources */,
 				F4D9FAB624BEA3D800EF594B /* LXTMapController.swift in Sources */,
 				F47639C824BD4C1300D906D4 /* LXTHomeController.swift in Sources */,
+				F44F85A224CFF5FB00C931DB /* LXTGoodsModel.swift in Sources */,
+				F44F859F24CFD3E600C931DB /* LXTUserManager.swift in Sources */,
 				F4D9FAB424BEA0BA00EF594B /* LXTTabBarController.swift in Sources */,
 				F4010A4E24C17CE70008A054 /* LXTDateHelper.swift in Sources */,
+				F427C2BF24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift in Sources */,
+				F44F859824CFC47500C931DB /* LXTSkillLibCell.swift in Sources */,
 				F404131A24BD62FA00E918F8 /* LXTHeroView.swift in Sources */,
+				F427C2BD24D3F5F300B365C3 /* LXTChooseSkillController.swift in Sources */,
 				F47639C524BD4B9300D906D4 /* LXTBaseModel.swift in Sources */,
+				F427C2C324D4200C00B365C3 /* LXTHeroSkillActivityCell.swift in Sources */,
 				F47639CC24BD4DB700D906D4 /* LXTStripProgressView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
