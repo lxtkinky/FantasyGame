@@ -55,6 +55,7 @@ class LXTGoodsSQliteHelper: NSObject {
     }
     
     class func lxt_updateGoods(model : LXTGoodsModel) -> Bool {
+        model.count = model.count < 0 ? 0 : model.count
         let goodTable = Table("goods")
         let id = Expression<Int>("id")
         let name = Expression<String>("name")
@@ -125,7 +126,7 @@ class LXTGoodsSQliteHelper: NSObject {
                 model.count = Int(goods[goodTable[count]])
                 model.lock = goods[goodTable[lock]]
                 model.useable = goods[goodTable[useable]]
-                model.type = GoodsType(rawValue: Int(goods[goodTable[type]])) ?? GoodsType.equip
+                model.type = GoodsType(rawValue: Int(goods[goodTable[type]])) ?? GoodsType.skill
                 model.desc = goods[goodTable[desc]]
                 model.relationID = Int(goods[goodTable[relationID]])
 
@@ -163,19 +164,25 @@ class LXTGoodsSQliteHelper: NSObject {
         let type = Expression<Int>("type")
         let desc = Expression<String>("desc")
         let relationID = Expression<Int>("relationID")
-        for goods in try! db!.prepare(goodTable) {
-            let model = LXTGoodsModel()
-            model.id = Int(goods[id])
-            model.name = goods[name]
-            model.count = Int(goods[count])
-            model.lock = goods[lock]
-            model.useable = goods[useable]
-            model.type = GoodsType.init(rawValue: Int(goods[type])) ?? GoodsType.equip
-            model.desc = goods[desc]
-            model.relationID = Int(goods[relationID])
-            goodsArray.append(model)
-            print("物品名称：\(model.name), 关联ID：\(model.relationID)")
+        do {
+            let filter = goodTable.filter(count > 0)
+            for goods in try db!.prepare(filter) {
+                let model = LXTGoodsModel()
+                model.id = Int(goods[id])
+                model.name = goods[name]
+                model.count = Int(goods[count])
+                model.lock = goods[lock]
+                model.useable = goods[useable]
+                model.type = GoodsType.init(rawValue: Int(goods[type])) ?? GoodsType.equip
+                model.desc = goods[desc]
+                model.relationID = Int(goods[relationID])
+                goodsArray.append(model)
+                print("物品名称：\(model.name), 关联ID：\(model.relationID)")
+            }
+        } catch {
+            
         }
+        
         return goodsArray
     }
     

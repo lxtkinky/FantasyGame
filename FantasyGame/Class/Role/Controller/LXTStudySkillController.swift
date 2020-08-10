@@ -17,6 +17,7 @@ class LXTStudySkillController: LXTBaseController,UICollectionViewDelegateFlowLay
     let goodsView = LXTGoodsView()
     var hero : LXTHeroModel?
     var skill : LXTSkillModel?
+    var selectGoods : LXTGoodsModel?
     let studyButton = UIButton(type: .custom)
     var currentSkillArray = Array<LXTHeroSkillModel>()
     override func viewDidLoad() {
@@ -74,15 +75,22 @@ class LXTStudySkillController: LXTBaseController,UICollectionViewDelegateFlowLay
                     if item.skillID == skillModel.skillID {
 //                        heroSkill = item
                         print("不能重复学习技能")
+//                        LXTAlertView.showInfo(info: "不能重复学习技能")
+                        LXTAlertView.showInfo(info: "不能重复学习技能", showCancel: false, completeTitle: "确定")
                         return
                     }
                 }
+                
+                self.selectGoods?.count -= 1
+                let _ = LXTGoodsSQliteHelper.lxt_updateGoods(model: self.selectGoods!)
                 
                 heroSkill.heroID = model.heroID
                 heroSkill.skillID = skillModel.skillID
                 heroSkill.damage = skillModel.damageBase
                 let success = LXTHeroSkillDBHelper.lxt_saveHeroSkill(heroSkill: heroSkill)
                 print(success ? "学习成功" : "学习失败")
+//                LXTAlertView.showInfo(info: success ? "学习成功" : "学习失败")
+                LXTAlertView.showInfo(info: success ? "学习成功" : "学习失败", showCancel: false, completeTitle: "确定")
             }
         }
         
@@ -97,7 +105,7 @@ class LXTStudySkillController: LXTBaseController,UICollectionViewDelegateFlowLay
         if indexPath.row < self.dataSource.count{
             let cell : LXTGoodsCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.goodsCellKey, for: indexPath) as! LXTGoodsCell
             cell.goods = self.dataSource[indexPath.row]
-            cell.contentView.backgroundColor = kRandomColor()
+            cell.contentView.backgroundColor = themeColorYellow
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellKey, for: indexPath)
@@ -108,6 +116,7 @@ class LXTStudySkillController: LXTBaseController,UICollectionViewDelegateFlowLay
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let goods = self.dataSource[indexPath.row]
         self.skill = goods.skillModel
+        self.selectGoods = goods
         self.studyButton.setTitleColor(goods.useable ? titleColor51 : buttonDisableColor, for: .normal)
         self.studyButton.layer.borderColor = goods.useable ? titleColor51.cgColor : buttonDisableColor.cgColor
     }

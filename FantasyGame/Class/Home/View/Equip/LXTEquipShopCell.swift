@@ -1,23 +1,22 @@
 //
-//  LXTSkillLibCell.swift
+//  LXTEquipShopCell.swift
 //  FantasyGame
 //
-//  Created by ULDD on 2020/7/28.
+//  Created by ULDD on 2020/8/10.
 //  Copyright © 2020 LXT. All rights reserved.
 //
 
 import UIKit
 
-class LXTSkillLibCell: UICollectionViewCell {
-    let skillName = UILabel()
+class LXTEquipShopCell: UICollectionViewCell {
+    let equipName = UILabel()
     let priceLabel = UILabel()
     let buyButton = UIButton(type: .custom)
-    var buyBlock : ((_ model : LXTSkillModel) -> Void)?
-    var skillModel : LXTSkillModel?{
+    var buyBlock : ((_ model : LXTEquipModel) -> Void)?
+    var equipModel : LXTEquipModel?{
         didSet{
-            print("技能id = \(self.skillModel!.id)")
-            self.skillName.text = self.skillModel?.name
-            self.priceLabel.text = String(self.skillModel!.goldPrice)
+            self.equipName.text = self.equipModel?.name
+            self.priceLabel.text = String(self.equipModel!.goldPrice)
         }
     }
     override init(frame: CGRect) {
@@ -29,14 +28,13 @@ class LXTSkillLibCell: UICollectionViewCell {
     func lxt_initSubView() -> Void {
         self.contentView.layer.cornerRadius = 5.0
         self.contentView.clipsToBounds = true
-//        self.contentView.backgroundColor = kRandomColor()
         self.contentView.layer.borderColor = titleColor51.cgColor
         self.contentView.layer.borderWidth = 1
         
-        self.skillName.font = UIFont(name: PingFangSCRegular, size: 12)
-        self.skillName.textColor = titleColor51
-        self.contentView.addSubview(self.skillName)
-        self.skillName.snp.makeConstraints { (make) in
+        self.equipName.font = UIFont(name: PingFangSCRegular, size: 12)
+        self.equipName.textColor = titleColor51
+        self.contentView.addSubview(self.equipName)
+        self.equipName.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(10)
         }
@@ -66,7 +64,7 @@ class LXTSkillLibCell: UICollectionViewCell {
     
     @objc func lxt_buyClick() -> Void {
         if let buyBlock = self.buyBlock {
-            buyBlock(self.skillModel!)
+            buyBlock(self.equipModel!)
         }
     }
     

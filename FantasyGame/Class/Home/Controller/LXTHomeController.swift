@@ -47,6 +47,9 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         self.lxt_registerNotification()
         
+        print("Int.max = \(Int.max)")
+        print("Int64.max = \(Int64.max)")
+        
         if showOfflineRevenue {
             self.offlineResult = LXTRoleManager.lxt_offlineRevenue()
 //            self.offlineRevenue = false
@@ -158,6 +161,21 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             make.size.equalTo(CGSize(width: 50, height: 50))
         }
         
+        let equipShopBtn = UIButton.init(type: .custom)
+        equipShopBtn.setTitle("装备商店", for: .normal)
+        equipShopBtn.layer.cornerRadius = 25
+        equipShopBtn.clipsToBounds = true
+        equipShopBtn.backgroundColor = kRandomColor()
+        equipShopBtn.setTitleColor(.white, for: .normal)
+        equipShopBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        equipShopBtn.addTarget(self, action: #selector(lxt_equipShopClick), for: .touchUpInside)
+        self.view.addSubview(equipShopBtn)
+        equipShopBtn.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(10)
+            make.top.equalTo(restBtn.snp_bottomMargin).offset(10)
+            make.size.equalTo(CGSize(width: 50, height: 50))
+        }
+        
         let backColor = UIColor.black.withAlphaComponent(0.3)
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -215,6 +233,12 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.present(skillVC, animated: false) {}
     }
     
+        @objc func lxt_equipShopClick()  {
+            let shopVC = LXTEquipShopController()
+            shopVC.modalPresentationStyle = .fullScreen
+            self.present(shopVC, animated: false) {}
+        }
+    
     @objc func lxt_mapClick() {
         let mapVC = LXTMapController()
         mapVC.changeMap = { mapLevel in
@@ -264,6 +288,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 LXTUserManager().lxt_saveUser(user: user)
                 NotificationCenter.default.post(name: NotificationNameUpdateHero, object: nil)
                 self.round = 1
+                LXTHeroSkillDBHelper.lxt_updateHeroSkillExp(exp: 1)
             }else{
                 self.dataSource.append("战斗失败")
                 self.round = 1

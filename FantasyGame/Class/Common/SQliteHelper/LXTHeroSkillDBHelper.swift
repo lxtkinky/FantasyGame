@@ -69,6 +69,23 @@ class LXTHeroSkillDBHelper: NSObject {
         }
     }
     
+    class func lxt_updateHeroSkillExp(exp : Int){
+        let table = Table("hero_skill")
+        let enable = Expression<Bool>("enable")
+        let currentExp = Expression<Int>("currentExp")
+        let update = table.filter(enable == true).update(currentExp += exp)
+        do {
+            let row = try db!.run(update)
+            if row > 0 {
+                print("更新exp成功")
+            }else{
+                print("没有技能上阵")
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     
     /// 查询英雄技能
     /// - Parameters:

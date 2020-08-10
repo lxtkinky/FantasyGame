@@ -45,5 +45,17 @@ class LXTRoleModel: LXTBaseModel{
     var maxExp = 0
     var currentExp = 0
     var desc = ""
+    var enhance = 0         //增加输出伤害
+    var reduce = 0          //受到伤害减免
+    var starLevel = 1       //星级
+    var magic = 0           //法力
+    var criticalChance = 0        //暴击几率
+    var criticalDamage = 150   //暴伤增强
+    var resistCriticalChance = 0    //抗暴击几率
+    var resistCriticalDamage = 0    //暴击伤害减免
+    var type = 1                    //1，英雄 2，地图怪物
+    var suckBlood = 0
+    var backInjury = 0
+    var talentSkills = Array<LXTHeroSkillModel>()   //天赋技能
     var skills = Array<LXTHeroSkillModel>()
 }

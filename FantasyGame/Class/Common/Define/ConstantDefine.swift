@@ -34,6 +34,7 @@ let titleColor51 = rgb(51, 51, 51)
 let titleDisableColor = rgb(102, 102, 102)
 let buttonDisableColor = rgb(200, 200, 200)
 let buttonEnableColor = titleColor51
+let themeColorYellow = rgba(255, 227, 150, 1)
 
 let documentPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last
 

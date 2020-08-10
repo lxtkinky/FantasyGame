@@ -1,36 +1,30 @@
 //
-//  LXTSikllLibController.swift
+//  LXTEquipShopController.swift
 //  FantasyGame
 //
-//  Created by ULDD on 2020/7/27.
+//  Created by ULDD on 2020/8/10.
 //  Copyright © 2020 LXT. All rights reserved.
 //
 
 import UIKit
 
-
-class LXTSikllLibController: LXTBaseController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class LXTEquipShopController: LXTBaseController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {    
     let width = (kScreenWidth - 25) / 4
     let height = (kScreenWidth - 25) / 4 / 3 * 4
     let bookCellKey = "bookCellKey"
-    var dataSource : Array<LXTSkillModel> = []
+    var dataSource : Array<LXTEquipModel> = []
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.dataSource = LXTSkillTableHelper.lxt_getBaseSkills()
-//        for skill in self.dataSource {
-//            skill.skillID = 1
-//            LXTSkillTableHelper.lxt_updateSkill(model: skill)
-//        }
-        
+        self.dataSource = LXTEquipDBHelper.lxt_queryAllEquip()
         self.lxt_initSubView()
     }
     
     func lxt_initSubView() -> Void {
         self.collectionView.backgroundColor = .white
         self.collectionView.register(UICollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "cell")
-        self.collectionView.register(LXTSkillLibCell.classForCoder(), forCellWithReuseIdentifier: self.bookCellKey)
+        self.collectionView.register(LXTEquipShopCell.classForCoder(), forCellWithReuseIdentifier: self.bookCellKey)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.view.addSubview(self.collectionView)
@@ -39,45 +33,45 @@ class LXTSikllLibController: LXTBaseController, UICollectionViewDelegateFlowLayo
         }
     }
     
-    func lxt_buyAction(skillModel : LXTSkillModel) -> Void {
-        let moneyEnough = skillModel.buyType == 1 ? user.goldNum > skillModel.goldPrice : user.ybNum > skillModel.ybPrice
-        let buyStr = skillModel.buyType == 1 ? "金币" : "元宝"
-        if moneyEnough {
-            let buyNum = skillModel.buyType == 1 ? skillModel.goldPrice : skillModel.ybPrice
-            
-            LXTAlertView.showInfo(info: "花费 \(buyNum) \(buyStr)购买", showCancel: true, completeTitle: "购买") {
-                if skillModel.buyType == 1{
-                    user.goldNum -= skillModel.goldPrice
-                }else{
-                    user.ybNum -= skillModel.ybPrice
+    func lxt_buyAction(equipModel : LXTEquipModel) -> Void {
+            let moneyEnough = equipModel.goldPrice > 0 ? user.goldNum > equipModel.goldPrice : user.ybNum > equipModel.ybPrice
+            let buyStr = equipModel.goldPrice > 0 ? "金币" : "元宝"
+            if moneyEnough {
+                let buyNum = equipModel.goldPrice > 0 ? equipModel.goldPrice : equipModel.ybPrice
+                
+                LXTAlertView.showInfo(info: "花费 \(buyNum) \(buyStr)购买", showCancel: true, completeTitle: "购买") {
+                    if equipModel.goldPrice > 0{
+                        user.goldNum -= equipModel.goldPrice
+                    }else{
+                        user.ybNum -= equipModel.ybPrice
+                    }
+                    
+                    LXTUserManager().lxt_saveUser(user: user)
+                    let goods = LXTGoodsModel()
+                    goods.name = equipModel.name
+                    goods.type = .equip
+                    goods.desc = "使用可学习技能\(equipModel.name)"
+                    goods.relationID = equipModel.id
+                    let _ = LXTGoodsSQliteHelper().lxt_addGoods(goods: goods)
+                    LXTAlertView.showInfo(info: "获得技能 \(equipModel.name)", showCancel: false, completeTitle: "确定")
                 }
                 
-                LXTUserManager().lxt_saveUser(user: user)
-                let goods = LXTGoodsModel()
-                goods.name = skillModel.name
-                goods.type = .skill
-                goods.desc = "使用可学习技能\(skillModel.name)"
-                goods.relationID = skillModel.skillID
-                let _ = LXTGoodsSQliteHelper().lxt_addGoods(goods: goods)
-                LXTAlertView.showInfo(info: "获得技能 \(skillModel.name)", showCancel: false, completeTitle: "确定")
+                print("购买装备：\(equipModel.name)")
+            }else{
+                LXTAlertView.showInfo(info: "\(buyStr)不足，无法购买", showCancel: false, completeTitle: "确定")
             }
-            
-//            print("购买技能：\(skillModel.name)")
-        }else{
-            LXTAlertView.showInfo(info: "\(buyStr)不足，无法购买", showCancel: false, completeTitle: "确定")
         }
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell : LXTSkillLibCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.bookCellKey, for: indexPath) as! LXTSkillLibCell
-        cell.skillModel = self.dataSource[indexPath.row]
+        let cell : LXTEquipShopCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.bookCellKey, for: indexPath) as! LXTEquipShopCell
+        cell.equipModel = self.dataSource[indexPath.row]
         weak var weakSelf = self
         cell.buyBlock = { model in
-            weakSelf?.lxt_buyAction(skillModel: model)
+            weakSelf?.lxt_buyAction(equipModel: model)
         }
         return cell
     }
