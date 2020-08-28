@@ -17,6 +17,7 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
     let skillCellKey = "skillCellKey"
     var dataSource : Array<String> = []
     var skillArray : Array<LXTHeroSkillModel> = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+    let heroView = LXTHeroSimpleInfoView()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,11 +38,21 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func lxt_initData() {
-        self.skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
-        for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: 1, battle: true) {
-            self.skillArray[model.index - 1] = model
-            print("上阵技能：\(model.skill?.name ?? "未知技能")")
-        }
+//        self.hero = LXTRoleManager.lxt_loadHero()
+//        self.skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+//        for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: 1, battle: true) {
+//            self.skillArray[model.index - 1] = model
+//            print("上阵技能：\(model.skill?.name ?? "未知技能")")
+//        }
+//        self.hero.skills = self.skillArray
+//        let equipArray = LXTGoodsSQliteHelper.lxt_getAllEquipGoods(paramHeroID: self.hero.id, paramEquipType: .all)
+//        for item in equipArray {
+//            self.hero.equipArray[item.equipModel.type - 1] = item
+//        }
+        self.hero = heroArray[0]
+        LXTRoleManager.lxt_updateHeroEquip()
+        LXTRoleManager.lxt_updateHeroSkill()
+        self.heroView.hero = self.hero
     }
     
     func lxt_initSubView() {
@@ -56,14 +67,26 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //            make.left.equalTo(self.hpLabel)
 //            make.top.equalTo(self.hpLabel.snp.bottom).offset(10)
 //        }
-        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: self.cellKey)
-        self.tableView.register(LXTHeroSkillTableCell.classForCoder(), forCellReuseIdentifier: self.skillCellKey)
-        self.tableView.bounces = false
-        self.tableView.separatorStyle = .none
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.view.addSubview(self.tableView)
-        self.tableView.snp.makeConstraints { (make) in
+//        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: self.cellKey)
+//        self.tableView.register(LXTHeroSkillTableCell.classForCoder(), forCellReuseIdentifier: self.skillCellKey)
+//        self.tableView.bounces = false
+//        self.tableView.separatorStyle = .none
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
+//        self.view.addSubview(self.tableView)
+//        self.tableView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(UIEdgeInsets(top: statusBarHeight + 20, left: 0, bottom: 0, right: 0))
+//        }
+        
+        self.view.addSubview(self.heroView)
+        weak var weakSelf = self
+        self.heroView.skillBlock = {
+            weakSelf?.lxt_chooseSkill()
+        }
+        self.heroView.equipBlock = {type in
+            weakSelf?.lxt_chooseEquip(type: type)
+        }
+        self.heroView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: statusBarHeight + 20, left: 0, bottom: 0, right: 0))
         }
         
@@ -78,9 +101,23 @@ class LXTRoleController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.view.addSubview(studyButton)
         studyButton.snp.makeConstraints { (make) in
             make.right.equalToSuperview().offset(-10)
-            make.top.equalTo(self.tableView).offset(30)
+            make.top.equalTo(self.heroView).offset(30)
             make.size.equalTo(CGSize(width: 50, height: 30))
         }
+    }
+    
+    func lxt_chooseSkill() {
+        let chooseVC = LXTChooseSkillController()
+        chooseVC.modalPresentationStyle = .fullScreen
+        self.present(chooseVC, animated: true) {}
+    }
+    
+    func lxt_chooseEquip(type : Int) {
+        let chooseVC = LXTEquipChooseController()
+        chooseVC.modalPresentationStyle = .fullScreen
+        chooseVC.hero = self.hero
+        chooseVC.type = type + 1
+        self.present(chooseVC, animated: true) {}
     }
     
     @objc func lxt_studyClick() -> Void {

@@ -18,6 +18,7 @@
 		F404131A24BD62FA00E918F8 /* LXTHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131924BD62FA00E918F8 /* LXTHeroView.swift */; };
 		F404131C24BD630700E918F8 /* LXTMonsterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131B24BD630700E918F8 /* LXTMonsterView.swift */; };
 		F404132024BD8C3900E918F8 /* LXTUserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */; };
+		F40DA89D24F8DD1E0018FF2B /* LXTFuncMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40DA89C24F8DD1E0018FF2B /* LXTFuncMenuView.swift */; };
 		F40F52A324C28F1C00FC95D9 /* LXTExpStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */; };
 		F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */; };
 		F427C2BD24D3F5F300B365C3 /* LXTChooseSkillController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F427C2BC24D3F5F300B365C3 /* LXTChooseSkillController.swift */; };
@@ -26,10 +27,16 @@
 		F427C2C324D4200C00B365C3 /* LXTHeroSkillActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F427C2C224D4200C00B365C3 /* LXTHeroSkillActivityCell.swift */; };
 		F429868624CEAC070030C049 /* Table.txt in Resources */ = {isa = PBXBuildFile; fileRef = F429868524CEAC070030C049 /* Table.txt */; };
 		F42C381F24C58B0600E1E6BC /* LXTTableSQliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */; };
+		F42F5EB024E27A4800ED739D /* LXTHeroSimpleInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F5EAF24E27A4800ED739D /* LXTHeroSimpleInfoView.swift */; };
+		F42F5EB224E2926300ED739D /* LXTSimpleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F5EB124E2926300ED739D /* LXTSimpleInfoCell.swift */; };
 		F43B8FA924D8001D0045E3E8 /* LXTAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B8FA824D8001D0045E3E8 /* LXTAlertView.swift */; };
 		F43B8FAD24D810F40045E3E8 /* LXTEquipDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B8FAC24D810F40045E3E8 /* LXTEquipDBHelper.swift */; };
 		F43B8FAF24D8116E0045E3E8 /* LXTEquipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B8FAE24D8116E0045E3E8 /* LXTEquipModel.swift */; };
 		F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */; };
+		F44A452E24E53BCE00A31454 /* LXTUserEquipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44A452D24E53BCE00A31454 /* LXTUserEquipModel.swift */; };
+		F44F48CA24E662A60083B36F /* LXTEquipChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F48C924E662A60083B36F /* LXTEquipChooseCell.swift */; };
+		F44F7AA724EE59C80066372C /* LXTCopyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F7AA624EE59C80066372C /* LXTCopyManager.swift */; };
+		F44F7AAB24EE63270066372C /* LXTTrialAreaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F7AAA24EE63270066372C /* LXTTrialAreaCell.swift */; };
 		F44F859524CFBE6400C931DB /* LXTBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859424CFBE6400C931DB /* LXTBaseTableViewCell.swift */; };
 		F44F859824CFC47500C931DB /* LXTSkillLibCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859724CFC47500C931DB /* LXTSkillLibCell.swift */; };
 		F44F859B24CFCDBD00C931DB /* LXTUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F859A24CFCDBD00C931DB /* LXTUserModel.swift */; };
@@ -40,6 +47,8 @@
 		F44F85A624D0202C00C931DB /* LXTGoodsSQliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85A524D0202C00C931DB /* LXTGoodsSQliteHelper.swift */; };
 		F44F85A924D0269300C931DB /* LXTGoodsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85A824D0269300C931DB /* LXTGoodsCell.swift */; };
 		F44F85AB24D02F3000C931DB /* LXTGoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44F85AA24D02F3000C931DB /* LXTGoodsView.swift */; };
+		F457720824E39D7F0062A5F3 /* LXTEquipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457720724E39D7F0062A5F3 /* LXTEquipCell.swift */; };
+		F457720B24E3A0B00062A5F3 /* LXTEquipChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457720A24E3A0B00062A5F3 /* LXTEquipChooseController.swift */; };
 		F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398B24BD43AB00D906D4 /* AppDelegate.swift */; };
 		F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398D24BD43AB00D906D4 /* SceneDelegate.swift */; };
 		F476399024BD43AB00D906D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476398F24BD43AB00D906D4 /* ViewController.swift */; };
@@ -53,6 +62,10 @@
 		F47639C524BD4B9300D906D4 /* LXTBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */; };
 		F47639C824BD4C1300D906D4 /* LXTHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639C724BD4C1300D906D4 /* LXTHomeController.swift */; };
 		F47639CC24BD4DB700D906D4 /* LXTStripProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47639CB24BD4DB700D906D4 /* LXTStripProgressView.swift */; };
+		F4768BC324F8EC920042917A /* LXTStrongController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4768BC224F8EC920042917A /* LXTStrongController.swift */; };
+		F4768BC524F8F43D0042917A /* LXTStrongChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4768BC424F8F43D0042917A /* LXTStrongChooseView.swift */; };
+		F476EC5324EA6207000978D2 /* LXTCopyListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476EC5224EA6207000978D2 /* LXTCopyListController.swift */; };
+		F476EC5624EA64B5000978D2 /* LXTCopyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476EC5524EA64B5000978D2 /* LXTCopyModel.swift */; };
 		F476ED1224E12F1D00528517 /* LXTUserEquipDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476ED1124E12F1D00528517 /* LXTUserEquipDB.swift */; };
 		F476ED1424E1313700528517 /* LXTEquipShopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476ED1324E1313700528517 /* LXTEquipShopController.swift */; };
 		F476ED1724E133F400528517 /* LXTEquipShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476ED1624E133F400528517 /* LXTEquipShopCell.swift */; };
@@ -63,11 +76,13 @@
 		F4D9FAB224BE97B400EF594B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4D9FAB124BE97B400EF594B /* README.md */; };
 		F4D9FAB424BEA0BA00EF594B /* LXTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */; };
 		F4D9FAB624BEA3D800EF594B /* LXTMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */; };
+		F4E4393D24EFC3EC00DB7847 /* LXTCopyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E4393C24EFC3EC00DB7847 /* LXTCopyCell.swift */; };
 		F4F33D9324CECD5400B7AF94 /* LXTSkillTableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F33D9224CECD5400B7AF94 /* LXTSkillTableHelper.swift */; };
 		F4F33D9A24CECE8A00B7AF94 /* LXTSikllLibController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F33D9924CECE8A00B7AF94 /* LXTSikllLibController.swift */; };
 		F4F33D9D24CECF4100B7AF94 /* LXTSkillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F33D9C24CECF4100B7AF94 /* LXTSkillModel.swift */; };
 		F4F33DA024CED9E800B7AF94 /* LXTHeroSkillCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F33D9F24CED9E800B7AF94 /* LXTHeroSkillCell.swift */; };
 		F4F33DA224CEDC6400B7AF94 /* LXTHeroSkillTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F33DA124CEDC6400B7AF94 /* LXTHeroSkillTableCell.swift */; };
+		F4FE7A2F24F79D5500E080AD /* LXTStringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE7A2E24F79D5500E080AD /* LXTStringHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +116,7 @@
 		F404131924BD62FA00E918F8 /* LXTHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroView.swift; sourceTree = "<group>"; };
 		F404131B24BD630700E918F8 /* LXTMonsterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTMonsterView.swift; sourceTree = "<group>"; };
 		F404131F24BD8C3900E918F8 /* LXTUserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserDefaultManager.swift; sourceTree = "<group>"; };
+		F40DA89C24F8DD1E0018FF2B /* LXTFuncMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTFuncMenuView.swift; sourceTree = "<group>"; };
 		F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTExpStripView.swift; sourceTree = "<group>"; };
 		F40F52A524C2E2A500FC95D9 /* LXTPackageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTPackageController.swift; sourceTree = "<group>"; };
 		F427C2BC24D3F5F300B365C3 /* LXTChooseSkillController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTChooseSkillController.swift; sourceTree = "<group>"; };
@@ -109,10 +125,16 @@
 		F427C2C224D4200C00B365C3 /* LXTHeroSkillActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillActivityCell.swift; sourceTree = "<group>"; };
 		F429868524CEAC070030C049 /* Table.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Table.txt; sourceTree = "<group>"; };
 		F42C381E24C58B0600E1E6BC /* LXTTableSQliteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTableSQliteHelper.swift; sourceTree = "<group>"; };
+		F42F5EAF24E27A4800ED739D /* LXTHeroSimpleInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSimpleInfoView.swift; sourceTree = "<group>"; };
+		F42F5EB124E2926300ED739D /* LXTSimpleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSimpleInfoCell.swift; sourceTree = "<group>"; };
 		F43B8FA824D8001D0045E3E8 /* LXTAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTAlertView.swift; sourceTree = "<group>"; };
 		F43B8FAC24D810F40045E3E8 /* LXTEquipDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipDBHelper.swift; sourceTree = "<group>"; };
 		F43B8FAE24D8116E0045E3E8 /* LXTEquipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipModel.swift; sourceTree = "<group>"; };
 		F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTrialAreaController.swift; sourceTree = "<group>"; };
+		F44A452D24E53BCE00A31454 /* LXTUserEquipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserEquipModel.swift; sourceTree = "<group>"; };
+		F44F48C924E662A60083B36F /* LXTEquipChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipChooseCell.swift; sourceTree = "<group>"; };
+		F44F7AA624EE59C80066372C /* LXTCopyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTCopyManager.swift; sourceTree = "<group>"; };
+		F44F7AAA24EE63270066372C /* LXTTrialAreaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTrialAreaCell.swift; sourceTree = "<group>"; };
 		F44F859424CFBE6400C931DB /* LXTBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTBaseTableViewCell.swift; sourceTree = "<group>"; };
 		F44F859724CFC47500C931DB /* LXTSkillLibCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSkillLibCell.swift; sourceTree = "<group>"; };
 		F44F859A24CFCDBD00C931DB /* LXTUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserModel.swift; sourceTree = "<group>"; };
@@ -123,6 +145,8 @@
 		F44F85A524D0202C00C931DB /* LXTGoodsSQliteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsSQliteHelper.swift; sourceTree = "<group>"; };
 		F44F85A824D0269300C931DB /* LXTGoodsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsCell.swift; sourceTree = "<group>"; };
 		F44F85AA24D02F3000C931DB /* LXTGoodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTGoodsView.swift; sourceTree = "<group>"; };
+		F457720724E39D7F0062A5F3 /* LXTEquipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipCell.swift; sourceTree = "<group>"; };
+		F457720A24E3A0B00062A5F3 /* LXTEquipChooseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipChooseController.swift; sourceTree = "<group>"; };
 		F476398824BD43AB00D906D4 /* FantasyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F476398B24BD43AB00D906D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F476398D24BD43AB00D906D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +166,10 @@
 		F47639C424BD4B9300D906D4 /* LXTBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTBaseModel.swift; sourceTree = "<group>"; };
 		F47639C724BD4C1300D906D4 /* LXTHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHomeController.swift; sourceTree = "<group>"; };
 		F47639CB24BD4DB700D906D4 /* LXTStripProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStripProgressView.swift; sourceTree = "<group>"; };
+		F4768BC224F8EC920042917A /* LXTStrongController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStrongController.swift; sourceTree = "<group>"; };
+		F4768BC424F8F43D0042917A /* LXTStrongChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStrongChooseView.swift; sourceTree = "<group>"; };
+		F476EC5224EA6207000978D2 /* LXTCopyListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTCopyListController.swift; sourceTree = "<group>"; };
+		F476EC5524EA64B5000978D2 /* LXTCopyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTCopyModel.swift; sourceTree = "<group>"; };
 		F476ED1124E12F1D00528517 /* LXTUserEquipDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTUserEquipDB.swift; sourceTree = "<group>"; };
 		F476ED1324E1313700528517 /* LXTEquipShopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipShopController.swift; sourceTree = "<group>"; };
 		F476ED1624E133F400528517 /* LXTEquipShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTEquipShopCell.swift; sourceTree = "<group>"; };
@@ -152,11 +180,13 @@
 		F4D9FAB124BE97B400EF594B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		F4D9FAB324BEA0BA00EF594B /* LXTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTTabBarController.swift; sourceTree = "<group>"; };
 		F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTMapController.swift; sourceTree = "<group>"; };
+		F4E4393C24EFC3EC00DB7847 /* LXTCopyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTCopyCell.swift; sourceTree = "<group>"; };
 		F4F33D9224CECD5400B7AF94 /* LXTSkillTableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSkillTableHelper.swift; sourceTree = "<group>"; };
 		F4F33D9924CECE8A00B7AF94 /* LXTSikllLibController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSikllLibController.swift; sourceTree = "<group>"; };
 		F4F33D9C24CECF4100B7AF94 /* LXTSkillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTSkillModel.swift; sourceTree = "<group>"; };
 		F4F33D9F24CED9E800B7AF94 /* LXTHeroSkillCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillCell.swift; sourceTree = "<group>"; };
 		F4F33DA124CEDC6400B7AF94 /* LXTHeroSkillTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTHeroSkillTableCell.swift; sourceTree = "<group>"; };
+		F4FE7A2E24F79D5500E080AD /* LXTStringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LXTStringHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +245,9 @@
 		F4010A4924C1539D0008A054 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F457720924E3A0870062A5F3 /* New Group */,
 				F4010A4A24C154120008A054 /* LXTRoleController.swift */,
+				F457720A24E3A0B00062A5F3 /* LXTEquipChooseController.swift */,
 				F4C39AEC24D2BCAA00E1EF5E /* LXTStudySkillController.swift */,
 				F427C2BC24D3F5F300B365C3 /* LXTChooseSkillController.swift */,
 			);
@@ -226,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				F4010A4D24C17CE60008A054 /* LXTDateHelper.swift */,
+				F4FE7A2E24F79D5500E080AD /* LXTStringHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -240,6 +273,7 @@
 				F404131424BD616100E918F8 /* LXTMonsterModel.swift */,
 				F4010A4624C1535F0008A054 /* LXTRoleManager.swift */,
 				F43B8FAE24D8116E0045E3E8 /* LXTEquipModel.swift */,
+				F44A452D24E53BCE00A31454 /* LXTUserEquipModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,6 +287,8 @@
 				F404131924BD62FA00E918F8 /* LXTHeroView.swift */,
 				F404131B24BD630700E918F8 /* LXTMonsterView.swift */,
 				F40F52A224C28F1C00FC95D9 /* LXTExpStripView.swift */,
+				F40DA89C24F8DD1E0018FF2B /* LXTFuncMenuView.swift */,
+				F4768BC424F8F43D0042917A /* LXTStrongChooseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -316,6 +352,8 @@
 		F44428B624C2F64400AAB68E /* TrialArea */ = {
 			isa = PBXGroup;
 			children = (
+				F44F7AA924EE63060066372C /* View */,
+				F476EC5424EA6498000978D2 /* Model */,
 				F44428BA24C2F92700AAB68E /* Controller */,
 			);
 			path = TrialArea;
@@ -334,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				F44428B824C2F67300AAB68E /* LXTTrialAreaController.swift */,
+				F476EC5224EA6207000978D2 /* LXTCopyListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -344,6 +383,15 @@
 				F44F859C24CFCF0800C931DB /* LXTLoginController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		F44F7AA924EE63060066372C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F44F7AAA24EE63270066372C /* LXTTrialAreaCell.swift */,
+				F4E4393C24EFC3EC00DB7847 /* LXTCopyCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F44F859324CFBE3D00C931DB /* View */ = {
@@ -387,6 +435,13 @@
 				F44F85AA24D02F3000C931DB /* LXTGoodsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F457720924E3A0870062A5F3 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		F476397F24BD43AB00D906D4 = {
@@ -485,6 +540,7 @@
 			children = (
 				F47639C724BD4C1300D906D4 /* LXTHomeController.swift */,
 				F4D9FAB524BEA3D800EF594B /* LXTMapController.swift */,
+				F4768BC224F8EC920042917A /* LXTStrongController.swift */,
 				F476ED0B24E0E51300528517 /* Equip */,
 				F4F33D9424CECE0200B7AF94 /* SkillLib */,
 			);
@@ -518,6 +574,15 @@
 				F47639C024BD4B3800D906D4 /* Controller */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		F476EC5424EA6498000978D2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F476EC5524EA64B5000978D2 /* LXTCopyModel.swift */,
+				F44F7AA624EE59C80066372C /* LXTCopyManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F476ED0B24E0E51300528517 /* Equip */ = {
@@ -576,6 +641,10 @@
 				F427C2BE24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift */,
 				F427C2C224D4200C00B365C3 /* LXTHeroSkillActivityCell.swift */,
 				F427C2C024D41EF300B365C3 /* LXTSkillItem.swift */,
+				F42F5EAF24E27A4800ED739D /* LXTHeroSimpleInfoView.swift */,
+				F42F5EB124E2926300ED739D /* LXTSimpleInfoCell.swift */,
+				F457720724E39D7F0062A5F3 /* LXTEquipCell.swift */,
+				F44F48C924E662A60083B36F /* LXTEquipChooseCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -761,8 +830,10 @@
 				F404131C24BD630700E918F8 /* LXTMonsterView.swift in Sources */,
 				F404131524BD616100E918F8 /* LXTMonsterModel.swift in Sources */,
 				F4F33D9324CECD5400B7AF94 /* LXTSkillTableHelper.swift in Sources */,
+				F476EC5624EA64B5000978D2 /* LXTCopyModel.swift in Sources */,
 				F44428B924C2F67300AAB68E /* LXTTrialAreaController.swift in Sources */,
 				F44F85A424D0097C00C931DB /* LXTBookModel.swift in Sources */,
+				F44F7AA724EE59C80066372C /* LXTCopyManager.swift in Sources */,
 				F4010A4724C1535F0008A054 /* LXTRoleManager.swift in Sources */,
 				F44F859D24CFCF0800C931DB /* LXTLoginController.swift in Sources */,
 				F47639BF24BD4A7700D906D4 /* ConstantDefine.swift in Sources */,
@@ -772,9 +843,12 @@
 				F4F33D9A24CECE8A00B7AF94 /* LXTSikllLibController.swift in Sources */,
 				F42C381F24C58B0600E1E6BC /* LXTTableSQliteHelper.swift in Sources */,
 				F476398C24BD43AB00D906D4 /* AppDelegate.swift in Sources */,
+				F4FE7A2F24F79D5500E080AD /* LXTStringHelper.swift in Sources */,
 				F44F85A624D0202C00C931DB /* LXTGoodsSQliteHelper.swift in Sources */,
+				F44A452E24E53BCE00A31454 /* LXTUserEquipModel.swift in Sources */,
 				F404131124BD60E700E918F8 /* LXTRoleModel.swift in Sources */,
 				F404131824BD62E900E918F8 /* LXTRoleView.swift in Sources */,
+				F44F7AAB24EE63270066372C /* LXTTrialAreaCell.swift in Sources */,
 				F40F52A624C2E2A500FC95D9 /* LXTPackageController.swift in Sources */,
 				F4F33DA024CED9E800B7AF94 /* LXTHeroSkillCell.swift in Sources */,
 				F44F859524CFBE6400C931DB /* LXTBaseTableViewCell.swift in Sources */,
@@ -782,10 +856,13 @@
 				F476ED1724E133F400528517 /* LXTEquipShopCell.swift in Sources */,
 				F43B8FAD24D810F40045E3E8 /* LXTEquipDBHelper.swift in Sources */,
 				F4C39AED24D2BCAA00E1EF5E /* LXTStudySkillController.swift in Sources */,
+				F4768BC324F8EC920042917A /* LXTStrongController.swift in Sources */,
+				F457720824E39D7F0062A5F3 /* LXTEquipCell.swift in Sources */,
 				F476ED1224E12F1D00528517 /* LXTUserEquipDB.swift in Sources */,
 				F476ED1424E1313700528517 /* LXTEquipShopController.swift in Sources */,
 				F4010A4B24C154120008A054 /* LXTRoleController.swift in Sources */,
 				F404131324BD615100E918F8 /* LXTHeroModel.swift in Sources */,
+				F42F5EB224E2926300ED739D /* LXTSimpleInfoCell.swift in Sources */,
 				F476398E24BD43AB00D906D4 /* SceneDelegate.swift in Sources */,
 				F427C2C124D41EF300B365C3 /* LXTSkillItem.swift in Sources */,
 				F4C39AEB24D2A58600E1EF5E /* LXTHeroSkillModel.swift in Sources */,
@@ -795,21 +872,28 @@
 				F44F859B24CFCDBD00C931DB /* LXTUserModel.swift in Sources */,
 				F4F33DA224CEDC6400B7AF94 /* LXTHeroSkillTableCell.swift in Sources */,
 				F4F33D9D24CECF4100B7AF94 /* LXTSkillModel.swift in Sources */,
+				F40DA89D24F8DD1E0018FF2B /* LXTFuncMenuView.swift in Sources */,
 				F44F85A924D0269300C931DB /* LXTGoodsCell.swift in Sources */,
 				F4D9FAB624BEA3D800EF594B /* LXTMapController.swift in Sources */,
 				F47639C824BD4C1300D906D4 /* LXTHomeController.swift in Sources */,
 				F44F85A224CFF5FB00C931DB /* LXTGoodsModel.swift in Sources */,
 				F44F859F24CFD3E600C931DB /* LXTUserManager.swift in Sources */,
 				F4D9FAB424BEA0BA00EF594B /* LXTTabBarController.swift in Sources */,
+				F44F48CA24E662A60083B36F /* LXTEquipChooseCell.swift in Sources */,
 				F4010A4E24C17CE70008A054 /* LXTDateHelper.swift in Sources */,
 				F43B8FA924D8001D0045E3E8 /* LXTAlertView.swift in Sources */,
 				F427C2BF24D3FAB100B365C3 /* LXTHeroSkillChooseCell.swift in Sources */,
 				F44F859824CFC47500C931DB /* LXTSkillLibCell.swift in Sources */,
 				F404131A24BD62FA00E918F8 /* LXTHeroView.swift in Sources */,
+				F476EC5324EA6207000978D2 /* LXTCopyListController.swift in Sources */,
 				F427C2BD24D3F5F300B365C3 /* LXTChooseSkillController.swift in Sources */,
+				F4768BC524F8F43D0042917A /* LXTStrongChooseView.swift in Sources */,
 				F47639C524BD4B9300D906D4 /* LXTBaseModel.swift in Sources */,
 				F427C2C324D4200C00B365C3 /* LXTHeroSkillActivityCell.swift in Sources */,
 				F47639CC24BD4DB700D906D4 /* LXTStripProgressView.swift in Sources */,
+				F42F5EB024E27A4800ED739D /* LXTHeroSimpleInfoView.swift in Sources */,
+				F457720B24E3A0B00062A5F3 /* LXTEquipChooseController.swift in Sources */,
+				F4E4393D24EFC3EC00DB7847 /* LXTCopyCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

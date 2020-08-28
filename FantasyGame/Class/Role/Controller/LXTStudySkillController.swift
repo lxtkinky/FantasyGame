@@ -28,7 +28,7 @@ class LXTStudySkillController: LXTBaseController,UICollectionViewDelegateFlowLay
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.dataSource = LXTGoodsSQliteHelper().lxt_getAllSkillGoods()
+        self.dataSource = LXTGoodsSQliteHelper.lxt_getAllSkillGoods()
         self.collectionView.reloadData()
     }
     

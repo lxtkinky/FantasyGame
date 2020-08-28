@@ -24,28 +24,30 @@ class LXTTableSQliteHelper: NSObject {
                 return true
             })
             
-            let userTableExists = LXTTableSQliteHelper().tableExists(tableName: "users")
-            if !userTableExists {
-                self.lxt_createTable(tableName: "users")
-            }
+//            let userTableExists = LXTTableSQliteHelper().tableExists(tableName: "users")
+//            if !userTableExists {
+//                self.lxt_createTable(tableName: "users")
+//            }
             
             LXTSkillTableHelper.lxt_createSkillTable()
-            let skillTableExists = LXTTableSQliteHelper().tableExists(tableName: "skill")
-            if !skillTableExists {
+//            let skillTableExists = LXTTableSQliteHelper().tableExists(tableName: "skill")
+//            if !skillTableExists {
 //                LXTTableSQliteHelper().lxt_createSkillTable()
 //                LXTSkillTableHelper.lxt_createSkillTable(<#T##self: LXTSkillTableHelper##LXTSkillTableHelper#>)
-            }
+//            }
             LXTSkillTableHelper.lxt_addSkillIDColumn()
             LXTSkillTableHelper.lxt_initSkill()
             
 //            LXTTableSQliteHelper().lxt_createGoodsTable()
-            LXTGoodsSQliteHelper().lxt_createGoodsTable()
+            LXTGoodsSQliteHelper.lxt_createGoodsTable()
             
             LXTHeroTableHelper.lxt_createTable()
             
             LXTHeroSkillDBHelper.lxt_createTable()
             
             LXTEquipDBHelper.lxt_createTable()
+            
+            LXTUserEquipDB.lxt_createTable()
         }
     }
     

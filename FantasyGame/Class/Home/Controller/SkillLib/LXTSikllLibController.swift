@@ -40,25 +40,39 @@ class LXTSikllLibController: LXTBaseController, UICollectionViewDelegateFlowLayo
     }
     
     func lxt_buyAction(skillModel : LXTSkillModel) -> Void {
-        let moneyEnough = skillModel.buyType == 1 ? user.goldNum > skillModel.goldPrice : user.ybNum > skillModel.ybPrice
-        let buyStr = skillModel.buyType == 1 ? "金币" : "元宝"
+        var moneyEnough = false
+        var buyStr = ""
+        if skillModel.buyType == 1 {
+            moneyEnough = user.goldNum >= skillModel.priceCount
+            buyStr = "金币"
+        }else if skillModel.buyType == 2{
+            moneyEnough = user.ybNum >= skillModel.priceCount
+            buyStr = "元宝"
+        }else{
+            moneyEnough = false
+            buyStr = "材料"
+        }
+        
         if moneyEnough {
             let buyNum = skillModel.buyType == 1 ? skillModel.goldPrice : skillModel.ybPrice
             
             LXTAlertView.showInfo(info: "花费 \(buyNum) \(buyStr)购买", showCancel: true, completeTitle: "购买") {
                 if skillModel.buyType == 1{
                     user.goldNum -= skillModel.goldPrice
-                }else{
+                }else if skillModel.buyType == 2{
                     user.ybNum -= skillModel.ybPrice
+                }else{
+                    //兑换 扣除材料
                 }
                 
                 LXTUserManager().lxt_saveUser(user: user)
                 let goods = LXTGoodsModel()
                 goods.name = skillModel.name
                 goods.type = .skill
+                goods.count = 1
                 goods.desc = "使用可学习技能\(skillModel.name)"
                 goods.relationID = skillModel.skillID
-                let _ = LXTGoodsSQliteHelper().lxt_addGoods(goods: goods)
+                let _ = LXTGoodsSQliteHelper.lxt_addGoods(goods: goods)
                 LXTAlertView.showInfo(info: "获得技能 \(skillModel.name)", showCancel: false, completeTitle: "确定")
             }
             
@@ -75,6 +89,7 @@ class LXTSikllLibController: LXTBaseController, UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : LXTSkillLibCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.bookCellKey, for: indexPath) as! LXTSkillLibCell
         cell.skillModel = self.dataSource[indexPath.row]
+        
         weak var weakSelf = self
         cell.buyBlock = { model in
             weakSelf?.lxt_buyAction(skillModel: model)

@@ -137,6 +137,7 @@ class LXTHeroSkillDBHelper: NSObject {
                  
                 let skill = LXTSkillModel()
                 skill.name = item[skillTable[name]]
+                skill.skillID = item[table[skillID]]
                 skill.type = Int(item[skillTable[type]])
                 skill.damageBase = Int(item[skillTable[damageBase]])
                 skill.maxLevel = Int(item[skillTable[maxLevel]])

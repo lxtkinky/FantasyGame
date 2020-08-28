@@ -36,14 +36,15 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate : AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-        appDelegate.allowRotate = false
-        
+        /*
+         let appDelegate : AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+         appDelegate.allowRotate = false
         //判断退出时是否是横屏
         if UIApplication.shared.statusBarOrientation.isLandscape {
             //是横屏让变回竖屏
             setNewOrientation(fullScreen: false)
         }
+ */
     }
     
     //横竖屏

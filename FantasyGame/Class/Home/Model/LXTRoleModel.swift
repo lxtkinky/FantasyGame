@@ -56,6 +56,7 @@ class LXTRoleModel: LXTBaseModel{
     var type = 1                    //1，英雄 2，地图怪物
     var suckBlood = 0
     var backInjury = 0
+    
     var talentSkills = Array<LXTHeroSkillModel>()   //天赋技能
-    var skills = Array<LXTHeroSkillModel>()
+    var skills = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
 }

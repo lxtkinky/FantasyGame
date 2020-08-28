@@ -50,15 +50,21 @@ class LXTEquipShopController: LXTBaseController,UICollectionViewDelegateFlowLayo
                     let goods = LXTGoodsModel()
                     goods.name = equipModel.name
                     goods.type = .equip
-                    goods.desc = "使用可学习技能\(equipModel.name)"
-                    goods.relationID = equipModel.id
-                    let _ = LXTGoodsSQliteHelper().lxt_addGoods(goods: goods)
-                    LXTAlertView.showInfo(info: "获得技能 \(equipModel.name)", showCancel: false, completeTitle: "确定")
+                    goods.desc = "初级装备\(equipModel.name)"
+                    goods.count = 1
+//                    goods.relationID = equipModel.id
+                    let userEquip = LXTUserEquipModel()
+                    userEquip.equipID = equipModel.id
+                    goods.userEquip = userEquip
+                    let _ = LXTGoodsSQliteHelper.lxt_saveEquipGoods(goods: goods)
+                    LXTAlertView.showInfo(info: "获得装备 \(equipModel.name)", showCancel: false, completeTitle: "确定")
                 }
                 
                 print("购买装备：\(equipModel.name)")
             }else{
                 LXTAlertView.showInfo(info: "\(buyStr)不足，无法购买", showCancel: false, completeTitle: "确定")
+                user.goldNum += 1000
+                LXTUserManager().lxt_saveUser(user: user)
             }
         }
     

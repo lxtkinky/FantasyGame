@@ -85,4 +85,9 @@ var kBottomSafeHeight: CGFloat {
 
 //用户
 var user = LXTUserManager().lxt_loadUser()
+var heroArray = LXTRoleManager.lxt_loadAllHero()
+var goodsArray = LXTGoodsSQliteHelper.lxt_getAllGoods()
+var dateHelper = LXTDateHelper()
+
+
 

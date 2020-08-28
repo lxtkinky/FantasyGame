@@ -8,7 +8,20 @@
 
 import UIKit
 
-class LXTMonsterModel: LXTRoleModel {
+class LXTMonsterModel: LXTRoleModel,NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copyObj = LXTMonsterModel()
+        copyObj.level = self.level
+        copyObj.hp = self.hp
+        copyObj.mp = self.mp
+        copyObj.currentHP = self.currentHP
+        copyObj.name = self.name
+        copyObj.maxExp = self.maxExp
+        copyObj.attack = self.attack
+        copyObj.magic = self.magic
+        return copyObj
+    }
+    
     override var level: Int{
         didSet{
             if level > 0 {
@@ -35,6 +48,7 @@ class LXTMonsterModel: LXTRoleModel {
         self.attack = 10
         self.level = 1
         self.maxExp = level * 10
+        self.name = "怪物\(level)"
     }
     
     required init?(coder: NSCoder) {

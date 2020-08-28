@@ -15,9 +15,9 @@ class LXTSkillLibCell: UICollectionViewCell {
     var buyBlock : ((_ model : LXTSkillModel) -> Void)?
     var skillModel : LXTSkillModel?{
         didSet{
-            print("技能id = \(self.skillModel!.id)")
+            print("skill id = \(self.skillModel!.id)")
             self.skillName.text = self.skillModel?.name
-            self.priceLabel.text = String(self.skillModel!.goldPrice)
+            self.priceLabel.text = String(self.skillModel!.priceCount)
         }
     }
     override init(frame: CGRect) {

@@ -16,7 +16,14 @@ class LXTEquipShopCell: UICollectionViewCell {
     var equipModel : LXTEquipModel?{
         didSet{
             self.equipName.text = self.equipModel?.name
-            self.priceLabel.text = String(self.equipModel!.goldPrice)
+            switch self.equipModel!.buyType {
+            case 1:
+                self.priceLabel.text = "金币：" + String(self.equipModel!.priceCount)
+            case 2:
+                self.priceLabel.text = "元宝：" + String(self.equipModel!.priceCount)
+            default:
+                self.priceLabel.text = "材料：" + String(self.equipModel!.priceCount)
+            }
         }
     }
     override init(frame: CGRect) {

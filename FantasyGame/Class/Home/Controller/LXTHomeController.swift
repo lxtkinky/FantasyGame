@@ -8,6 +8,11 @@
 
 import UIKit
 
+//var nextMonster : LXTMonsterModel?
+var nextCopy : LXTCopyModel?
+var currentCopy : LXTCopyModel?
+var copyCount = 0
+
 class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var heroView : LXTHeroView?
     var monsterView : LXTMonsterView?
@@ -19,11 +24,15 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var tableView = UITableView()
 //    var expLabel = UILabel()
     let expStrip = LXTExpStripView()
+    let goldLabel = UILabel()
+    let ybLabel = UILabel()
     
     var showOfflineRevenue = true     //离线收益是否结算
     var offlineResult : String?
     let offlineResLabel = UILabel()
     var round = 1           //回合
+    
+    let menuView = LXTFuncMenuView()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count
@@ -31,7 +40,24 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = self.dataSource[indexPath.row]
+        var titleLabel : UILabel?
+        if cell?.contentView.subviews.count == 0 {
+            titleLabel = UILabel()
+            titleLabel?.textColor = titleColor51
+            titleLabel?.font = UIFont(name: PingFangSCRegular, size: 12)
+            titleLabel?.numberOfLines = 0
+            titleLabel?.tag = 1001
+            cell?.contentView.addSubview(titleLabel!)
+            titleLabel?.snp.makeConstraints({ (make) in
+                make.left.equalToSuperview().offset(10)
+                make.right.equalToSuperview().offset(-10)
+                make.top.equalToSuperview().offset(3)
+                make.bottom.equalToSuperview().offset(-3)
+            })
+        }else{
+            titleLabel = cell?.contentView.viewWithTag(1001) as? UILabel
+        }
+        titleLabel?.text = self.dataSource[indexPath.row]
         cell?.selectionStyle = .none
         cell?.backgroundColor = .clear
         return cell!
@@ -44,6 +70,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         super.viewDidLoad()
         
 //        self.backButton.isHidden = true
+        print("\(user.userName) 编号 : \(user.userID)")
         
         self.lxt_registerNotification()
         
@@ -68,12 +95,13 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         
-        self.hero = LXTRoleManager.lxt_loadHero()
-        var skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
-        for item in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: self.hero!.heroID, battle: true) {
-            skillArray[item.index - 1] = item
-        }
-        self.hero?.skills = skillArray
+//        self.hero = LXTRoleManager.lxt_loadHero()
+//        var skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+//        for item in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: self.hero!.heroID, battle: true) {
+//            skillArray[item.index - 1] = item
+//        }
+//        self.hero?.skills = skillArray
+        self.hero = heroArray[0]
         let heroView = LXTHeroView()
         self.heroView = heroView
         self.heroView?.role = self.hero
@@ -131,49 +159,17 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func lxt_initSubView(){
-        let mapBtn = UIButton.init(type: .custom)
-        mapBtn.setTitle("map", for: .normal)
-        mapBtn.layer.cornerRadius = 25
-        mapBtn.clipsToBounds = true
-        mapBtn.backgroundColor = kRandomColor()
-        mapBtn.setTitleColor(.white, for: .normal)
-        mapBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        mapBtn.addTarget(self, action: #selector(lxt_mapClick), for: .touchUpInside)
-        self.view.addSubview(mapBtn)
-        mapBtn.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().offset(-10)
-            make.top.equalTo(self.monsterView!.snp_bottomMargin).offset(50)
-            make.size.equalTo(CGSize(width: 50, height: 50))
-        }
         
-        let restBtn = UIButton.init(type: .custom)
-        restBtn.setTitle("藏书阁", for: .normal)
-        restBtn.layer.cornerRadius = 25
-        restBtn.clipsToBounds = true
-        restBtn.backgroundColor = kRandomColor()
-        restBtn.setTitleColor(.white, for: .normal)
-        restBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        restBtn.addTarget(self, action: #selector(lxt_restHero), for: .touchUpInside)
-        self.view.addSubview(restBtn)
-        restBtn.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(10)
-            make.top.equalTo(self.monsterView!.snp_bottomMargin).offset(50)
-            make.size.equalTo(CGSize(width: 50, height: 50))
+        weak var weakSelf = self
+        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化"]
+        self.view.addSubview(self.menuView)
+        self.menuView.selectMenuBlock = { index in
+            weakSelf?.lxt_menuAction(index: index)
         }
-        
-        let equipShopBtn = UIButton.init(type: .custom)
-        equipShopBtn.setTitle("装备商店", for: .normal)
-        equipShopBtn.layer.cornerRadius = 25
-        equipShopBtn.clipsToBounds = true
-        equipShopBtn.backgroundColor = kRandomColor()
-        equipShopBtn.setTitleColor(.white, for: .normal)
-        equipShopBtn.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        equipShopBtn.addTarget(self, action: #selector(lxt_equipShopClick), for: .touchUpInside)
-        self.view.addSubview(equipShopBtn)
-        equipShopBtn.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(10)
-            make.top.equalTo(restBtn.snp_bottomMargin).offset(10)
-            make.size.equalTo(CGSize(width: 50, height: 50))
+        self.menuView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.heroView!.snp.bottom).offset(20)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(120)
         }
         
         let backColor = UIColor.black.withAlphaComponent(0.3)
@@ -186,24 +182,58 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.tableView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-55)
-            make.height.equalToSuperview().multipliedBy(0.5)
+//            make.height.equalToSuperview().multipliedBy(0.5)
+            make.top.equalTo(self.menuView.snp.bottom)
         }
         
-        self.view.addSubview(self.expStrip)
-        self.expStrip.hero = self.hero!
-        self.expStrip.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
+//        self.view.addSubview(self.expStrip)
+//        self.expStrip.hero = self.hero!
+//        self.expStrip.snp.makeConstraints { (make) in
+//            make.left.equalToSuperview()
+//            make.right.equalToSuperview()
+//            make.top.equalToSuperview().offset(statusBarHeight + 20)
+//            make.height.equalTo(10)
+//        }
+        
+        self.goldLabel.font = UIFont(name: PingFangSCRegular, size: 12)
+        self.goldLabel.textColor = titleColor51
+        self.goldLabel.text = "金币：\(user.goldNum)"
+        self.view.addSubview(self.goldLabel)
+        self.goldLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(10)
             make.top.equalToSuperview().offset(statusBarHeight + 20)
-            make.height.equalTo(10)
         }
         
+        self.ybLabel.font = UIFont(name: PingFangSCRegular, size: 12)
+        self.ybLabel.textColor = titleColor51
+        self.ybLabel.text = "金币：\(user.ybNum)"
+        self.view.addSubview(self.ybLabel)
+        self.ybLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(statusBarHeight + 20)
+        }
     }
     
     func lxt_registerNotification() -> Void {
         NotificationCenter.default.addObserver(self, selector: #selector(lxt_appActive), name: KNotificationAppActive, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(lxt_heroSkillChange), name: KNotificationHeroSkillChange, object: nil)
+    }
+    
+    func lxt_menuAction(index : Int) {
+        if index == 0 {
+            self.lxt_mapClick()
+        }else if(index == 1){
+            let skillVC = LXTSikllLibController()
+            skillVC.modalPresentationStyle = .fullScreen
+            self.present(skillVC, animated: false) {}
+        }else if(index == 2){
+            self.lxt_equipShopClick()
+        }else if(index == 3){
+            let strongVC = LXTStrongController()
+            strongVC.modalPresentationStyle = .fullScreen
+            self.present(strongVC, animated: false) {}
+        }
     }
     
     @objc func lxt_appActive() -> Void {
@@ -226,21 +256,18 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //        self.hero?.level = 1
 //        self.hero?.maxExp = 1000
 //        self.hero = LXTHeroModel()
-//        self.lxt_saveHero(hero: self.hero!)                         
-        
-        let skillVC = LXTSikllLibController()
-        skillVC.modalPresentationStyle = .fullScreen
-        self.present(skillVC, animated: false) {}
+//        self.lxt_saveHero(hero: self.hero!)
     }
     
-        @objc func lxt_equipShopClick()  {
-            let shopVC = LXTEquipShopController()
-            shopVC.modalPresentationStyle = .fullScreen
-            self.present(shopVC, animated: false) {}
-        }
+    @objc func lxt_equipShopClick()  {
+        let shopVC = LXTEquipShopController()
+        shopVC.modalPresentationStyle = .fullScreen
+        self.present(shopVC, animated: false) {}
+    }
     
     @objc func lxt_mapClick() {
         let mapVC = LXTMapController()
+        mapVC.modalPresentationStyle = .fullScreen
         mapVC.changeMap = { mapLevel in
             self.hero?.mapLevel = mapLevel
 //            self.monster?.level = mapLevel
@@ -265,25 +292,38 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         if self.hero!.currentHP <= 0 || self.monster!.currentHP <= 0 {
             //计算战斗结果
             if self.monster!.currentHP <= 0 {
-                if Int(arc4random()) % probability == 1 {
-                    if arc4random() % 5 == 1 {
-                        self.hero?.attack += 1
-                        self.dataSource.append("战斗胜利，获得攻击+1")
-                    }else{
-                        self.hero?.hp += 1
-                        self.dataSource.append("战斗胜利，获得生命+1")
+                if currentCopy != nil {
+                    for item in currentCopy!.sundries {
+                        let _ = LXTGoodsSQliteHelper.lxt_addGoods(goods: item)
                     }
+                    
+                    if currentCopy!.isTrailCopy {
+                        user.trialCount += 1
+                    }
+                    
                 }else{
-                    self.dataSource.append("战斗胜利，什么都没有")
+                    if Int(arc4random()) % probability == 1 {
+                        if arc4random() % 5 == 1 {
+                            self.hero?.attack += 1
+                            self.dataSource.append("战斗胜利，获得攻击+1")
+                        }else{
+                            self.hero?.hp += 1
+                            self.dataSource.append("战斗胜利，获得生命+1")
+                        }
+                    }else{
+                        self.dataSource.append("战斗胜利，什么都没有")
+                    }
+                    user.goldNum += 1
+                    self.goldLabel.text = "金币：\(user.goldNum)"
+                    self.hero?.currentExp += self.monster!.maxExp
+                    if self.hero!.currentExp > self.hero!.maxExp {
+                        self.hero?.currentExp = self.hero!.currentExp - self.hero!.maxExp
+                        self.hero?.level += 1
+                    }
                 }
-                user.goldNum += 1
-                self.hero?.currentExp += self.monster!.maxExp
-                if self.hero!.currentExp > self.hero!.maxExp {
-                    self.hero?.currentExp = self.hero!.currentExp - self.hero!.maxExp
-                    self.hero?.level += 1
-                }
+                
+                
                 self.expStrip.hero = self.hero!
-//                self.lxt_saveHero(hero: self.hero!)
                 LXTRoleManager.lxt_saveHero(hero: self.hero!)
                 LXTUserManager().lxt_saveUser(user: user)
                 NotificationCenter.default.post(name: NotificationNameUpdateHero, object: nil)
@@ -303,21 +343,37 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             
 //            self.monster = LXTMonsterModel()
 //            self.monster?.level = self.hero!.mapLevel
-            self.monster?.level = self.hero!.mapLevel
-            self.monster?.currentHP = self.monster!.hp
-            self.monsterView?.role = self.monster
+            if copyCount > 0 , let _ = nextCopy {
+                self.monster = nextCopy!.monster.copy() as? LXTMonsterModel
+//                self.monster?.attack = nextCopy!.monster.attack
+//                self.monster?.hp = nextCopy!.monster.hp
+//                self.monster?.currentHP = nextCopy!.monster.currentHP
+                self.monsterView?.role = self.monster
+                currentCopy = nextCopy!
+                copyCount -= 1
+                if copyCount == 0 {
+                    nextCopy = nil
+                }
+            }else{
+                currentCopy = nil
+                self.monster = LXTMonsterModel()
+                self.monster?.level = self.hero!.mapLevel
+                self.monster?.currentHP = self.monster!.hp
+                self.monsterView?.role = self.monster
+            }
+            
         }else{
             if self.playStatus == 0 {
                 self.playStatus = 1
                 let index = (self.round - 1) % 6;
                 let heroSkill = self.hero?.skills[index]
                 if heroSkill!.id > 0 {
-                    let attackNum = Int(Double(self.hero!.attack * heroSkill!.damage) / 100.0)
+                    let attackNum = Int(Double(self.hero!.totalAttack * heroSkill!.damage) / 100.0)
                     self.monster?.currentHP -= attackNum
-                    self.dataSource.append("轮子对阿呆使出了\(heroSkill!.skill!.name)，造成\(attackNum)点伤害")
+                    self.dataSource.append("\(self.hero!.name)对\(self.monster!.name)使出了\(heroSkill!.skill!.name)，造成\(attackNum)点伤害")
                 }else{
-                    self.monster?.currentHP -= self.hero!.attack
-                    self.dataSource.append("轮子对阿呆使用普通攻击，造成\(self.hero!.attack)点伤害")
+                    self.monster?.currentHP -= self.hero!.totalAttack
+                    self.dataSource.append("\(self.hero!.name)对\(self.monster!.name)使用普通攻击，造成\(self.hero!.totalAttack)点伤害")
                 }
                 
                 self.monsterView?.role = self.monster
@@ -326,7 +382,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 self.playStatus = 0
                 self.hero?.currentHP -= self.monster!.attack
                 self.heroView?.role = self.hero
-                self.dataSource.append("阿呆对轮子使用普通攻击，造成\(self.monster!.attack)点伤害")
+                self.dataSource.append("\(self.monster!.name)对\(self.hero!.name)使用普通攻击，造成\(self.monster!.attack)点伤害")
                 //回合加一
                 self.round += 1
             }
@@ -334,7 +390,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         
         
-        if self.dataSource.count >= 10 {
+        if self.dataSource.count >= 100 {
             self.dataSource.remove(at: 0)
         }
         
@@ -343,42 +399,8 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.tableView.reloadData()
         if self.dataSource.count < 1000 {
             let indexPath = IndexPath(row: self.dataSource.count - 1, section: 0)
-            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
         }
     }
-    
-//    func lxt_saveHero(hero : LXTHeroModel) -> Void {
-//        let fileExists = FileManager().fileExists(atPath: documentPath! + "/data/role/hero.data")
-//        if !fileExists {
-//            do {
-//                try FileManager().createDirectory(atPath: documentPath! + "/data/role/", withIntermediateDirectories: true, attributes: nil)
-//                FileManager.default.createFile(atPath: documentPath! + "/data/role/hero.data", contents: nil, attributes: nil)
-//            } catch  {
-//                print("创建文件失败")
-//            }
-//
-//        }
-//        if let data = try? NSKeyedArchiver.archivedData(withRootObject: hero, requiringSecureCoding: true){
-////            print("\(documentPath!)/data/role/hero.data")
-//            if let _ = try? data.write(to: URL(fileURLWithPath: documentPath! + "/data/role/hero.data")){
-////                print("保存数据成功")
-//            }else{
-//                print("写入文件失败")
-//            }
-//        }else{
-//            print("失败1")
-//        }
-//    }
-    
-//    func lxt_loadHero() -> LXTHeroModel {
-//        do {
-//            let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/role/hero.data"))
-//            let hero = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTHeroModel
-//            return hero ?? LXTHeroModel.init()
-//        } catch  {
-//            print("解档文件失败")
-//        }
-//        return LXTHeroModel()
-//    }
     
 }

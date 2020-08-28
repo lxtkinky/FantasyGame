@@ -23,6 +23,13 @@ class LXTGoodsCell: UICollectionViewCell {
     }
     
     func lxt_initSubView() -> Void {
+        self.contentView.backgroundColor = .white
+        
+        self.contentView.layer.cornerRadius = 3
+        self.contentView.layer.borderColor = titleColor51.cgColor
+        self.contentView.layer.borderWidth = 1
+        self.contentView.clipsToBounds = true
+        
         self.goodsName.font = UIFont(name: PingFangSCRegular, size: 12)
         self.goodsName.textColor = titleColor51
         self.contentView.addSubview(self.goodsName)
@@ -41,7 +48,12 @@ class LXTGoodsCell: UICollectionViewCell {
     }
     
     func lxt_updateUIWithModel() {
-        self.goodsName.text = self.goods?.name
+        if self.goods!.type == GoodsType.equip {
+            self.goodsName.text = "\(self.goods!.name)+\(self.goods!.equipModel.strongLevel)"
+        }else{
+            self.goodsName.text = self.goods?.name
+        }
+        
         self.countLabel.text = String(self.goods!.count)
     }
     

@@ -33,7 +33,61 @@ class LXTRoleManager: NSObject {
 //            }
         
         }
-        
+    
+    /*
+           self.hero = LXTRoleManager.lxt_loadHero()
+           self.skillArray = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+           for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: 1, battle: true) {
+               self.skillArray[model.index - 1] = model
+               print("上阵技能：\(model.skill?.name ?? "未知技能")")
+           }
+           self.hero.skills = self.skillArray
+           let equipArray = LXTGoodsSQliteHelper.lxt_getAllEquipGoods(paramHeroID: self.hero.id, paramEquipType: .all)
+           for item in equipArray {
+               self.hero.equipArray[item.equipModel.type - 1] = item
+           }
+           self.heroView.hero = self.hero
+    */
+    class func lxt_loadAllHero() -> Array<LXTHeroModel>{
+        let array = LXTHeroTableHelper.lxt_queryAllHero()
+        for hero in array {
+            for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: hero.id, battle: true) {
+                hero.skills[model.index - 1] = model
+                print("上阵技能：\(model.skill?.name ?? "未知技能")")
+            }
+            
+            let equipArray = LXTGoodsSQliteHelper.lxt_getAllEquipGoods(paramHeroID: hero.id, paramEquipType: .all)
+            for item in equipArray {
+                hero.equipArray[item.equipModel.type - 1] = item
+            }
+            hero.lxt_calculate()
+        }
+        return array
+    }
+    
+    class func lxt_updateHeroSkill(){
+        for hero in heroArray {
+            var skills = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)
+            for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: hero.id, battle: true) {
+                skills[model.index - 1] = model
+                print("上阵技能：\(model.skill?.name ?? "未知技能")")
+            }
+            hero.skills = skills
+        }
+    }
+    
+    class func lxt_updateHeroEquip(){
+        for hero in heroArray {
+            let equipArray = LXTGoodsSQliteHelper.lxt_getAllEquipGoods(paramHeroID: hero.id, paramEquipType: .all)
+            var tempArray = Array<LXTGoodsModel>(repeating: LXTGoodsModel(), count: 10)
+            for item in equipArray {
+                tempArray[item.equipModel.type - 1] = item
+            }
+            hero.equipArray = tempArray
+            hero.lxt_calculate()
+        }
+    }
+
         class func lxt_loadHero() -> LXTHeroModel {
 //            do {
 //                let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/role/hero.data"))

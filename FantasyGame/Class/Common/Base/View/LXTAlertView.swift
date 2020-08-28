@@ -21,7 +21,9 @@ class LXTAlertView: UIView {
     
 
     func lxt_initSubView(showCancel : Bool, completeTitle : String) {
-        self.boxView.backgroundColor = themeColorYellow
+        self.boxView.backgroundColor = .white
+        self.boxView.layer.borderColor = titleColor51.cgColor
+        self.boxView.layer.borderWidth = 1
         self.boxView.layer.cornerRadius = 5
         self.boxView.clipsToBounds = true
         self.addSubview(self.boxView)

@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = .white
 //        self.window?.rootViewController = ViewController.init()
         
+        sleep(3)
+        
 //        LXTTableSQliteHelper.lxt_createTable(tableName: "user")
         LXTTableSQliteHelper.lxt_initTable()
         

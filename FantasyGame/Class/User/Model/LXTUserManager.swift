@@ -33,13 +33,33 @@ class LXTUserManager: NSObject {
     }
     
     func lxt_loadUser() -> LXTUserModel {
+        var user : LXTUserModel = LXTUserModel()
         do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/user.data"))
-            let user = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTUserModel
-            return user ?? LXTUserModel()
+            let fileExists = FileManager().fileExists(atPath: documentPath! + "/data/user.data")
+            if fileExists {
+                let data = try Data(contentsOf: URL(fileURLWithPath: documentPath! + "/data/user.data"))
+                user = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? LXTUserModel ?? LXTUserModel()
+            }else{
+                user.nickName = "戒不掉d瘾"
+                user.userName = "lixt"
+                user.password = "123456"
+                user.userID = 1
+            }
+
         } catch  {
             print("解档文件失败\(error)")
         }
-        return LXTUserModel()
+        
+        let today = dateHelper.lxt_stringFromDate(date: Date(), format: "yyyy-MM-dd")
+        if user.lastDate != today {
+            user.lastDate = today
+            user.challengeCount = 0
+            user.hasGetPrize = false
+            self.lxt_saveUser(user: user)
+        }
+//        user.challengeCount = 5
+//        self.lxt_saveUser(user: user)
+        
+        return user
     }
 }

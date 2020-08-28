@@ -48,8 +48,10 @@ class LXTSkillTableHelper: NSObject {
         let cd = Expression<Int64>("cd")
         let desc = Expression<String>("desc")
         let buyType = Expression<Int>("buyType")
+        let sundriesType = Expression<Int>("sundriesType")
+        let priceCount = Expression<Int>("priceCount")
         
-        let _ = try? db!.run(skillTable.create(block: { (table) in
+        let create = skillTable.create(temporary: false, ifNotExists: true, withoutRowid: false,block: { (table) in
             table.column(id, primaryKey: true)
             table.column(name, unique: true)
             table.column(type)
@@ -62,7 +64,10 @@ class LXTSkillTableHelper: NSObject {
             table.column(cd)
             table.column(desc)
             table.column(buyType, defaultValue: 1)
-        }))
+            table.column(priceCount, defaultValue: 0)
+            table.column(sundriesType, defaultValue: 0)
+            })
+        let _ = try? db!.run(create)
     }
     
     class func lxt_getBaseSkills() -> Array<LXTSkillModel> {
@@ -80,6 +85,8 @@ class LXTSkillTableHelper: NSObject {
         let desc = Expression<String>("desc")
         let skillID = Expression<Int>("skillID")
         let buyType = Expression<Int>("buyType")
+        let sundriesType = Expression<Int>("sundriesType")
+        let priceCount = Expression<Int>("priceCount")
         
         var skillArr = Array<LXTSkillModel>()
         for skill in try! db!.prepare(skillTable) {
@@ -98,7 +105,9 @@ class LXTSkillTableHelper: NSObject {
             model.desc = String(skill[desc])
             model.skillID = skill[skillID]
             model.buyType = skill[buyType]
-            print("技能名称：\(skill[name])，skillID = \(skill[skillID])，对地方造成\(skill[damageBase])%的物理伤害")
+            model.sundiresType = SundriesType.init(rawValue: skill[sundriesType]) ?? SundriesType.none
+            model.priceCount = skill[priceCount]
+            print("技能名称：\(skill[name])，skillID = \(skill[id])，对地方造成\(skill[damageBase])%的物理伤害")
             skillArr.append(model)
         }
         
@@ -124,6 +133,8 @@ class LXTSkillTableHelper: NSObject {
         skill.expFormula = 1000000
         skill.cd = 6
         skill.desc = "基础内功，很好很强大"
+        skill.priceCount = 1000
+        skill.buyType = 1
         self.lxt_insertSkill(model: skill)
         
         let ybSkill = LXTSkillModel()
@@ -131,6 +142,7 @@ class LXTSkillTableHelper: NSObject {
         ybSkill.name = "大挪移神通"
         ybSkill.type = 2
         ybSkill.buyType = 2
+        ybSkill.priceCount = 10000
         ybSkill.damageBase = 130
         ybSkill.maxLevel = 100
         ybSkill.damageFormula = 10
@@ -159,10 +171,12 @@ class LXTSkillTableHelper: NSObject {
 //        self.lxt_insertSkill(model: skill2)
         
         let skill3 = LXTSkillModel()
-        skill3.skillID = 3
+        skill3.skillID = 1
         skill3.name = "一点寒光(剑)"
         skill3.type = 2
         skill3.damageBase = 150
+        skill3.priceCount = 2000
+        skill3.buyType = 3
         skill3.maxLevel = 100
         skill3.damageFormula = 10
         skill3.prerequisite = 100
@@ -188,6 +202,8 @@ class LXTSkillTableHelper: NSObject {
         let cd = Expression<Int64>("cd")
         let desc = Expression<String>("desc")
         let buyType = Expression<Int>("buyType")
+        let sundriesType = Expression<Int>("sundriesType")
+        let priceCount = Expression<Int>("priceCount")
     
         do {
             let filter = skillTable.filter(name == model.name)
@@ -208,7 +224,9 @@ class LXTSkillTableHelper: NSObject {
                                            expFormula <- Int64(model.expFormula),
                                            cd <- Int64(model.cd),
                                            buyType <- model.buyType,
-                                           desc <- model.desc)
+                                           desc <- model.desc,
+                                           sundriesType <- model.sundiresType.rawValue,
+                                           priceCount <- model.priceCount)
             
             let rowid = try db!.run(insert)
             print("插入成功：rowid = \(rowid)")
@@ -220,10 +238,35 @@ class LXTSkillTableHelper: NSObject {
     class func lxt_updateSkill(model : LXTSkillModel) -> Void {
         let skillTable = Table("skill")
         let id = Expression<Int?>("id")
-        let skillID = Expression<Int?>("skillID")
+//        let skillID = Expression<Int?>("skillID")
+        let name = Expression<String>("name")
+        let type = Expression<Int64>("type")
+        let damageBase = Expression<Int64>("damageBase")
+        let maxLevel = Expression<Int64>("maxLevel")
+        let damageFormula = Expression<Int64>("formula")
+        let prerequisite = Expression<Int64>("prerequisite")
+        let minExp = Expression<Int64>("minExp")
+        let expFormula = Expression<Int64>("expFormula")
+        let cd = Expression<Int64>("cd")
+        let desc = Expression<String>("desc")
+        let buyType = Expression<Int>("buyType")
+        let sundriesType = Expression<Int>("sundriesType")
+        let priceCount = Expression<Int>("priceCount")
         let item = skillTable.filter(id == model.id)
         do {
-            let update = item.update(skillID <- model.skillID)
+            let update = item.update(name <- model.name,
+            type <- Int64(model.type),
+            damageBase <- Int64(model.damageBase),
+            maxLevel <- Int64(model.maxLevel),
+            damageFormula <- Int64(model.damageFormula),
+            prerequisite <- Int64(model.prerequisite),
+            minExp <- Int64(model.minExp),
+            expFormula <- Int64(model.expFormula),
+            cd <- Int64(model.cd),
+            buyType <- model.buyType,
+            desc <- model.desc,
+            sundriesType <- model.sundiresType.rawValue,
+            priceCount <- model.priceCount)
             if try db!.run(update) > 0{
 //                print("更新成功")
             }else{

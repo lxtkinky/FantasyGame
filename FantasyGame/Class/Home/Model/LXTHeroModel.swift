@@ -10,7 +10,10 @@ import UIKit
 
 class LXTHeroModel: LXTRoleModel,NSSecureCoding {
     static var supportsSecureCoding: Bool = true
+    var equipArray : Array<LXTGoodsModel> = Array<LXTGoodsModel>(repeating: LXTGoodsModel(), count: 10)
     
+    var totalAttack = 0
+    var totalMagic: Int = 0
     override var level: Int{
         didSet{
             self.maxExp = level * 10000
@@ -18,8 +21,6 @@ class LXTHeroModel: LXTRoleModel,NSSecureCoding {
     }
     
     var mapLevel = 1
-    
-    
     override var maxExp: Int{
         get{
              return level * 10000
@@ -68,5 +69,16 @@ class LXTHeroModel: LXTRoleModel,NSSecureCoding {
         maxExp = Int(coder.decodeInt32(forKey: "maxExp"))
         currentExp = Int(coder.decodeInt32(forKey: "currentExp"))
         mapLevel = Int(coder.decodeInt32(forKey: "mapLevel"))
+    }
+    
+    func lxt_calculate() {
+        self.totalAttack = self.attack
+        self.totalMagic = self.magic
+        for item in self.equipArray {
+            let strongAttack = Int(Float(item.equipModel.attack * item.equipModel.strongLevel ) / 10.0)
+            self.totalAttack += item.equipModel.attack + strongAttack
+            let strongMagic = Int(Float(item.equipModel.magic * item.equipModel.strongLevel ) / 10.0)
+            self.totalMagic += item.equipModel.magic + strongMagic
+        }
     }
 }

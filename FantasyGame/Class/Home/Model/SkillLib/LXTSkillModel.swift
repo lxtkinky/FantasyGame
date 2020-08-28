@@ -21,9 +21,11 @@ class LXTSkillModel: NSObject {
     var expFormula = 0
     var cd = 0
     var desc = ""
-    var buyType = 1             //1、金币购买，  2，元宝购买
+    var buyType = 1             //1、金币购买，  2，元宝购买, 3材料兑换
     var goldPrice = 1000
     var ybPrice = 100
+    var priceCount = 0          //购买或兑换数量
+    var sundiresType = SundriesType.none    //兑换材料类型
     
     var enhance = 0         //增加我方输出伤害
     var reduce = 0          //增加我方伤害减免

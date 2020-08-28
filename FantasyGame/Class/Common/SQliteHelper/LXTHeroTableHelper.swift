@@ -33,6 +33,7 @@ class LXTHeroTableHelper: NSObject {
     class func lxt_createTable(){
         let heroTable = Table("hero")
         let id = Expression<Int>("id")
+        let userID = Expression<Int>("userID")
         let heroID = Expression<Int>("heroID")
         let type = Expression<Int>("type")
         let name = Expression<String>("name")
@@ -53,6 +54,7 @@ class LXTHeroTableHelper: NSObject {
         let resistCriticalChance = Expression<Int>("resistCriticalChance")
         let suckBlood = Expression<Int>("suckBlood")
         let backInjury = Expression<Int>("backInjury")
+        let mapLevel = Expression<Int>("mapLevel")
         
         do {
             try db!.run(heroTable.create(temporary: false, ifNotExists: true, withoutRowid: false, block: { (builder) in
@@ -77,10 +79,17 @@ class LXTHeroTableHelper: NSObject {
                 builder.column(resistCriticalDamage, defaultValue: 0)
                 builder.column(suckBlood, defaultValue: 0)
                 builder.column(backInjury, defaultValue: 0)
+                builder.column(mapLevel, defaultValue: 1)
+                builder.column(userID, defaultValue: 0)
             }))
         } catch {
             print(error)
         }
+        
+        let hero = LXTHeroModel()
+        hero.heroID = 1
+        hero.name = "主角"
+        LXTHeroTableHelper.lxt_saveHero(hero: hero)
     }
     
     class func lxt_saveHero(hero : LXTHeroModel){
@@ -106,6 +115,8 @@ class LXTHeroTableHelper: NSObject {
         let suckBlood = Expression<Int>("suckBlood")
         let backInjury = Expression<Int>("backInjury")
         let type = Expression<Int>("type")
+        let mapLevel = Expression<Int>("mapLevel")
+        let userID = Expression<Int>("userID")
         
         do {
             let filter = heroTable.filter(heroID == hero.heroID)
@@ -133,7 +144,8 @@ class LXTHeroTableHelper: NSObject {
                                                resistCriticalDamage <- hero.resistCriticalDamage,
                                                suckBlood <- hero.suckBlood,
                                                backInjury <- hero.backInjury,
-                                               type <- hero.type
+                                               type <- hero.type,
+                                               mapLevel <- hero.mapLevel
                 )
                 let rowid = try db!.run(update)
                 if rowid > 0 {
@@ -161,8 +173,8 @@ class LXTHeroTableHelper: NSObject {
                                               resistCriticalDamage <- hero.resistCriticalDamage,
                                               suckBlood <- hero.suckBlood,
                                               backInjury <- hero.backInjury,
-                                              type <- hero.type
-                                              )
+                                              type <- hero.type,
+                                              userID <- user.userID)
                 let rowid = try db!.run(insert)
                 if rowid > 0 {
                     print("插入成功")
@@ -200,9 +212,12 @@ class LXTHeroTableHelper: NSObject {
         let suckBlood = Expression<Int>("suckBlood")
         let backInjury = Expression<Int>("backInjury")
         let type = Expression<Int>("type")
+        let mapLevel = Expression<Int>("mapLevel")
+        let userID = Expression<Int>("userID")
         
         do {
-            for hero in try db!.prepare(heroTable) {
+            let filter = heroTable.filter(userID == user.userID)
+            for hero in try db!.prepare(filter) {
                 let model = LXTHeroModel()
                 model.id = hero[id]
                 model.heroID = hero[heroID]
@@ -227,6 +242,7 @@ class LXTHeroTableHelper: NSObject {
                 model.suckBlood = hero[suckBlood]
                 model.backInjury = hero[backInjury]
                 model.type = hero[type]
+                model.mapLevel = hero[mapLevel]
                 heroArray.append(model)
             }
         } catch {

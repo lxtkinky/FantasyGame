@@ -27,10 +27,15 @@ class LXTGoodsView: UIView {
     }
     
     func lxt_initSubView() -> Void {
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
+        
         
         let boxView = UIView()
         boxView.backgroundColor = .white
+        boxView.layer.cornerRadius = 5
+        boxView.layer.borderWidth = 1
+        boxView.layer.borderColor = titleColor51.cgColor
+        boxView.clipsToBounds = true
         self.addSubview(boxView)
         boxView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
@@ -73,7 +78,7 @@ class LXTGoodsView: UIView {
         
         self.useButton.setTitle("使用", for: .normal)
         self.useButton.addTarget(self, action: #selector(lxt_useClick), for: .touchUpInside)
-        self.useButton.layer.borderColor = kRandomColor().cgColor
+        self.useButton.layer.borderColor = titleColor51.cgColor
         self.useButton.isHidden = true
         self.useButton.setTitleColor(rgb(51, 51, 51), for: .normal)
         self.useButton.titleLabel?.font = UIFont(name: PingFangSCRegular, size: 12)
