@@ -31,7 +31,17 @@ class LXTCopyManager: NSObject {
             goods.desc = "铜矿，打造装备的材料"
             goods.count = 1
             copyModel.sundries.append(goods)
+            
+            let stone1 = LXTGoodsModel()
+            stone1.name = "强化石"
+            stone1.desc = "强化石，用于强化装备"
+            stone1.count = 1
+            stone1.type = .sundries
+            stone1.relationID = SundriesType.stone.rawValue
+            copyModel.sundries.append(stone1)
             copyArray.append(copyModel)
+            
+            
             
             copyModel = LXTCopyModel()
             copyModel.name = "铁矿副本"

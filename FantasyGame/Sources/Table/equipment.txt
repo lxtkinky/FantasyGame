@@ -1,0 +1,6 @@
+id	name	level	attack	magic	enhance	reduce	skillID	type	maxStrongLevel	costStrongGold	costStrongStone	speed	hp	mp	defense	magicDefense	doubleHit	hpRecovery	mpRecovery	sundriesType	buyType	priceCount
+1	ÌÒÄ¾½£	1	10	10	0	0	0	1	5	100	1	0	0	0	0	0	0	0	0	0	1	100
+2	¾ÞÊ¯½£	10	20	20	0	0	0	1	5	200	1	0	0	0	0	0	0	0	0	0	1	200
+3	ÇàÍ­½£	30	50	50	0	0	0	1	5	500	1	0	0	0	0	0	0	0	0	0	1	500
+4	Ìú½£	50	100	100	0	0	0	1	5	1000	1	0	0	0	0	0	0	0	0	0	1	1000
+5	ÐþÌú½£	100	150	150	0	0	0	1	5	1500	1	0	0	0	0	0	0	0	0	0	1	1500

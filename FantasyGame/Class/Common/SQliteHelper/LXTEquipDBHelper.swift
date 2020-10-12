@@ -248,64 +248,17 @@ class LXTEquipDBHelper: NSObject {
     
     
     class func lxt_initEquip(){
-        var equip = LXTEquipModel()
-        equip.id = 1
-        equip.name = "铁剑"
-        equip.goldPrice = 1000
-        equip.priceCount = 1000
-        equip.ybPrice = 0
-        equip.type = 1
-        equip.attack = 50
-        equip.magic = 50
-        equip.maxStrongLevel = 10
-        equip.costStrongGold = 1000
-        equip.costStrongStone = 1
-        self.lxt_saveEquip(equip: equip)
-        
-        
-        equip = LXTEquipModel()
-        equip.id = 2
-        equip.name = "铁枪"
-        equip.goldPrice = 1000
-        equip.priceCount = 1000
-        equip.ybPrice = 0
-        equip.type = 1
-        equip.attack = 70
-        equip.magic = 70
-        equip.maxStrongLevel = 10
-        equip.costStrongGold = 1000
-        equip.costStrongStone = 1
-        self.lxt_saveEquip(equip: equip)
-        
-        equip = LXTEquipModel()
-        equip.id = 3
-        equip.name = "铁甲"
-        equip.goldPrice = 1000
-        equip.priceCount = 1000
-        equip.buyType = 2
-        equip.ybPrice = 0
-        equip.type = EquipType.clothes.rawValue
-        equip.attack = 0
-        equip.magic = 0
-        equip.maxStrongLevel = 10
-        equip.costStrongGold = 1000
-        equip.costStrongStone = 1
-        self.lxt_saveEquip(equip: equip)
-        
-        let equip4 = LXTEquipModel()
-        equip4.id = 4
-        equip4.name = "诛仙剑(灵器)"
-        equip4.goldPrice = 1000
-        equip4.ybPrice = 0
-        equip4.priceCount = 1000
-        equip4.sundriesType = SundriesType.iron
-        equip4.buyType = 3
-        equip4.type = EquipType.clothes.rawValue
-        equip4.attack = 0
-        equip4.magic = 0
-        equip4.maxStrongLevel = 10
-        equip4.costStrongGold = 1000
-        equip4.costStrongStone = 1
-        self.lxt_saveEquip(equip: equip4)
+        let table = Table("equip")
+        do {
+            let count =  try db!.scalar(table.count)
+            if count == 0 {
+                let modelArray = LXTReadFileHelper.lxt_loadEquipArray()
+                for item in modelArray {
+                    self.lxt_saveEquip(equip: item)
+                }
+            }
+        } catch {
+            print("初始化装备异常：\(error)")
+        }
     }
 }

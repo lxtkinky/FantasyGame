@@ -16,7 +16,7 @@ class LXTSkillModel: NSObject {
     var damageBase = 0
     var maxLevel = 0
     var damageFormula = 0
-    var prerequisite = 0        //学习条件
+    var studyLevel = 0        //学习条件
     var minExp = 0
     var expFormula = 0
     var cd = 0

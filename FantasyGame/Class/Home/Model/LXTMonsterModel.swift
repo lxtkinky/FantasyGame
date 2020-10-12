@@ -24,17 +24,17 @@ class LXTMonsterModel: LXTRoleModel,NSCopying {
     
     override var level: Int{
         didSet{
-            if level > 0 {
-                self.maxExp = level * 10
-                self.attack = level > 1 ? 30 * level : 10
-                self.hp = 100 * level
-                self.currentHP = 100 * level
-            }else{
-                self.maxExp = 10
-                self.attack = 10
-                self.hp = 100
-                self.currentHP = 100 
-            }
+//            if level > 0 {
+//                self.maxExp = level * 10
+//                self.attack = level > 1 ? 30 * level : 10
+//                self.hp = 100 * level
+//                self.currentHP = 100 * level
+//            }else{
+//                self.maxExp = 10
+//                self.attack = 10
+//                self.hp = 100
+//                self.currentHP = 100 
+//            }
             
         }
     }
@@ -47,8 +47,8 @@ class LXTMonsterModel: LXTRoleModel,NSCopying {
         self.currentMP = self.mp
         self.attack = 10
         self.level = 1
-        self.maxExp = level * 10
-        self.name = "怪物\(level)"
+        self.maxExp = 10
+        self.name = "怪物"
     }
     
     required init?(coder: NSCoder) {

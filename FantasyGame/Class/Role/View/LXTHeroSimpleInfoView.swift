@@ -115,9 +115,9 @@ class LXTHeroSimpleInfoView: UIView, UICollectionViewDelegateFlowLayout, UIColle
         if indexPath.section == 0 {
             return CGSize(width: kScreenWidth, height: 30)
         }else if indexPath.section == 1{
-            return CGSize(width: kScreenWidth / 2 - 0.5, height: 30)
+            return CGSize(width: kScreenWidth / 2 - 0.5 - 10, height: 30)
         }
-        let wh = (kScreenWidth - 5) / 6
+        let wh = (kScreenWidth - 5 * 5 - 10) / 6
         return CGSize(width: wh, height: wh)
     }
     
@@ -130,7 +130,9 @@ class LXTHeroSimpleInfoView: UIView, UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsets(top: 0, left: 0, bottom: section == 0 ? 0 : 10, right: 0)
+        if section > 0 {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
+        }
+        return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
     }
 }

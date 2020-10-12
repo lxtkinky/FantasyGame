@@ -54,8 +54,8 @@ class LXTRoleModel: LXTBaseModel{
     var resistCriticalChance = 0    //抗暴击几率
     var resistCriticalDamage = 0    //暴击伤害减免
     var type = 1                    //1，英雄 2，地图怪物
-    var suckBlood = 0
-    var backInjury = 0
+    var suckBlood = 0               //吸血
+    var backInjury = 0              //反伤
     
     var talentSkills = Array<LXTHeroSkillModel>()   //天赋技能
     var skills = Array<LXTHeroSkillModel>(repeating: LXTHeroSkillModel(), count: 6)

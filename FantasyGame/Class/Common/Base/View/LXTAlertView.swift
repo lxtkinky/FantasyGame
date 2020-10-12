@@ -113,6 +113,10 @@ class LXTAlertView: UIView {
             make.edges.equalToSuperview()
         }
     }
+    
+    class func showTips(tips : String){
+        self.showInfo(info: tips, showCancel: false, completeTitle: "确定")
+    }
 
     
     required init?(coder: NSCoder) {

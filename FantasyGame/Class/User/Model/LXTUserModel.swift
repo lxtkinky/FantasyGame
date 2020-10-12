@@ -23,6 +23,7 @@ class LXTUserModel: LXTBaseModel,NSSecureCoding {
         coder.encode(self.challengeCount, forKey: "challengeCount")
         coder.encode(self.lastDate, forKey: "lastDate")
         coder.encode(self.hasGetPrize, forKey: "hasGetPrize")
+        coder.encode(self.mapIndex, forKey: "mapIndex")
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +37,8 @@ class LXTUserModel: LXTBaseModel,NSSecureCoding {
         totalChallengeCount = Int(coder.decodeInt32(forKey: "totalChallengeCount"))
         challengeCount = Int(coder.decodeInt32(forKey: "challengeCount"))
         lastDate = coder.decodeObject(forKey: "lastDate") as! String
-//        hasGetPrize = coder.decodeBool(forKey: "hasGetPrize")
+        hasGetPrize = coder.decodeBool(forKey: "hasGetPrize")
+        mapIndex = Int(coder.decodeInt32(forKey: "mapIndex"))
     }
     
     var userName = ""
@@ -50,9 +52,11 @@ class LXTUserModel: LXTBaseModel,NSSecureCoding {
     var challengeCount = 0              //今日已挑战次数
     var lastDate = ""
     var hasGetPrize = false             //是否可以领取奖励
+    var mapIndex = 1                    //地图索引
     
     //获取物品列表的时候赋值
     var couponModel : LXTGoodsModel = LXTGoodsModel()
+    var stone = LXTGoodsModel()
 
     
     override init() {

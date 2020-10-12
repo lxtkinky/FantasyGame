@@ -13,6 +13,8 @@ class LXTStrongController: LXTBaseController {
     let equipBox = UIButton(type: .custom)
     let chooseView = LXTStrongChooseView()
     var selectModel : LXTGoodsModel?
+    let costGoldLabel  = UILabel()
+    let costStoneLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,25 @@ class LXTStrongController: LXTBaseController {
         self.equipBox.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(kNavigationBarHeight + 60)
-            make.size.equalTo(CGSize(width: 80, height: 80))
+            make.size.equalTo(CGSize(width: 60, height: 60))
+        }
+        
+        self.costGoldLabel.text = "消耗：0/\(user.goldNum) 金币"
+        self.costGoldLabel.font = UIFont(name: PingFangSCRegular, size: 12)
+        self.costGoldLabel.textColor = titleColor51
+        self.view.addSubview(self.costGoldLabel)
+        self.costGoldLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.equipBox).offset(-20)
+            make.top.equalTo(self.equipBox.snp.bottom).offset(20)
+        }
+        
+        self.costStoneLabel.text = "消耗：0/\(user.stone.count) 强化石"
+        self.costStoneLabel.font = UIFont(name: PingFangSCRegular, size: 12)
+        self.costStoneLabel.textColor = titleColor51
+        self.view.addSubview(self.costStoneLabel)
+        self.costStoneLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(self.costGoldLabel)
+            make.top.equalTo(self.costGoldLabel.snp.bottom).offset(5)
         }
         
         let strongButton = UIButton(type: .custom)
@@ -49,8 +69,8 @@ class LXTStrongController: LXTBaseController {
         self.view.addSubview(strongButton)
         strongButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.equipBox.snp.bottom).offset(20)
-            make.size.equalTo(CGSize(width: 40, height: 30))
+            make.top.equalTo(self.costStoneLabel.snp.bottom).offset(40)
+            make.size.equalTo(CGSize(width: 60, height: 40))
         }
         
         self.view.addSubview(self.chooseView)
@@ -60,23 +80,40 @@ class LXTStrongController: LXTBaseController {
         }
         weak var weakSelf = self
         self.chooseView.selectBlock = { model in
-            weakSelf?.selectModel = model
-            weakSelf?.equipBox.setTitle("\(model.name)+\(model.equipModel.strongLevel)", for: .normal)
+            weakSelf?.lxt_selectEquipAction(model: model)
         }
+    }
+    
+    func lxt_selectEquipAction(model : LXTGoodsModel) {
+        self.selectModel = model
+        self.equipBox.setTitle("\(model.name)+\(model.equipModel.strongLevel)", for: .normal)
+        let multiple = powf(2, Float(model.equipModel.strongLevel + 1))
+        let costGold = Int(multiple) * model.equipModel.costStrongGold
+        let costStone = Int(multiple) * model.equipModel.costStrongStone
+        self.costGoldLabel.text = "消耗：\(costGold)/\(user.goldNum) 金币"
+        self.costStoneLabel.text = "消耗：\(costStone)/\(user.stone.count) 强化石"
     }
     
     @objc func lxt_strongEquipClick() {
         if let model = self.selectModel {
-            if arc4random() % 10 == 3 {
-                model.equipModel.strongLevel += 1
-                LXTAlertView.showInfo(info: "强化成功", showCancel: false, completeTitle: "确定")
-                self.equipBox.setTitle("\(model.name)+\(model.equipModel.strongLevel)", for: .normal)
-                let _ = LXTUserEquipDB.lxt_updateWithEquip(model: model.equipModel)
+            let f = powf(2, Float(model.equipModel.strongLevel + 1))
+            print(f)
+            if user.goldNum > model.equipModel.costStrongGold * Int(f)
+                && user.stone.count > model.equipModel.costStrongStone * Int(f) {
+                if arc4random() % 10 == 3 {
+                    model.equipModel.strongLevel += 1
+                    LXTAlertView.showInfo(info: "强化成功", showCancel: false, completeTitle: "确定")
+                    self.equipBox.setTitle("\(model.name)+\(model.equipModel.strongLevel)", for: .normal)
+                    let _ = LXTUserEquipDB.lxt_updateWithEquip(model: model.equipModel)
+                }else{
+                    LXTAlertView.showInfo(info: "强化失败", showCancel: false, completeTitle: "确定")
+                }
             }else{
-                LXTAlertView.showInfo(info: "强化失败", showCancel: false, completeTitle: "确定")
+                LXTAlertView.showTips(tips: "材料不足，无法强化")
             }
-            
         }
+        
+        
     }
     
     @objc func lxt_chooseEquipClick() {

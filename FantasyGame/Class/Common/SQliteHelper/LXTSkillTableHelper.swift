@@ -17,7 +17,7 @@ import SQLite
 //let damageBase = Expression<Int64>("damageBase")
 //let maxLevel = Expression<Int64>("maxLevel")
 //let damageFormula = Expression<Int64>("formula")
-//let prerequisite = Expression<Int64>("prerequisite")
+//let studyLevel = Expression<Int64>("studyLevel")
 //let minExp = Expression<Int64>("minExp")
 //let expFormula = Expression<Int64>("expFormula")
 //let cd = Expression<Int64>("cd")
@@ -42,7 +42,7 @@ class LXTSkillTableHelper: NSObject {
         let damageBase = Expression<Int64>("damageBase")
         let maxLevel = Expression<Int64>("maxLevel")
         let damageFormula = Expression<Int64>("formula")
-        let prerequisite = Expression<Int64>("prerequisite")
+        let studyLevel = Expression<Int64>("studyLevel")
         let minExp = Expression<Int64>("minExp")
         let expFormula = Expression<Int64>("expFormula")
         let cd = Expression<Int64>("cd")
@@ -50,6 +50,7 @@ class LXTSkillTableHelper: NSObject {
         let buyType = Expression<Int>("buyType")
         let sundriesType = Expression<Int>("sundriesType")
         let priceCount = Expression<Int>("priceCount")
+        let skillID = Expression<Int?>("skillID")
         
         let create = skillTable.create(temporary: false, ifNotExists: true, withoutRowid: false,block: { (table) in
             table.column(id, primaryKey: true)
@@ -58,7 +59,7 @@ class LXTSkillTableHelper: NSObject {
             table.column(damageBase)
             table.column(maxLevel)
             table.column(damageFormula)
-            table.column(prerequisite)
+            table.column(studyLevel)
             table.column(minExp)
             table.column(expFormula)
             table.column(cd)
@@ -66,6 +67,7 @@ class LXTSkillTableHelper: NSObject {
             table.column(buyType, defaultValue: 1)
             table.column(priceCount, defaultValue: 0)
             table.column(sundriesType, defaultValue: 0)
+            table.column(skillID, defaultValue: 0)
             })
         let _ = try? db!.run(create)
     }
@@ -78,7 +80,7 @@ class LXTSkillTableHelper: NSObject {
         let damageBase = Expression<Int64>("damageBase")
         let maxLevel = Expression<Int64>("maxLevel")
         let damageFormula = Expression<Int64>("formula")
-        let prerequisite = Expression<Int64>("prerequisite")
+        let studyLevel = Expression<Int64>("studyLevel")
         let minExp = Expression<Int64>("minExp")
         let expFormula = Expression<Int64>("expFormula")
         let cd = Expression<Int64>("cd")
@@ -98,7 +100,7 @@ class LXTSkillTableHelper: NSObject {
             model.damageBase = Int(skill[damageBase])
             model.maxLevel = Int(skill[maxLevel])
             model.damageFormula = Int(skill[damageFormula])
-            model.prerequisite = Int(skill[prerequisite])
+            model.studyLevel = Int(skill[studyLevel])
             model.minExp = Int(skill[minExp])
             model.expFormula = Int(skill[expFormula])
             model.cd = Int(skill[cd])
@@ -128,7 +130,7 @@ class LXTSkillTableHelper: NSObject {
         skill.damageBase = 130
         skill.maxLevel = 100
         skill.damageFormula = 10
-        skill.prerequisite = 100
+        skill.studyLevel = 100
         skill.minExp = 100000
         skill.expFormula = 1000000
         skill.cd = 6
@@ -146,7 +148,7 @@ class LXTSkillTableHelper: NSObject {
         ybSkill.damageBase = 130
         ybSkill.maxLevel = 100
         ybSkill.damageFormula = 10
-        ybSkill.prerequisite = 100
+        ybSkill.studyLevel = 100
         ybSkill.minExp = 100000
         ybSkill.expFormula = 1000000
         ybSkill.cd = 6
@@ -162,7 +164,7 @@ class LXTSkillTableHelper: NSObject {
 //        skill2.damageBase = 110
 //        skill2.maxLevel = 100
 //        skill2.damageFormula = 10
-//        skill2.prerequisite = 100
+//        skill2.studyLevel = 100
 //        skill2.minExp = 100000
 //        skill2.expFormula = 1000000
 //        skill2.cd = 6
@@ -179,7 +181,7 @@ class LXTSkillTableHelper: NSObject {
         skill3.buyType = 3
         skill3.maxLevel = 100
         skill3.damageFormula = 10
-        skill3.prerequisite = 100
+        skill3.studyLevel = 100
         skill3.minExp = 100000
         skill3.expFormula = 1000000
         skill3.cd = 6
@@ -196,7 +198,7 @@ class LXTSkillTableHelper: NSObject {
         let damageBase = Expression<Int64>("damageBase")
         let maxLevel = Expression<Int64>("maxLevel")
         let damageFormula = Expression<Int64>("formula")
-        let prerequisite = Expression<Int64>("prerequisite")
+        let studyLevel = Expression<Int64>("studyLevel")
         let minExp = Expression<Int64>("minExp")
         let expFormula = Expression<Int64>("expFormula")
         let cd = Expression<Int64>("cd")
@@ -209,7 +211,7 @@ class LXTSkillTableHelper: NSObject {
             let filter = skillTable.filter(name == model.name)
             let count = try db!.scalar(filter.count)
             if count > 0 {
-                print("不能添加重复的技能")
+//                print("不能添加重复的技能")
                 return
             }
             
@@ -219,7 +221,7 @@ class LXTSkillTableHelper: NSObject {
                                            damageBase <- Int64(model.damageBase),
                                            maxLevel <- Int64(model.maxLevel),
                                            damageFormula <- Int64(model.damageFormula),
-                                           prerequisite <- Int64(model.prerequisite),
+                                           studyLevel <- Int64(model.studyLevel),
                                            minExp <- Int64(model.minExp),
                                            expFormula <- Int64(model.expFormula),
                                            cd <- Int64(model.cd),
@@ -244,7 +246,7 @@ class LXTSkillTableHelper: NSObject {
         let damageBase = Expression<Int64>("damageBase")
         let maxLevel = Expression<Int64>("maxLevel")
         let damageFormula = Expression<Int64>("formula")
-        let prerequisite = Expression<Int64>("prerequisite")
+        let studyLevel = Expression<Int64>("studyLevel")
         let minExp = Expression<Int64>("minExp")
         let expFormula = Expression<Int64>("expFormula")
         let cd = Expression<Int64>("cd")
@@ -259,7 +261,7 @@ class LXTSkillTableHelper: NSObject {
             damageBase <- Int64(model.damageBase),
             maxLevel <- Int64(model.maxLevel),
             damageFormula <- Int64(model.damageFormula),
-            prerequisite <- Int64(model.prerequisite),
+            studyLevel <- Int64(model.studyLevel),
             minExp <- Int64(model.minExp),
             expFormula <- Int64(model.expFormula),
             cd <- Int64(model.cd),

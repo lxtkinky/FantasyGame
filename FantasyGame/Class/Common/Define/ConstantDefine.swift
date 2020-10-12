@@ -88,6 +88,7 @@ var user = LXTUserManager().lxt_loadUser()
 var heroArray = LXTRoleManager.lxt_loadAllHero()
 var goodsArray = LXTGoodsSQliteHelper.lxt_getAllGoods()
 var dateHelper = LXTDateHelper()
+var monsterArray = LXTHeroTableHelper.lxt_queryAllMonster()
 
 
 

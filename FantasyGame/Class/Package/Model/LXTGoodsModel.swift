@@ -19,6 +19,7 @@ enum SundriesType : Int {
     case coupon = 1 //副本券
     case iron = 2    //精铁
     case copper = 3     //黄铜
+    case stone = 4     //黄铜
 }
 
 class LXTGoodsModel: NSObject {

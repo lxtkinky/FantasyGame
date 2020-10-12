@@ -30,7 +30,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var showOfflineRevenue = true     //离线收益是否结算
     var offlineResult : String?
     let offlineResLabel = UILabel()
-    var round = 1           //回合
+    var pkCount = 1           //回合
     
     let menuView = LXTFuncMenuView()
     
@@ -68,14 +68,15 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
 //        self.backButton.isHidden = true
-        print("\(user.userName) 编号 : \(user.userID)")
+//        print("\(user.userName) 编号 : \(user.userID)")
         
         self.lxt_registerNotification()
         
-        print("Int.max = \(Int.max)")
-        print("Int64.max = \(Int64.max)")
+//        print("Int.max = \(Int.max)")
+//        print("Int64.max = \(Int64.max)")
         
         if showOfflineRevenue {
             self.offlineResult = LXTRoleManager.lxt_offlineRevenue()
@@ -113,8 +114,8 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         
-        self.monster = LXTMonsterModel()
-        self.monster?.level = self.hero!.mapLevel
+        self.monster = monsterArray[user.mapIndex].copy() as? LXTMonsterModel
+//        self.monster?.level = self.hero!.mapLevel
         let monsterView = LXTMonsterView()
         self.monsterView = monsterView
         self.monsterView?.role = self.monster
@@ -161,7 +162,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func lxt_initSubView(){
         
         weak var weakSelf = self
-        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化"]
+        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化", "宗门"]
         self.view.addSubview(self.menuView)
         self.menuView.selectMenuBlock = { index in
             weakSelf?.lxt_menuAction(index: index)
@@ -183,7 +184,8 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-55)
 //            make.height.equalToSuperview().multipliedBy(0.5)
-            make.top.equalTo(self.menuView.snp.bottom)
+//            make.top.equalTo(self.menuView.snp.bottom)
+            make.height.equalTo(kScreenHeight * 0.5 - 55)
         }
         
 //        self.view.addSubview(self.expStrip)
@@ -249,14 +251,6 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     @objc func lxt_restHero()  {
-//        self.hero?.attack = 10
-//        self.hero?.hp = 100
-//        self.hero?.currentHP = 100
-//        self.hero?.mapLevel = 1
-//        self.hero?.level = 1
-//        self.hero?.maxExp = 1000
-//        self.hero = LXTHeroModel()
-//        self.lxt_saveHero(hero: self.hero!)
     }
     
     @objc func lxt_equipShopClick()  {
@@ -269,9 +263,10 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let mapVC = LXTMapController()
         mapVC.modalPresentationStyle = .fullScreen
         mapVC.changeMap = { mapLevel in
-            self.hero?.mapLevel = mapLevel
+//            self.hero?.mapLevel = mapLevel
 //            self.monster?.level = mapLevel
-            LXTRoleManager.lxt_saveHero(hero: self.hero!)
+//            LXTRoleManager.lxt_saveHero(hero: self.hero!)
+//            self.monster = LXTHeroTableHelper.lxt_queryAllMonster()[mapLevel]
         }
         self.present(mapVC, animated: false) {}
         
@@ -315,7 +310,8 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                     }
                     user.goldNum += 1
                     self.goldLabel.text = "金币：\(user.goldNum)"
-                    self.hero?.currentExp += self.monster!.maxExp
+                    //TODO:经验值获取修改
+                    self.hero?.currentExp += self.monster!.maxExp * 100
                     if self.hero!.currentExp > self.hero!.maxExp {
                         self.hero?.currentExp = self.hero!.currentExp - self.hero!.maxExp
                         self.hero?.level += 1
@@ -327,16 +323,15 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 LXTRoleManager.lxt_saveHero(hero: self.hero!)
                 LXTUserManager().lxt_saveUser(user: user)
                 NotificationCenter.default.post(name: NotificationNameUpdateHero, object: nil)
-                self.round = 1
+                self.pkCount = 1
                 LXTHeroSkillDBHelper.lxt_updateHeroSkillExp(exp: 1)
             }else{
                 self.dataSource.append("战斗失败")
-                self.round = 1
+                self.pkCount = 1
             }
             
             //初始化战斗
             self.playStatus = 0
-//            self.hero = LXTRoleManager.lxt_loadHero()
             self.hero?.currentHP = self.hero!.hp
             self.hero?.currentMP = self.hero!.mp
             self.heroView?.role = self.hero
@@ -345,9 +340,6 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //            self.monster?.level = self.hero!.mapLevel
             if copyCount > 0 , let _ = nextCopy {
                 self.monster = nextCopy!.monster.copy() as? LXTMonsterModel
-//                self.monster?.attack = nextCopy!.monster.attack
-//                self.monster?.hp = nextCopy!.monster.hp
-//                self.monster?.currentHP = nextCopy!.monster.currentHP
                 self.monsterView?.role = self.monster
                 currentCopy = nextCopy!
                 copyCount -= 1
@@ -355,17 +347,16 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                     nextCopy = nil
                 }
             }else{
+//                print(user.mapIndex)
                 currentCopy = nil
-                self.monster = LXTMonsterModel()
-                self.monster?.level = self.hero!.mapLevel
-                self.monster?.currentHP = self.monster!.hp
+                self.monster = monsterArray[user.mapIndex].copy() as? LXTMonsterModel
                 self.monsterView?.role = self.monster
             }
             
         }else{
             if self.playStatus == 0 {
                 self.playStatus = 1
-                let index = (self.round - 1) % 6;
+                let index = (self.pkCount - 1) % 6;
                 let heroSkill = self.hero?.skills[index]
                 if heroSkill!.id > 0 {
                     let attackNum = Int(Double(self.hero!.totalAttack * heroSkill!.damage) / 100.0)
@@ -384,7 +375,20 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 self.heroView?.role = self.hero
                 self.dataSource.append("\(self.monster!.name)对\(self.hero!.name)使用普通攻击，造成\(self.monster!.attack)点伤害")
                 //回合加一
-                self.round += 1
+                self.pkCount += 1
+            }
+            
+            if self.pkCount >= 20 {
+                self.playStatus = 0
+                self.hero?.currentHP = self.hero!.hp
+                self.hero?.currentMP = self.hero!.mp
+                self.heroView?.role = self.hero
+                
+                currentCopy = nil
+                self.monster = LXTMonsterModel()
+                self.monster?.level = self.hero!.mapLevel
+                self.monster?.currentHP = self.monster!.hp
+                self.monsterView?.role = self.monster
             }
         }
         

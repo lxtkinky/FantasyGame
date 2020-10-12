@@ -79,7 +79,7 @@ class LXTHeroSkillDBHelper: NSObject {
             if row > 0 {
                 print("更新exp成功")
             }else{
-                print("没有技能上阵")
+//                print("没有技能上阵")
             }
         } catch {
             print(error)
@@ -110,7 +110,7 @@ class LXTHeroSkillDBHelper: NSObject {
         let damageBase = Expression<Int64>("damageBase")
         let maxLevel = Expression<Int64>("maxLevel")
         let damageFormula = Expression<Int64>("formula")
-        let prerequisite = Expression<Int64>("prerequisite")
+        let studyLevel = Expression<Int64>("studyLevelstudyLevel")
         let minExp = Expression<Int>("minExp")
         let expFormula = Expression<Int>("expFormula")
         let cd = Expression<Int>("cd")
@@ -142,7 +142,7 @@ class LXTHeroSkillDBHelper: NSObject {
                 skill.damageBase = Int(item[skillTable[damageBase]])
                 skill.maxLevel = Int(item[skillTable[maxLevel]])
                 skill.damageFormula = Int(item[skillTable[damageFormula]])
-                skill.prerequisite = Int(item[skillTable[prerequisite]])
+                skill.studyLevel = Int(item[skillTable[studyLevel]])
                 skill.minExp = item[skillTable[minExp]]
                 skill.expFormula = item[skillTable[expFormula]]
                 skill.cd = item[skillTable[cd]]

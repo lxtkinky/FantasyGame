@@ -35,7 +35,7 @@ class LXTTableSQliteHelper: NSObject {
 //                LXTTableSQliteHelper().lxt_createSkillTable()
 //                LXTSkillTableHelper.lxt_createSkillTable(<#T##self: LXTSkillTableHelper##LXTSkillTableHelper#>)
 //            }
-            LXTSkillTableHelper.lxt_addSkillIDColumn()
+//            LXTSkillTableHelper.lxt_addSkillIDColumn()
             LXTSkillTableHelper.lxt_initSkill()
             
 //            LXTTableSQliteHelper().lxt_createGoodsTable()

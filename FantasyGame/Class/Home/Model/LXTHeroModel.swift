@@ -14,21 +14,29 @@ class LXTHeroModel: LXTRoleModel,NSSecureCoding {
     
     var totalAttack = 0
     var totalMagic: Int = 0
-    override var level: Int{
+//    override var level: Int{
+//        didSet{
+//            self.maxExp = level * 10000
+//        }
+//    }
+    
+    override var type: Int{
         didSet{
-            self.maxExp = level * 10000
+            if type == 1 {
+                self.maxExp = level * 10000
+            }
         }
     }
     
     var mapLevel = 1
-    override var maxExp: Int{
-        get{
-             return level * 10000
-        }
-        set{
-            super.maxExp = newValue
-        }
-    }
+//    override var maxExp: Int{
+//        get{
+//             return level * 10000
+//        }
+//        set{
+//            super.maxExp = newValue
+//        }
+//    }
     
     override init() {
         super.init()

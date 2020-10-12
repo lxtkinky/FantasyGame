@@ -11,7 +11,7 @@ import UIKit
 class LXTEquipShopController: LXTBaseController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {    
     let width = (kScreenWidth - 25) / 4
     let height = (kScreenWidth - 25) / 4 / 3 * 4
-    let bookCellKey = "bookCellKey"
+    let bookCellKey = "cellKey"
     var dataSource : Array<LXTEquipModel> = []
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
@@ -34,39 +34,49 @@ class LXTEquipShopController: LXTBaseController,UICollectionViewDelegateFlowLayo
     }
     
     func lxt_buyAction(equipModel : LXTEquipModel) -> Void {
-            let moneyEnough = equipModel.goldPrice > 0 ? user.goldNum > equipModel.goldPrice : user.ybNum > equipModel.ybPrice
-            let buyStr = equipModel.goldPrice > 0 ? "金币" : "元宝"
-            if moneyEnough {
-                let buyNum = equipModel.goldPrice > 0 ? equipModel.goldPrice : equipModel.ybPrice
-                
-                LXTAlertView.showInfo(info: "花费 \(buyNum) \(buyStr)购买", showCancel: true, completeTitle: "购买") {
-                    if equipModel.goldPrice > 0{
-                        user.goldNum -= equipModel.goldPrice
-                    }else{
-                        user.ybNum -= equipModel.ybPrice
-                    }
-                    
-                    LXTUserManager().lxt_saveUser(user: user)
-                    let goods = LXTGoodsModel()
-                    goods.name = equipModel.name
-                    goods.type = .equip
-                    goods.desc = "初级装备\(equipModel.name)"
-                    goods.count = 1
-//                    goods.relationID = equipModel.id
-                    let userEquip = LXTUserEquipModel()
-                    userEquip.equipID = equipModel.id
-                    goods.userEquip = userEquip
-                    let _ = LXTGoodsSQliteHelper.lxt_saveEquipGoods(goods: goods)
-                    LXTAlertView.showInfo(info: "获得装备 \(equipModel.name)", showCancel: false, completeTitle: "确定")
+        var moneyEnough = false
+        var buyStr = ""
+        if equipModel.buyType == 1 {
+            buyStr = "金币"
+            moneyEnough = user.goldNum > equipModel.priceCount
+        }else if(equipModel.buyType == 2){
+            moneyEnough = user.ybNum > equipModel.priceCount
+            buyStr = "元宝"
+        }else if(equipModel.buyType == 3){
+            buyStr = "材料"
+        }
+        
+        if moneyEnough {
+            let buyNum = equipModel.priceCount
+            
+            LXTAlertView.showInfo(info: "花费 \(buyNum) \(buyStr)购买", showCancel: true, completeTitle: "购买") {
+                if equipModel.buyType == 1{
+                    user.goldNum -= equipModel.priceCount
+                }else if (equipModel.buyType == 2){
+                    user.ybNum -= equipModel.priceCount
+                }else if(equipModel.buyType == 3){
+                    //扣除材料
                 }
                 
-                print("购买装备：\(equipModel.name)")
-            }else{
-                LXTAlertView.showInfo(info: "\(buyStr)不足，无法购买", showCancel: false, completeTitle: "确定")
-                user.goldNum += 1000
                 LXTUserManager().lxt_saveUser(user: user)
+                let goods = LXTGoodsModel()
+                goods.name = equipModel.name
+                goods.type = .equip
+                goods.desc = "初级装备\(equipModel.name)"
+                goods.count = 1
+                //                    goods.relationID = equipModel.id
+                let userEquip = LXTUserEquipModel()
+                userEquip.equipID = equipModel.id
+                goods.userEquip = userEquip
+                let _ = LXTGoodsSQliteHelper.lxt_saveEquipGoods(goods: goods)
+                LXTAlertView.showInfo(info: "获得装备 \(equipModel.name)", showCancel: false, completeTitle: "确定")
             }
+            
+            print("购买装备：\(equipModel.name)")
+        }else{
+            LXTAlertView.showInfo(info: "\(buyStr)不足，无法购买", showCancel: false, completeTitle: "确定")
         }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.dataSource.count

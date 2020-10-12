@@ -49,7 +49,14 @@ class LXTRoleManager: NSObject {
            self.heroView.hero = self.hero
     */
     class func lxt_loadAllHero() -> Array<LXTHeroModel>{
-        let array = LXTHeroTableHelper.lxt_queryAllHero()
+        var array = LXTHeroTableHelper.lxt_queryAllHero()
+        if array.count == 0 {
+            let hero = LXTHeroModel()
+            hero.heroID = 1
+            hero.name = "主角"
+            LXTHeroTableHelper.lxt_saveHero(hero: hero)
+            array.append(hero)
+        }
         for hero in array {
             for model in LXTHeroSkillDBHelper.lxt_queryHeroSkillByHeroID(heroID: hero.id, battle: true) {
                 hero.skills[model.index - 1] = model
@@ -129,7 +136,7 @@ class LXTRoleManager: NSObject {
             if interval > 1 * 60 {
                 let pkCount = Int(interval / 5 )
                 user.goldNum += pkCount
-                let totalExp = pkCount * 10
+                let totalExp = monsterArray[user.mapIndex].maxExp * 100
                 let hero = self.lxt_loadHero()
                 hero.currentExp += totalExp
                 if hero.currentExp + totalExp > hero.maxExp {

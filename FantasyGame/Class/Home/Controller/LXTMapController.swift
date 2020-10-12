@@ -12,11 +12,14 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
     
     let tableView = UITableView()
     var changeMap : (Int) -> Void = {mapLevel in}
+    var dataSource = Array<LXTMonsterModel>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
+        
+        self.dataSource = LXTHeroTableHelper.lxt_queryAllMonster()
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -47,6 +50,8 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
  */
     }
     
+    //MARK: - 分割线
+    
     //横竖屏
     func setNewOrientation(fullScreen: Bool) {
         if fullScreen { //横屏
@@ -66,18 +71,21 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = "map \(indexPath.row + 1)"
+        cell?.textLabel?.text = self.dataSource[indexPath.row].name
+        cell?.textLabel?.textColor = indexPath.row <= user.mapIndex ? titleColor51 : .lightGray
         cell?.selectionStyle = .none
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.changeMap(indexPath.row + 1)
+        user.mapIndex = indexPath.row
+        LXTUserManager().lxt_saveUser(user: user)
+        self.changeMap(indexPath.row)
         self.dismiss(animated: true) {}
     }
 

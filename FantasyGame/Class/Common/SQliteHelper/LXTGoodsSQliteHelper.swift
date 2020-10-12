@@ -147,7 +147,7 @@ class LXTGoodsSQliteHelper: NSObject {
         let damageBase = Expression<Int>("damageBase")
         let maxLevel = Expression<Int>("maxLevel")
         let damageFormula = Expression<Int>("formula")
-        let prerequisite = Expression<Int>("prerequisite")
+        let studyLevel = Expression<Int>("studyLevel")
         let minExp = Expression<Int>("minExp")
         let expFormula = Expression<Int>("expFormula")
         let cd = Expression<Int>("cd")
@@ -180,7 +180,7 @@ class LXTGoodsSQliteHelper: NSObject {
                 skillModel.damageBase = goods[skillTable[damageBase]]
                 skillModel.maxLevel = goods[skillTable[maxLevel]]
                 skillModel.damageFormula = goods[skillTable[damageFormula]]
-                skillModel.prerequisite = goods[skillTable[prerequisite]]
+                skillModel.studyLevel = goods[skillTable[studyLevel]]
                 skillModel.minExp = goods[skillTable[minExp]]
                 skillModel.expFormula = goods[skillTable[expFormula]]
                 skillModel.cd = goods[skillTable[cd]]
@@ -276,7 +276,7 @@ class LXTGoodsSQliteHelper: NSObject {
                 let model = LXTGoodsModel()
                 model.id = Int(goods[id])
                 model.name = goods[name]
-                model.count = Int(goods[count])
+                model.count = Int(goods[count] )
                 model.lock = goods[lock]
                 model.useable = goods[useable]
                 model.type = GoodsType(rawValue: Int(goods[type])) ?? GoodsType.sundries
@@ -284,6 +284,10 @@ class LXTGoodsSQliteHelper: NSObject {
                 model.relationID = Int(goods[relationID])
                 if model.relationID == SundriesType.coupon.rawValue {
                     user.couponModel = model
+                }
+                
+                if model.relationID == SundriesType.stone.rawValue {
+                    user.stone = model
                 }
                 goodsArray.append(model)
             }

@@ -50,7 +50,7 @@ class LXTEquipModel: NSObject {
     var hpRecovery = 0
     var mpRecovery = 0
     var sundriesType = SundriesType.none
-    var buyType = 1
+    var buyType = 1     //1，金币 2，元宝 3，材料兑换
     var priceCount = 0
     var skill = LXTHeroSkillModel()
     

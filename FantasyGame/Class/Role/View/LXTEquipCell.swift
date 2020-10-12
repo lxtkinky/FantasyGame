@@ -13,7 +13,8 @@ class LXTEquipCell: UICollectionViewCell {
     var model : LXTGoodsModel?{
         didSet{
             if model!.id > 0 {
-                self.equipLabel.text = model?.equipModel.name
+                let strongStr = model!.equipModel.strongLevel > 0 ? "+\(model!.equipModel.strongLevel)" : ""
+                self.equipLabel.text = model!.equipModel.name + strongStr
             }else{
                 self.equipLabel.text = "点击更换"
             }
