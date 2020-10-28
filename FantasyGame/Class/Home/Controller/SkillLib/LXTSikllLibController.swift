@@ -14,11 +14,17 @@ class LXTSikllLibController: LXTBaseController, UICollectionViewDelegateFlowLayo
     let height = (kScreenWidth - 25) / 4 / 3 * 4
     let bookCellKey = "bookCellKey"
     var dataSource : Array<LXTSkillModel> = []
+    var isSect = false      //是否宗门藏书阁
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataSource = LXTSkillTableHelper.lxt_getBaseSkills()
+        if self.isSect {
+            self.dataSource = LXTSkillTableHelper.lxt_getSkills(isSectType: 1)
+        }else{
+            self.dataSource = LXTSkillTableHelper.lxt_getBaseSkills()
+        }
+        
 //        for skill in self.dataSource {
 //            skill.skillID = 1
 //            LXTSkillTableHelper.lxt_updateSkill(model: skill)

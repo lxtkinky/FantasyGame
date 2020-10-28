@@ -158,7 +158,9 @@ class LXTRoleManager: NSObject {
                 }
                 self.lxt_saveHero(hero: hero)
                 LXTUserManager().lxt_saveUser(user: user)
-                revenueStr = "离线战斗\(pkCount)次，生命+\(hpCount)，攻击+\(attackCount)"
+                let hour = Int(interval / 3600)
+                let min = Int(interval) % 3600 / 60
+                revenueStr = "离线时长\(hour)小时\(min)分钟\r\n战斗\(pkCount)次\r\n经验+\(totalExp)\r\n生命+\(hpCount)\r\n攻击+\(attackCount)"
             }
         }else{
             print("lxt-- 没有存档")

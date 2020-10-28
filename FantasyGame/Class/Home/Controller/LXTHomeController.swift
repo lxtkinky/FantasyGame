@@ -82,16 +82,13 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             self.offlineResult = LXTRoleManager.lxt_offlineRevenue()
 //            self.offlineRevenue = false
             if let result = self.offlineResult{
-                self.offlineResLabel.text = result
-                self.offlineResLabel.textColor = .green
-                self.offlineResLabel.textAlignment = .center
-                self.offlineResLabel.isHidden = true
-                self.offlineResLabel.frame = CGRect(x: 0, y: kScreenHeight - 200, width: kScreenWidth, height: 20)
-                self.view.addSubview(self.offlineResLabel)
-//                self.offlineResLabel.snp.makeConstraints { (make) in
-//                    make.centerX.equalToSuperview()
-//                    make.bottom.equalToSuperview().offset(-200)
-//                }
+//                self.offlineResLabel.text = result
+//                self.offlineResLabel.textColor = .green
+//                self.offlineResLabel.textAlignment = .center
+//                self.offlineResLabel.isHidden = true
+//                self.offlineResLabel.frame = CGRect(x: 0, y: kScreenHeight - 200, width: kScreenWidth, height: 20)
+//                self.view.addSubview(self.offlineResLabel)
+//                LXTAlertView.showInfo(info: result, showCancel: false, completeTitle: "确定")
             }
         }
         
@@ -142,27 +139,33 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func lxt_animateOfflineResult() {
-        if showOfflineRevenue{
-            DispatchQueue(label: "com.lxt.offline").asyncAfter(deadline: .now() + .seconds(1)) {
-                DispatchQueue.main.async {
-                    var frame = self.offlineResLabel.frame
-                    self.offlineResLabel.isHidden = false
-                    frame.origin.y -= 300
-                    UIView.animate(withDuration: 2, animations: {
-                        self.offlineResLabel.frame = frame
-                    }) { (finish) in
-                        self.offlineResLabel.isHidden = true
-                        self.showOfflineRevenue = false
-                    }
-                }
-            }
+//        let strig = "123456\r\n伺服电机路撒打飞机爱丽丝；\r\n地方静安寺；地方静安寺的理发师家里的饭手动阀；\r\n阿斯蒂芬；阿斯蒂芬；\r\n阿是地方静安寺的法三的；\r\n附件爱上大姐夫拉手动阀了；逻辑"
+//        LXTAlertView.showInfo(info: strig, showCancel: false, completeTitle: "确定")
+        if let result = self.offlineResult{
+            LXTAlertView.showInfo(info: result, showCancel: false, completeTitle: "确定")
+            self.offlineResult = nil
         }
+//        if showOfflineRevenue{
+//            DispatchQueue(label: "com.lxt.offline").asyncAfter(deadline: .now() + .seconds(1)) {
+//                DispatchQueue.main.async {
+//                    var frame = self.offlineResLabel.frame
+//                    self.offlineResLabel.isHidden = false
+//                    frame.origin.y -= 300
+//                    UIView.animate(withDuration: 2, animations: {
+//                        self.offlineResLabel.frame = frame
+//                    }) { (finish) in
+//                        self.offlineResLabel.isHidden = true
+//                        self.showOfflineRevenue = false
+//                    }
+//                }
+//            }
+//        }
     }
     
     func lxt_initSubView(){
         
         weak var weakSelf = self
-        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化", "宗门"]
+        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化", "宗门", "锻造"]
         self.view.addSubview(self.menuView)
         self.menuView.selectMenuBlock = { index in
             weakSelf?.lxt_menuAction(index: index)
@@ -227,14 +230,29 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             self.lxt_mapClick()
         }else if(index == 1){
             let skillVC = LXTSikllLibController()
-            skillVC.modalPresentationStyle = .fullScreen
-            self.present(skillVC, animated: false) {}
+//            skillVC.modalPresentationStyle = .fullScreen
+//            self.present(skillVC, animated: false) {}
+            self.navigationController?.pushViewController(skillVC, animated: false)
         }else if(index == 2){
             self.lxt_equipShopClick()
         }else if(index == 3){
             let strongVC = LXTStrongController()
-            strongVC.modalPresentationStyle = .fullScreen
-            self.present(strongVC, animated: false) {}
+//            strongVC.modalPresentationStyle = .fullScreen
+//            self.present(strongVC, animated: false) {}
+            self.navigationController?.pushViewController(strongVC, animated: false)
+        }else if(index == 4){
+            user.sectId = 1
+            if user.sectId == 0 {
+                let applyVC = LXTSectApplyController()
+//                applyVC.modalPresentationStyle = .fullScreen
+//                self.present(applyVC, animated: false) {}
+                self.navigationController?.pushViewController(applyVC, animated: false)
+            }else{
+                let sectVC = LXTSectController()
+//                sectVC.modalPresentationStyle = .fullScreen
+//                self.present(applyVC, animated: false) {}
+                self.navigationController?.pushViewController(sectVC, animated: false)
+            }
         }
     }
     
@@ -297,25 +315,31 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
                     }
                     
                 }else{
-                    if Int(arc4random()) % probability == 1 {
-                        if arc4random() % 5 == 1 {
-                            self.hero?.attack += 1
-                            self.dataSource.append("战斗胜利，获得攻击+1")
-                        }else{
-                            self.hero?.hp += 1
-                            self.dataSource.append("战斗胜利，获得生命+1")
-                        }
-                    }else{
-                        self.dataSource.append("战斗胜利，什么都没有")
-                    }
-                    user.goldNum += 1
-                    self.goldLabel.text = "金币：\(user.goldNum)"
-                    //TODO:经验值获取修改
-                    self.hero?.currentExp += self.monster!.maxExp * 100
+                    let exp = self.monster!.maxExp * 100
+                    self.hero?.currentExp += exp
                     if self.hero!.currentExp > self.hero!.maxExp {
                         self.hero?.currentExp = self.hero!.currentExp - self.hero!.maxExp
                         self.hero?.level += 1
                     }
+                    user.goldNum += 1
+                    self.goldLabel.text = "金币：\(user.goldNum)"
+                    self.dataSource.append("战斗胜利")
+                    self.dataSource.append("获得经验 \(exp)")
+                    self.dataSource.append("获得金币 1")
+                    if Int(arc4random()) % probability == 1 {
+                        if arc4random() % 5 == 1 {
+                            self.hero?.attack += 1
+                            self.dataSource.append("获得攻击+1")
+                        }else{
+                            self.hero?.hp += 1
+                            self.dataSource.append("获得生命+1")
+                        }
+                    }else{
+//                        self.dataSource.append("战斗胜利，什么都没有")
+                    }
+                    
+                    //TODO:经验值获取修改
+                    
                 }
                 
                 

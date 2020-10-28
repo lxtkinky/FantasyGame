@@ -110,7 +110,7 @@ class LXTHeroSkillDBHelper: NSObject {
         let damageBase = Expression<Int64>("damageBase")
         let maxLevel = Expression<Int64>("maxLevel")
         let damageFormula = Expression<Int64>("formula")
-        let studyLevel = Expression<Int64>("studyLevelstudyLevel")
+        let studyLevel = Expression<Int64>("studyLevel")
         let minExp = Expression<Int>("minExp")
         let expFormula = Expression<Int>("expFormula")
         let cd = Expression<Int>("cd")

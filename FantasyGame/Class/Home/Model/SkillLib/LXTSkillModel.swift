@@ -25,6 +25,7 @@ class LXTSkillModel: NSObject {
     var goldPrice = 1000
     var ybPrice = 100
     var priceCount = 0          //购买或兑换数量
+    var isSect = 0              //是否是宗门技能
     var sundiresType = SundriesType.none    //兑换材料类型
     
     var enhance = 0         //增加我方输出伤害

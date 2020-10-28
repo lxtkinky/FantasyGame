@@ -10,6 +10,27 @@ import UIKit
 
 class LXTUserModel: LXTBaseModel,NSSecureCoding {
     static var supportsSecureCoding: Bool = true
+    var userName = ""
+    var password = ""
+    var nickName = ""
+    var goldNum = 0
+    var ybNum = 0
+    var userID = 0      //由服务器分配
+    var trialCount = 0      //试练塔层数
+    var totalChallengeCount = 10      //今日可用挑战次数
+    var challengeCount = 0              //今日已挑战次数   //可用挑战次数
+    var lastDate = ""
+    var hasGetPrize = false             //是否可以领取奖励
+    var mapIndex = 1                    //地图索引
+    
+    //获取物品列表的时候赋值
+    var couponModel : LXTGoodsModel = LXTGoodsModel()
+    var stone = LXTGoodsModel()
+    var sectId = 0      //宗门ID
+    
+    override init() {
+        super.init()
+    }
     
     func encode(with coder: NSCoder) {
         coder.encode(self.userName, forKey: "userName")
@@ -41,25 +62,5 @@ class LXTUserModel: LXTBaseModel,NSSecureCoding {
         mapIndex = Int(coder.decodeInt32(forKey: "mapIndex"))
     }
     
-    var userName = ""
-    var password = ""
-    var nickName = ""
-    var goldNum = 0
-    var ybNum = 0
-    var userID = 0      //由服务器分配
-    var trialCount = 0      //试练塔层数
-    var totalChallengeCount = 10      //今日可用挑战次数
-    var challengeCount = 0              //今日已挑战次数
-    var lastDate = ""
-    var hasGetPrize = false             //是否可以领取奖励
-    var mapIndex = 1                    //地图索引
     
-    //获取物品列表的时候赋值
-    var couponModel : LXTGoodsModel = LXTGoodsModel()
-    var stone = LXTGoodsModel()
-
-    
-    override init() {
-        super.init()
-    }
 }

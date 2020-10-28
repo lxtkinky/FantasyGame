@@ -1,95 +1,84 @@
 //
-//  LXTCopyListController.swift
+//  LXTSectApplyController.swift
 //  FantasyGame
 //
-//  Created by ULDD on 2020/8/17.
+//  Created by ULDD on 2020/10/14.
 //  Copyright © 2020 LXT. All rights reserved.
 //
 
 import UIKit
 
-
-class LXTCopyListController: LXTBaseController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
+class LXTSectApplyController: LXTBaseController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
     var collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let cellKey = "cellKey"
-    var dataSource : Array<String> = []
-    
+    var dataSource : Array<LXTSectModel> = Array(repeating: LXTSectModel(), count: 10)
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.lxt_initData()
+        
+        self.navTitleLabel.text = "宗门申请"
+        
         self.lxt_initSubView()
-        
-        
-        
     }
-    
+
     func lxt_initSubView() {
         self.view.backgroundColor = .white
         
         self.collectionView.backgroundColor = .white
-        self.collectionView.register(UICollectionViewCell.classForCoder(), forCellWithReuseIdentifier: self.cellKey)
+        self.collectionView.layer.cornerRadius = 5
+        self.collectionView.layer.borderWidth = 1
+        self.collectionView.layer.borderColor = titleColor51.cgColor
+        self.collectionView.clipsToBounds = true
+        self.collectionView.register(LXTSectApplyCell.classForCoder(), forCellWithReuseIdentifier: self.cellKey)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.bounces = false
         self.collectionView.showsVerticalScrollIndicator = false
         self.view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets(top: statusBarHeight + 20, left: 0, bottom: kBottomSafeHeight, right: 0))
+            make.edges.equalTo(UIEdgeInsets(top: statusBarHeight + 44, left: 5, bottom: kBottomSafeHeight , right: 5))
         }
     }
     
-    func lxt_initData() {
-        self.dataSource.append("经验副本")
-        self.dataSource.append("材料副本")
+    func lxt_applySect(sectId : Int) {
+        
     }
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dataSource.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellKey, for: indexPath)
+        let cell : LXTSectApplyCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellKey, for: indexPath) as! LXTSectApplyCell
 //        cell.backgroundColor = kRandomColor()
-        for label in cell.contentView.subviews {
-            label.removeFromSuperview()
+        let model = self.dataSource[indexPath.row]
+        model.sectName = "宗门\(String(format: "%.2d", indexPath.row + 1))"
+        cell.model = model
+        weak var weakSelf = self
+        cell.applyAction = { sectId in
+            weakSelf?.lxt_applySect(sectId: sectId)
         }
-        let label = UILabel()
-        cell.contentView.addSubview(label)
-        label.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
-
-        label.text = self.dataSource[indexPath.row]
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: kScreenWidth, height: 100)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.tabBarController?.selectedIndex = 0
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: kScreenWidth - 20, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if section == 0{
-            return 1
-        }
-        return 1
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 2
     }
+
 }

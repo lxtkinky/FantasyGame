@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,8 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        LXTTableSQliteHelper.lxt_createTable(tableName: "user")
         LXTTableSQliteHelper.lxt_initTable()
         
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         let tabBarVC = LXTTabBarController()
         let homeVC = LXTHomeController()
+        let homeNavVC = UINavigationController.init(rootViewController: homeVC)
         homeVC.tabBarItem = UITabBarItem.init(title: "战斗", image: UIImage(named: "tabbar_home"), tag: 1001)
         
         let myVC = LXTRoleController()
@@ -36,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let packageVC = LXTPackageController()
         packageVC.tabBarItem = UITabBarItem.init(title: "包裹", image: UIImage(named: "tabbar_my"), tag: 1004)
         
-        tabBarVC.viewControllers = [homeVC, myVC, trialAreaVC, packageVC]
+        tabBarVC.viewControllers = [homeNavVC, myVC, trialAreaVC, packageVC]
         self.window?.rootViewController = tabBarVC
         self.window?.makeKeyAndVisible()
         return true

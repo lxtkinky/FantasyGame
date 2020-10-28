@@ -9,10 +9,19 @@
 import UIKit
 
 class LXTBaseController: UIViewController {
+    let navTitleLabel = UILabel()
     let backButton = UIButton.init(type: .custom)
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navTitleLabel.font = UIFont(name: PingFangSCMedium, size: 14)
+        self.navTitleLabel.textColor = titleColor51
+        self.view.addSubview(self.navTitleLabel)
+        self.navTitleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(statusBarHeight)
+            make.height.equalTo(44)
+        }
         
         self.backButton.setImage(UIImage(named: "close"), for: .normal)
         self.backButton.addTarget(self, action: #selector(lxt_backClick), for: .touchUpInside)

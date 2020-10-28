@@ -10,13 +10,16 @@ import UIKit
 
 class LXTEquipCell: UICollectionViewCell {
     let equipLabel = UILabel()
+    var equipType = "武器"
     var model : LXTGoodsModel?{
         didSet{
             if model!.id > 0 {
                 let strongStr = model!.equipModel.strongLevel > 0 ? "+\(model!.equipModel.strongLevel)" : ""
                 self.equipLabel.text = model!.equipModel.name + strongStr
+                self.equipLabel.textColor = titleColor51
             }else{
-                self.equipLabel.text = "点击更换"
+                self.equipLabel.text = self.equipType
+                self.equipLabel.textColor = titleColor153
             }
         }
     }

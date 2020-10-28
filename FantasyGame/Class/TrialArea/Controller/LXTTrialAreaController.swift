@@ -8,18 +8,45 @@
 
 import UIKit
 
-class LXTTrialAreaController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
+import GoogleMobileAds
+
+class LXTTrialAreaController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource, GADInterstitialDelegate {
     var collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let cellKey = "cellKey"
     let trialKey = "trialKey"
     let copyKey = "copyKey"
     var dataSource : Array<LXTCopyModel> = []
     var activity = "活动"
+    var interstitial: GADInterstitial!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lxt_initData()
         self.lxt_initSubView()
+        
+        self.lxt_createAdModel()
+    }
+    
+    func lxt_createAdModel() {
+        //加载广告
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let request = GADRequest()
+        interstitial.load(request)
+        interstitial.delegate = self
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        self.lxt_createAdModel()
+        user.challengeCount += 1
+        self.collectionView.reloadData()
+    }
+    
+    func lxt_playAd() {
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        }else{
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,8 +155,9 @@ class LXTTrialAreaController: UIViewController,UICollectionViewDelegateFlowLayou
     }
     
     func lxt_trialChanllenge() {
-        if user.challengeCount >= user.totalChallengeCount {
-            LXTAlertView.showInfo(info: "", showCancel: false, completeTitle: "确定")
+        if user.challengeCount <= 0 {
+            LXTAlertView.showInfo(info: "今日挑战次数已用完", showCancel: false, completeTitle: "确定")
+            self.lxt_playAd()
         }else{
             if nextCopy == nil {
                 nextCopy = LXTCopyModel()
@@ -146,11 +174,11 @@ class LXTTrialAreaController: UIViewController,UICollectionViewDelegateFlowLayou
                 
                 copyCount = 1
                 
-                user.challengeCount += 1
+                user.challengeCount -= 1
                 
                 self.tabBarController?.selectedIndex = 0
             }else{
-                LXTAlertView.showInfo(info: "", showCancel: false, completeTitle: "确定")
+                LXTAlertView.showInfo(info: "当前正在挑战", showCancel: false, completeTitle: "确定")
             }
         }
         

@@ -15,6 +15,8 @@ class LXTHeroSimpleInfoView: UIView, UICollectionViewDelegateFlowLayout, UIColle
     let equipKey = "equipKey"
     let skillKey = "skillKey"
     let expStrip = LXTExpStripView()
+//    1武器，2衣服，3头，4手，5戒指，6腰带，7鞋子，8宝物，9盾牌，10坐骑
+    let equipTypes = ["武器", "衣服", "头盔", "手镯", "戒指", "腰带", "鞋子", "宝物", "盾牌", "坐骑"]
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var skillBlock : (() -> Void)?
     var equipBlock : ((_ type : Int) -> Void)?
@@ -95,6 +97,7 @@ class LXTHeroSimpleInfoView: UIView, UICollectionViewDelegateFlowLayout, UIColle
             return cell
         }else if indexPath.section == 2{
             let cell : LXTEquipCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.equipKey, for: indexPath) as! LXTEquipCell
+            cell.equipType = self.equipTypes[indexPath.row]
             cell.model = self.hero?.equipArray[indexPath.row]
             return cell
         }

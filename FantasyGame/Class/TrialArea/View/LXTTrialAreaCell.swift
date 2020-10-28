@@ -81,7 +81,7 @@ class LXTTrialAreaCell: UICollectionViewCell{
         
         let buttonSize = CGSize(width: 50, height: 40)
         
-        self.batchButton.setTitle("扫荡", for: .normal)
+        self.batchButton.setTitle("一键挑战", for: .normal)
         self.batchButton.addTarget(self, action: #selector(lxt_batchChanllegeClick), for: .touchUpInside)
         self.batchButton.setTitleColor(titleColor51, for: .normal)
         self.batchButton.titleLabel?.font = UIFont(name: PingFangSCRegular, size: 12)
@@ -146,6 +146,12 @@ class LXTTrialAreaCell: UICollectionViewCell{
     
     @objc func lxt_challengeClick() {
         self.challengeBlock?()
+//        if self.userModel!.totalChallengeCount > self.userModel!.challengeCount {
+//            self.challengeBlock?()
+//        }else{
+//            LXTAlertView.showTips(tips: "今日剩余挑战次已用完")
+//        }
+        
     }
     
     @objc func lxt_getPrize() {
@@ -166,16 +172,20 @@ class LXTTrialAreaCell: UICollectionViewCell{
     }
     
     @objc func lxt_batchChanllegeClick() {
-        if self.userModel!.challengeCount < self.userModel!.totalChallengeCount {
+        if self.userModel!.challengeCount > 0 {
             if self.userModel!.trialCount % 10 == 0 {
+                LXTAlertView.showTips(tips: "当前关卡无法扫荡")
                 return
             }
             var count = self.userModel!.trialCount % 10
-            count = min(10 - count, self.userModel!.totalChallengeCount - self.userModel!.challengeCount)
+            count = min(10 - count, self.userModel!.challengeCount)
             user.trialCount += count
-            user.challengeCount += count
+            user.challengeCount -= count
             LXTUserManager().lxt_saveUser(user: user)
             self.userModel = user
+            LXTAlertView.showTips(tips: "共挑战 \(count) 关卡")
+        }else{
+            LXTAlertView.showTips(tips: "今日剩余挑战次数已用完")
         }
     }
     
@@ -183,7 +193,7 @@ class LXTTrialAreaCell: UICollectionViewCell{
 //        self.nameLabel.text = self.userModel!.name
         self.levelLabel.text = "等级：10"
         self.currCountLabel.text = "层数：\(self.userModel!.trialCount)"
-        self.countLabel.text = "挑战： \(self.userModel!.totalChallengeCount - self.userModel!.challengeCount)/\(self.userModel!.totalChallengeCount)"
+        self.countLabel.text = "挑战： \(self.userModel!.challengeCount)/\(self.userModel!.totalChallengeCount)"
         self.getButton.setTitle(self.userModel!.hasGetPrize ? "已领" : "领取", for: .normal)
         
     }

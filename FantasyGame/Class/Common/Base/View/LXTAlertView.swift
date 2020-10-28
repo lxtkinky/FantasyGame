@@ -29,15 +29,22 @@ class LXTAlertView: UIView {
         self.addSubview(self.boxView)
         self.boxView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.size.equalTo(CGSize(width: kScreenWidth - 60, height: (kScreenWidth - 60) / 6 * 4))
+//            make.size.equalTo(CGSize(width: kScreenWidth - 60, height: (kScreenWidth - 60) / 6 * 4))
+            make.width.equalTo(kScreenWidth * 0.8)
         }
         
         self.msgLabel.font = UIFont(name: PingFangSCRegular, size: 14)
         self.msgLabel.textColor = titleColor51
+        self.msgLabel.textAlignment = .center
+        self.msgLabel.numberOfLines = 0
         self.boxView.addSubview(self.msgLabel)
         self.msgLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+//            make.centerX.equalToSuperview()
+            make.left.equalToSuperview().offset(10)
+            make.right.equalToSuperview().offset(-10)
+//            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(30)
+            make.bottom.equalToSuperview().offset(-80)
         }
         
         
@@ -56,8 +63,8 @@ class LXTAlertView: UIView {
             }else{
                 make.centerX.equalToSuperview().offset(60)
             }
-            make.bottom.equalToSuperview().offset(-10)
-            make.size.equalTo(CGSize(width: 60, height: 40))
+            make.bottom.equalToSuperview().offset(-15)
+            make.size.equalTo(CGSize(width: 50, height: 30))
         }
         
         if showCancel {
@@ -73,8 +80,8 @@ class LXTAlertView: UIView {
             self.boxView.addSubview(cancelButton)
             cancelButton.snp.makeConstraints { (make) in
                 make.centerX.equalToSuperview().offset(-60)
-                make.bottom.equalToSuperview().offset(-10)
-                make.size.equalTo(CGSize(width: 60, height: 40))
+                make.bottom.equalToSuperview().offset(-15)
+                make.size.equalTo(CGSize(width: 50, height: 30))
             }
         }
         

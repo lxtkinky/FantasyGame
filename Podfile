@@ -10,4 +10,5 @@ target 'FantasyGame' do
     pod 'HMSegmentedControl'
     pod 'HandyJSON', '~> 5.0.1'
     pod 'SQLite.swift', '~> 0.12.2'
+    pod 'Google-Mobile-Ads-SDK'
 end

@@ -31,6 +31,7 @@ let roleBgColor = rgb(66, 66, 66)
 let bloodColor = rgb(255, 91, 101)
 let manaColor = rgb(0, 179, 248)
 let titleColor51 = rgb(51, 51, 51)
+let titleColor153 = rgb(153, 153, 153)
 let titleDisableColor = rgb(102, 102, 102)
 let buttonDisableColor = rgb(200, 200, 200)
 let buttonEnableColor = titleColor51

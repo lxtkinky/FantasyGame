@@ -51,6 +51,7 @@ class LXTSkillTableHelper: NSObject {
         let sundriesType = Expression<Int>("sundriesType")
         let priceCount = Expression<Int>("priceCount")
         let skillID = Expression<Int?>("skillID")
+        let isSect = Expression<Int?>("isSect")
         
         let create = skillTable.create(temporary: false, ifNotExists: true, withoutRowid: false,block: { (table) in
             table.column(id, primaryKey: true)
@@ -68,11 +69,12 @@ class LXTSkillTableHelper: NSObject {
             table.column(priceCount, defaultValue: 0)
             table.column(sundriesType, defaultValue: 0)
             table.column(skillID, defaultValue: 0)
+            table.column(isSect, defaultValue: 0)
             })
         let _ = try? db!.run(create)
     }
     
-    class func lxt_getBaseSkills() -> Array<LXTSkillModel> {
+    class func lxt_getSkills(isSectType : Int) -> Array<LXTSkillModel>{
         let skillTable = Table("skill")
         let id = Expression<Int64>("id")
         let name = Expression<String>("name")
@@ -89,9 +91,11 @@ class LXTSkillTableHelper: NSObject {
         let buyType = Expression<Int>("buyType")
         let sundriesType = Expression<Int>("sundriesType")
         let priceCount = Expression<Int>("priceCount")
+        let isSect = Expression<Int>("isSect")
+        
         
         var skillArr = Array<LXTSkillModel>()
-        for skill in try! db!.prepare(skillTable) {
+        for skill in try! db!.prepare(skillTable.filter(isSect == isSectType)) {
             
             let model = LXTSkillModel()
             model.id = Int(skill[id])
@@ -109,11 +113,16 @@ class LXTSkillTableHelper: NSObject {
             model.buyType = skill[buyType]
             model.sundiresType = SundriesType.init(rawValue: skill[sundriesType]) ?? SundriesType.none
             model.priceCount = skill[priceCount]
+            model.isSect = skill[isSect]
             print("技能名称：\(skill[name])，skillID = \(skill[id])，对地方造成\(skill[damageBase])%的物理伤害")
             skillArr.append(model)
         }
         
         return skillArr
+    }
+    
+    class func lxt_getBaseSkills() -> Array<LXTSkillModel> {
+        return self.lxt_getSkills(isSectType: 0)
     }
     
     class func lxt_addSkillIDColumn() {
@@ -187,6 +196,23 @@ class LXTSkillTableHelper: NSObject {
         skill3.cd = 6
         skill3.desc = "进阶剑招，非常强大"
         self.lxt_insertSkill(model: skill3)
+        
+        let skill4 = LXTSkillModel()
+        skill4.skillID = 4
+        skill4.name = "五色神光"
+        skill4.type = 2
+        skill4.isSect = 1
+        skill4.damageBase = 150
+        skill4.priceCount = 2000
+        skill4.buyType = 3
+        skill4.maxLevel = 100
+        skill4.damageFormula = 10
+        skill4.studyLevel = 100
+        skill4.minExp = 100000
+        skill4.expFormula = 1000000
+        skill4.cd = 6
+        skill4.desc = "非常强大"
+        self.lxt_insertSkill(model: skill4)
     }
     
     class func lxt_insertSkill(model : LXTSkillModel) -> Void{
@@ -206,6 +232,7 @@ class LXTSkillTableHelper: NSObject {
         let buyType = Expression<Int>("buyType")
         let sundriesType = Expression<Int>("sundriesType")
         let priceCount = Expression<Int>("priceCount")
+        let isSect = Expression<Int?>("isSect")
     
         do {
             let filter = skillTable.filter(name == model.name)
@@ -228,6 +255,7 @@ class LXTSkillTableHelper: NSObject {
                                            buyType <- model.buyType,
                                            desc <- model.desc,
                                            sundriesType <- model.sundiresType.rawValue,
+                                           isSect <- model.isSect,
                                            priceCount <- model.priceCount)
             
             let rowid = try db!.run(insert)
@@ -254,6 +282,7 @@ class LXTSkillTableHelper: NSObject {
         let buyType = Expression<Int>("buyType")
         let sundriesType = Expression<Int>("sundriesType")
         let priceCount = Expression<Int>("priceCount")
+        let isSect = Expression<Int?>("isSect")
         let item = skillTable.filter(id == model.id)
         do {
             let update = item.update(name <- model.name,
@@ -268,6 +297,7 @@ class LXTSkillTableHelper: NSObject {
             buyType <- model.buyType,
             desc <- model.desc,
             sundriesType <- model.sundiresType.rawValue,
+            isSect <- model.isSect,
             priceCount <- model.priceCount)
             if try db!.run(update) > 0{
 //                print("更新成功")

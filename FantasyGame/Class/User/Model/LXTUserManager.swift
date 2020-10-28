@@ -53,7 +53,7 @@ class LXTUserManager: NSObject {
         let today = dateHelper.lxt_stringFromDate(date: Date(), format: "yyyy-MM-dd")
         if user.lastDate != today {
             user.lastDate = today
-            user.challengeCount = 0
+            user.challengeCount = user.totalChallengeCount
             user.hasGetPrize = false
             self.lxt_saveUser(user: user)
         }
