@@ -48,6 +48,8 @@ class LXTTableSQliteHelper: NSObject {
             LXTEquipDBHelper.lxt_createTable()
             
             LXTUserEquipDB.lxt_createTable()
+            
+            LXTSchemeDB.lxt_createTable()
         }
     }
     

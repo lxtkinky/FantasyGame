@@ -165,7 +165,7 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
     func lxt_initSubView(){
         
         weak var weakSelf = self
-        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化", "宗门", "锻造"]
+        self.menuView.dataSource = ["地图", "藏书阁", "装备店", "强化", "锻造"]
         self.view.addSubview(self.menuView)
         self.menuView.selectMenuBlock = { index in
             weakSelf?.lxt_menuAction(index: index)
@@ -230,29 +230,27 @@ class LXTHomeController: UIViewController,UITableViewDelegate,UITableViewDataSou
             self.lxt_mapClick()
         }else if(index == 1){
             let skillVC = LXTSikllLibController()
-//            skillVC.modalPresentationStyle = .fullScreen
-//            self.present(skillVC, animated: false) {}
             self.navigationController?.pushViewController(skillVC, animated: false)
         }else if(index == 2){
             self.lxt_equipShopClick()
         }else if(index == 3){
             let strongVC = LXTStrongController()
-//            strongVC.modalPresentationStyle = .fullScreen
-//            self.present(strongVC, animated: false) {}
             self.navigationController?.pushViewController(strongVC, animated: false)
         }else if(index == 4){
+            let forgeVC = LXTForgeController()
+            self.navigationController?.pushViewController(forgeVC, animated: false)
+            
+            /*
+             //宗门
             user.sectId = 1
             if user.sectId == 0 {
                 let applyVC = LXTSectApplyController()
-//                applyVC.modalPresentationStyle = .fullScreen
-//                self.present(applyVC, animated: false) {}
                 self.navigationController?.pushViewController(applyVC, animated: false)
             }else{
                 let sectVC = LXTSectController()
-//                sectVC.modalPresentationStyle = .fullScreen
-//                self.present(applyVC, animated: false) {}
                 self.navigationController?.pushViewController(sectVC, animated: false)
             }
+ */
         }
     }
     

@@ -9,23 +9,22 @@
 import UIKit
 import SQLite
 class LXTMonsterDB: NSObject {
-        class func lxt_createTable() {
-            let table = Table("user_equip")
-            let userEquipID = Expression<Int>("userEquipID")
-            let heroID = Expression<Int>("heroID")
-            let equipID = Expression<Int>("equipID")
-            let strongLevel = Expression<Int>("strongLevel")
-            
-            do {
-                try db!.run(table.create(temporary: false, ifNotExists: true, withoutRowid: false, block: { (builder) in
-                    builder.column(userEquipID, primaryKey: .autoincrement)
-                    builder.column(heroID, defaultValue: 0)
-    //                builder.column(userID, defaultValue: 0)
-                    builder.column(equipID, defaultValue: 0)
-                    builder.column(strongLevel, defaultValue: 1)
-                }))
-            } catch {
-                print("创建表失败：\(error)")
-            }
+    class func lxt_createTable() {
+        let table = Table("monster")
+        let id = Expression<Int>("id")
+        let mapNum = Expression<Int>("mapNum")
+        let name = Expression<String>("name")
+        let level = Expression<Int>("level")
+        
+        do {
+            try db!.run(table.create(temporary: false, ifNotExists: true, withoutRowid: false, block: { (builder) in
+                builder.column(id, primaryKey: .autoincrement)
+                builder.column(mapNum, defaultValue: 0)
+                builder.column(name, defaultValue: "未知")
+                builder.column(level, defaultValue: 1)
+            }))
+        } catch {
+            print("创建表失败：\(error)")
         }
+    }
 }

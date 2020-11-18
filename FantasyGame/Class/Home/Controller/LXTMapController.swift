@@ -20,13 +20,13 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
         self.view.backgroundColor = .white
         
         self.dataSource = LXTHeroTableHelper.lxt_queryAllMonster()
-
+        self.tableView.register(LXTMapCell.classForCoder(), forCellReuseIdentifier: "cell")
+        self.tableView.separatorStyle = .none
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
         self.view.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0))
+            make.edges.equalTo(UIEdgeInsets(top: kNavigationBarHeight + 10, left: 0, bottom: 0, right: 0))
         }
     }
     
@@ -47,11 +47,37 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
             //是横屏让变回竖屏
             setNewOrientation(fullScreen: false)
         }
- */
+         */
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return user.mapIndex
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell : LXTMapCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! LXTMapCell
+        cell.monster = self.dataSource[indexPath.row]
+        cell.selectionStyle = .none
+        cell.hangUpLabel.isHidden = !(indexPath.row == user.mapIndex - 1)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        user.mapIndex = indexPath.row
+        LXTUserManager().lxt_saveUser(user: user)
+        self.changeMap(indexPath.row)
+        self.dismiss(animated: true) {}
     }
     
     //MARK: - 分割线
     
+    /*
     //横竖屏
     func setNewOrientation(fullScreen: Bool) {
         if fullScreen { //横屏
@@ -69,24 +95,6 @@ class LXTMapController: LXTBaseController,UITableViewDelegate,UITableViewDataSou
             UIDevice.current.setValue(orientationTarget, forKey: "orientation")
         }
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = self.dataSource[indexPath.row].name
-        cell?.textLabel?.textColor = indexPath.row <= user.mapIndex ? titleColor51 : .lightGray
-        cell?.selectionStyle = .none
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        user.mapIndex = indexPath.row
-        LXTUserManager().lxt_saveUser(user: user)
-        self.changeMap(indexPath.row)
-        self.dismiss(animated: true) {}
-    }
+ */
 
 }

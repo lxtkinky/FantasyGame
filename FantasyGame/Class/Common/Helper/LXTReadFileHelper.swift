@@ -113,6 +113,23 @@ class LXTReadFileHelper: NSObject {
         return modelArray
     }
     
+    class func lxt_readSchemeJson() -> Array<LXTSchemeModel>{
+        var modelArray = Array<LXTSchemeModel>()
+        let stringArray = self.lxt_readJsonFile(file: "Scheme") as! Array<Array<String>>
+        for item in stringArray {
+            let model = LXTSchemeModel()
+            model.id = Int(item[0])!
+            model.name = item[1]
+            model.type = Int(item[2])!
+            model.relationId = Int(item[3])!
+            model.sundriesTypes = item[4]
+            model.sundriesCounts = item[5]
+            model.desc = item[6]
+            modelArray.append(model)
+        }
+        return modelArray
+    }
+    
     class func lxt_readSkillTxtFile() -> Array<LXTSkillModel>{
         var modelArray = Array<LXTSkillModel>()
         let stringArray = self.lxt_readTXTFile(file: "skill")
